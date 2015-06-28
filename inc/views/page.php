@@ -29,7 +29,7 @@
                 <form method='GET' action='https://hn.algolia.com'>
                     <input type='search' name='query' placeholder='Search archives' /><input type='submit' value='search'/>
                 </form>
-                <a href='https://github.com/allen-garvey/h-news'><p>Source on github</p></a>
+                <a href='https://github.com/allen-garvey/h-news' class='github'><p>Source on github</p></a>
             </div>
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
