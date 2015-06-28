@@ -5,7 +5,7 @@ define('ENVIRONMENT_CURRENT', ENVIRONMENT_DEVELOPMENT);
 
 if(ENVIRONMENT_CURRENT === ENVIRONMENT_PRODUCTION){
 	define('BASE_URL','http://www.allengarvey.com/code/h-news/');
-	define('ROOT_PATH',$_SERVER['DOCUMENT_ROOT'] . 'code/h-news/');
+	define('ROOT_PATH',$_SERVER['DOCUMENT_ROOT'] . '/code/h-news/');
 }
 else{
 	define('BASE_URL','/h-news/');
