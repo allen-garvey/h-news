@@ -17,7 +17,8 @@ if(!isset($page_controller)){
 	$page_controller = new HNewsHomePageController;
 }
 
-$story_ids = $page_controller->getStoryIds();
+//for server side processing
+//$story_ids = $page_controller->getStoryIds();
 
 include(VIEWS_PATH.'page.php');
 

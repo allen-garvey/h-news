@@ -8,6 +8,7 @@ abstract class HNewsAbstractPageController{
 	*/
 	public abstract function getTitle();
 	public abstract function getStoryIds();
+	public abstract function getStoryIdsUrl();
 	/**
 	* Returns a boolean if should display story of that type
 	*/
@@ -26,6 +27,9 @@ class HNewsHomePageController extends HNewsAbstractPageController{
 	public function getStoryIds(){
 		return HNewsStoriesModel::topStories();
 	}
+	public function getStoryIdsUrl(){
+		return HNewsStoriesModel::topStoriesUrl();	
+	}
 
 	public function shouldDisplayStory(HNewsStoryController $story){
 		if($story->getType() !== 'job'){
@@ -42,6 +46,9 @@ class HNewsShowPageController extends HNewsAbstractPageController{
 	public function getStoryIds(){
 		return HNewsStoriesModel::showStories();
 	}
+	public function getStoryIdsUrl(){
+		return HNewsStoriesModel::showStoriesUrl();	
+	}
 
 	public function shouldDisplayStory(HNewsStoryController $story){
 		return true;
@@ -54,6 +61,9 @@ class HNewsAskPageController extends HNewsAbstractPageController{
 	}
 	public function getStoryIds(){
 		return HNewsStoriesModel::askStories();
+	}
+	public function getStoryIdsUrl(){
+		return HNewsStoriesModel::askStoriesUrl();	
 	}
 
 	public function shouldDisplayStory(HNewsStoryController $story){

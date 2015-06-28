@@ -10,6 +10,9 @@ class HNewsStoriesModel{
 	public static function topStories(){
 		return json_decode(file_get_contents('https://hacker-news.firebaseio.com/v0/topstories.json'), true);
 	}
+	public static function topStoriesUrl(){
+		return 'https://hacker-news.firebaseio.com/v0/topstories.json';
+	}
 
 	/**
 	* returns ids of up to 200 new ask stories
@@ -18,11 +21,19 @@ class HNewsStoriesModel{
 		return json_decode(file_get_contents('https://hacker-news.firebaseio.com/v0/askstories.json'), true);
 	}
 
+	public static function askStoriesUrl(){
+		return 'https://hacker-news.firebaseio.com/v0/askstories.json';
+	}
+
 	/**
 	* returns ids of up to 200 new ask stories
 	*/
 	public static function showStories(){
 		return json_decode(file_get_contents('https://hacker-news.firebaseio.com/v0/showstories.json'), true);
+	}
+
+	public static function showStoriesUrl(){
+		return 'https://hacker-news.firebaseio.com/v0/showstories.json';
 	}
 
 	/**
