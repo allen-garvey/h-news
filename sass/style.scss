@@ -79,10 +79,10 @@ h4{
 }
 a{
 	text-decoration:none;
-	color: darken($secondary_color, 10%);
+	color: lighten($secondary_color, 10%);
 }
 a:visited{
-	color: $secondary_color;
+	color: darken($secondary_color, 10%);
 }
 a:hover{
 	text-decoration:underline;
@@ -130,6 +130,16 @@ nav{
 	margin: 1rem 0 1.5rem 0;
 }
 
+nav a{
+	color: darken($secondary_color, 10%);
+}
+nav a:visited{
+	color: $secondary_color;
+}
+nav a:hover{
+	text-decoration:underline;
+}
+
 /**
 * main content styles
 */
@@ -159,13 +169,17 @@ footer{
 	text-align: center;
 	margin: 4rem 0 4rem 0;
 }
-
+.github{
+	display:none;
+}
 
 /**
 * Media queries
 */
 @media screen and (min-width: $bootstrap_sm_breakpoint){
-
+	.github{
+		display: block;
+	}
 }
 
 @media screen and (min-width: $bootstrap_med_breakpoint){
