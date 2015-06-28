@@ -5,6 +5,7 @@ A redesign of [Hacker News](http://news.ycombinator.com) with a focus on usabili
 ##Dependencies
 
 * PHP 5.6.* or later
+* Gulp with appropriate plug-ins to concatenate and minify JavaScript source files (see package.json for more details)
 
 ##License
 
