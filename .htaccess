@@ -1,0 +1,5 @@
+RewriteEngine On
+
+#clean up get requests for ask and show pages
+RewriteRule show/?$|show/.*$ index.php?page=show
+RewriteRule ask/?$|ask/.*$ index.php?page=ask

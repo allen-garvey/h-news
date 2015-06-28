@@ -17,6 +17,6 @@ define('STYLES_URL', BASE_URL.'styles/');
 define('SCRIPTS_URL', BASE_URL.'scripts/');
 
 define('HOME_URL', BASE_URL.'index.php');
-define('SHOW_URL', HOME_URL.'?page=show');
-define('ASK_URL', BASE_URL.'?page=ask');
+define('SHOW_URL', HOME_URL.'show/');
+define('ASK_URL', BASE_URL.'ask/');
 
