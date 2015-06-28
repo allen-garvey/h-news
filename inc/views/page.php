@@ -33,11 +33,9 @@
             </div>
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
-        <script src="<?= SCRIPTS_URL.'fastclick.js'; ?>" type="text/javascript"></script>
         <script type="text/javascript">var HN={};HN.storiesUrl = '<?= $page_controller->getStoryIdsUrl(); ?>';
         HN.storiesPerPage = <?= $page_controller->getNumStoriesPerPage(); ?>;
         HN.shouldDisplayStory = <?= $page_controller->displayStoryFunction(); ?>;</script>
-        <script src="<?= SCRIPTS_URL.'story_controller.js'; ?>" type="text/javascript"></script>
-        <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
+        <script src="<?= SCRIPTS_URL.'app.min.js'; ?>" type="text/javascript"></script>
     </body>
 </html>
