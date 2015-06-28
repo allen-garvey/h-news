@@ -1,7 +1,6 @@
 <?php 
 require_once('inc/config.php');
 require_once(MODELS_PATH.'story_model.php');
-require_once(CONTROLLERS_PATH.'story_controller.php');
 require_once(CONTROLLERS_PATH.'page_controller.php');
 
 if(isset($_GET['page'])){
@@ -16,9 +15,6 @@ if(isset($_GET['page'])){
 if(!isset($page_controller)){
 	$page_controller = new HNewsHomePageController;
 }
-
-//for server side processing
-//$story_ids = $page_controller->getStoryIds();
 
 include(VIEWS_PATH.'page.php');
 
