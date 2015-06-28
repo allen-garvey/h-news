@@ -22,8 +22,12 @@
 					dataType: 'json'
 				})
 				.done(function(storyInfo) {
+					if(!storyInfo){
+						console.log('Story info is: ' + storyInfo + ' for story id: ' + storyIds[i]);
+						return;
+					}
 					var story = new HN.Story(storyInfo);
-					console.log(story);
+					// console.log(story);
 					if(HN.shouldDisplayStory(story)){
 						$('main ol').append(getStoryHTML(story));
 					}
@@ -68,4 +72,6 @@
 		html = html + "</div></li>";
 		return html;
 	}
+	//add fastclick
+	FastClick.attach(document.body);
 })();
