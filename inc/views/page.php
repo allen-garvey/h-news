@@ -55,9 +55,9 @@
         <footer>
             <div class='container'>
                 <form method='GET' action='https://hn.algolia.com'>
-                    <input type='search' name='query' /><input type='submit' value='search'/>
+                    <input type='search' name='query' placeholder='Search archives' /><input type='submit' value='search'/>
                 </form>
-                <a href='#'><p>Source on github</p></a>
+                <a href='https://github.com/allen-garvey/h-news'><p>Source on github</p></a>
             </div>
         </footer>
     </body>
