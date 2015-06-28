@@ -22,10 +22,6 @@
         </header>
         <main>
             <ol>
-                <?php 
-                //for server side story processing
-                //include(VIEWS_PATH.'stories.php'); 
-                ?>  
             </ol>
         </main>
         <footer>
@@ -37,7 +33,7 @@
             </div>
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
-        <script type="text/javascript">var storiesUrl = '<?= $page_controller->getStoryIdsUrl(); ?>';var storiesPerPage = <?= $page_controller->getNumStoriesPerPage(); ?>;</script>
+        <script type="text/javascript">var HN={};HN.storiesUrl = '<?= $page_controller->getStoryIdsUrl(); ?>';HN.storiesPerPage = <?= $page_controller->getNumStoriesPerPage(); ?>;</script>
         <script src="<?= SCRIPTS_URL.'story_controller.js'; ?>" type="text/javascript"></script>
         <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
     </body>
