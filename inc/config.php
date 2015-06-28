@@ -3,11 +3,14 @@ define('ENVIRONMENT_DEVELOPMENT', 0);
 define('ENVIRONMENT_PRODUCTION', 1);
 define('ENVIRONMENT_CURRENT', ENVIRONMENT_DEVELOPMENT);
 
-if(ENVIRONMENT_CURRENT === ENVIRONMENT_DEVELOPMENT){
-	define('BASE_URL','/h-news/');
-	define('ROOT_PATH',$_SERVER['DOCUMENT_ROOT'] . '/h-news/');
+if(ENVIRONMENT_CURRENT === ENVIRONMENT_PRODUCTION){
+	define('BASE_URL','http://www.allengarvey.com/code/h-news/');
+	define('ROOT_PATH',$_SERVER['DOCUMENT_ROOT'] . 'code/h-news/');
 }
-
+else{
+	define('BASE_URL','/h-news/');
+	define('ROOT_PATH',$_SERVER['DOCUMENT_ROOT'] . '/h-news/');	
+}
 define('INC_PATH', ROOT_PATH.'inc/');
 define('VIEWS_PATH', INC_PATH.'views/');
 define('CONTROLLERS_PATH', INC_PATH.'controllers/');
