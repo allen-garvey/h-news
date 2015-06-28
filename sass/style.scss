@@ -58,7 +58,7 @@ $bootstrap_lg_breakpoint : 1200px;
 body{
 	@extend %body_copy_font_family;
 	font-size: 16px;
-	background-color: snow;
+	background-color: #FFFAFA; //snow
 }
 
 h1,h2,h3,h4{
