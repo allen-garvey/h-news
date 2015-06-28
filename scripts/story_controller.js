@@ -48,8 +48,5 @@ HN.Story = (function(){
 	HNStory.prototype.commentsUrl = function(){
 		return 'https://news.ycombinator.com/item?id=' + this.storyInfo['id'];
 	}
-	HNStory.prototype.storyInfoUrl = function() {
-		return 'https://hacker-news.firebaseio.com/v0/item/' + this.id + '.json';
-	};
 	return HNStory;
 })();
