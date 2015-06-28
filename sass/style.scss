@@ -23,7 +23,7 @@ $bootstrap_lg_breakpoint : 1200px;
 */
 //font families
 %brand_font_family{
-	font-family: Ubuntu, Helvetica, 'Helvetica Neue', sans-serif;
+	font-family: Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 %heading_font_family{
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -116,11 +116,7 @@ nav ul{
 	float : right;
 	margin:0;
 }
-
-nav ul li:first-of-type{
-	margin-right : 3rem;
-}
-nav ul:nth-child(2){
+nav ul li{
 	margin-right : 2rem;
 }
 
@@ -169,7 +165,7 @@ footer{
 	text-align: center;
 	margin: 4rem 0 4rem 0;
 }
-.github{
+.hide_for_sm{
 	display:none;
 }
 
@@ -177,8 +173,11 @@ footer{
 * Media queries
 */
 @media screen and (min-width: $bootstrap_sm_breakpoint){
-	.github{
-		display: block;
+	.hide_for_sm{
+		display: initial;
+	}
+	nav ul li:first-of-type{
+		margin-right : 3rem;
 	}
 }
 
