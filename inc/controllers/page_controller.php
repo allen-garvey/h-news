@@ -7,12 +7,13 @@ abstract class HNewsAbstractPageController{
 	* Title of the page, used to display navigation
 	*/
 	public abstract function getTitle();
-	public abstract function getStoryIds();
 	public abstract function getStoryIdsUrl();
 	/**
-	* Returns a boolean if should display story of that type
+	* Returns a js function as string used by the javascript to determine if story should be displayed
 	*/
-	public abstract function shouldDisplayStory(HNewsStoryController $story);
+	public function displayStoryFunction(){
+		return 'function(story){return true;}';
+	}
 	
 	public function getNumStoriesPerPage(){
 		return 30;
@@ -24,9 +25,6 @@ class HNewsHomePageController extends HNewsAbstractPageController{
 	public function getTitle(){
 		return 'home';
 	}
-	public function getStoryIds(){
-		return HNewsStoriesModel::topStories();
-	}
 	public function getStoryIdsUrl(){
 		return HNewsStoriesModel::topStoriesUrl();	
 	}
@@ -37,21 +35,17 @@ class HNewsHomePageController extends HNewsAbstractPageController{
 		}
 		return false;
 	}
+	public function displayStoryFunction(){
+		return 'function(story){if(story.type()==="job"){return false;} return true;}';
+	}
 }
 
 class HNewsShowPageController extends HNewsAbstractPageController{
 	public function getTitle(){
 		return 'show';
 	}
-	public function getStoryIds(){
-		return HNewsStoriesModel::showStories();
-	}
 	public function getStoryIdsUrl(){
 		return HNewsStoriesModel::showStoriesUrl();	
-	}
-
-	public function shouldDisplayStory(HNewsStoryController $story){
-		return true;
 	}
 }
 
@@ -59,14 +53,7 @@ class HNewsAskPageController extends HNewsAbstractPageController{
 	public function getTitle(){
 		return 'ask';
 	}
-	public function getStoryIds(){
-		return HNewsStoriesModel::askStories();
-	}
 	public function getStoryIdsUrl(){
 		return HNewsStoriesModel::askStoriesUrl();	
-	}
-
-	public function shouldDisplayStory(HNewsStoryController $story){
-		return true;
 	}
 }

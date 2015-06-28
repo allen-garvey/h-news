@@ -24,7 +24,7 @@
 				.done(function(storyInfo) {
 					var story = new HN.Story(storyInfo);
 					console.log(story);
-					if(shouldDisplayStory(story)){
+					if(HN.shouldDisplayStory(story)){
 						$('main ol').append(getStoryHTML(story));
 					}
 				})
@@ -67,13 +67,5 @@
 		}
 		html = html + "</div></li>";
 		return html;
-	}
-
-	function shouldDisplayStory(story){
-		if(story.type() === 'job'){
-			return false;
-		}
-
-		return true;
 	}
 })();
