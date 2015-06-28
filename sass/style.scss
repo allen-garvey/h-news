@@ -1,0 +1,185 @@
+@import 'normalize.scss';
+
+/**
+* Constants
+*/
+//type
+$type_scale : 1.414; //augmented fourth
+
+//layout
+$universal_left_right_padding : 1em;
+
+//colors
+$hn_orange : #ff6600;
+$secondary_color : #313C7A;
+
+//media queries
+$bootstrap_sm_breakpoint : 768px;
+$bootstrap_med_breakpoint : 992px;
+$bootstrap_lg_breakpoint : 1200px;
+
+/**
+* Abstract type classes
+*/
+//font families
+%brand_font_family{
+	font-family: Ubuntu, Helvetica, 'Helvetica Neue', sans-serif;
+}
+%heading_font_family{
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+%body_copy_font_family{
+	font-family: Georgia, 'Times', serif;
+}
+
+//font sizes
+%font_size_1{
+	font-size: 1rem / $type_scale;
+}
+%font_size_0{
+	font-size: 1rem;
+}
+%font_size1{
+	font-size: 1rem * $type_scale;
+}
+%font_size2{
+	font-size: 1rem * $type_scale * $type_scale;
+}
+%font_size3{
+	font-size: 1rem * $type_scale * $type_scale * $type_scale;
+}
+%font_size4{
+	font-size: 1rem * $type_scale * $type_scale * $type_scale * $type_scale;
+}
+
+/**
+* Base styles
+*/
+body{
+	@extend %body_copy_font_family;
+	font-size: 16px;
+	background-color: snow;
+}
+
+h1,h2,h3,h4{
+	@extend %heading_font_family;
+	font-weight : normal;
+}
+h1{
+	@extend %font_size4;
+}
+h2{
+	@extend %font_size3;
+}
+h3{
+	@extend %font_size2;
+}
+h4{
+	@extend %font_size1;
+}
+a{
+	text-decoration:none;
+	color: darken($secondary_color, 10%);
+}
+a:visited{
+	color: $secondary_color;
+}
+a:hover{
+	text-decoration:underline;
+}
+
+
+/**
+* Layout
+*/
+.container{
+	max-width: 950px;
+	margin: 0 auto;
+	padding : 0 $universal_left_right_padding;
+}
+ul, ol{
+	list-style-type: none;
+}
+
+/**
+* Header and nav styles
+*/
+.jumbotron{
+	@extend %brand_font_family;
+	background-color: lighten($hn_orange, 33%);
+}
+nav ul, nav ul li, nav{
+	display:inline-block;
+}
+nav ul{
+	padding:0;
+	float : right;
+	margin:0;
+}
+
+nav ul li:first-of-type{
+	margin-right : 3rem;
+}
+nav ul:nth-child(2){
+	margin-right : 2rem;
+}
+
+nav{
+	@extend %font_size1;
+	width: 100%;
+	margin: 1rem 0 1.5rem 0;
+}
+
+/**
+* main content styles
+*/
+main ol{
+	padding:0;
+}
+main li{
+	padding: 0.5rem 0rem 1rem 0rem;
+}
+main p{
+	@extend %font_size_0;	
+}
+main li h4{
+	margin-top:0;
+}
+.small{
+	@extend %font_size_1;
+}
+
+main li:nth-child(even){
+	background-color: lighten($hn_orange, 45%);
+}
+/**
+* Footer styles
+*/
+footer{
+	text-align: center;
+	margin: 4rem 0 4rem 0;
+}
+
+
+/**
+* Media queries
+*/
+@media screen and (min-width: $bootstrap_sm_breakpoint){
+
+}
+
+@media screen and (min-width: $bootstrap_med_breakpoint){
+
+}
+
+@media screen and (min-width: $bootstrap_lg_breakpoint){
+	nav ul:nth-child(2){
+		margin-right : 0;
+	}
+	main p{
+		@extend %font_size_0;
+		margin-top: -1em;
+	}
+}
+
+
