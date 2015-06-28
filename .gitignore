@@ -5,3 +5,5 @@
 .sass-cache
 .sass-cache/*
 styles/*.css
+node_modules/*
+scripts/*.js
