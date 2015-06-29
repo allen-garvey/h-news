@@ -12,10 +12,10 @@
         <header class='jumbotron'>
             <div class='container'>
                 <nav>
-                    <a class='brand' href='<?= HOME_URL; ?>'>H-News</a>
+                    <a href='<?= HOME_URL; ?>'><span class='brand <?php if($page_controller->getTitle()==='home'){echo 'current';} ?>'>H-News</span></a>
                     <ul>
-                        <li><a href='<?= SHOW_URL; ?>'>Show</a></li>
-                        <li><a href='<?= ASK_URL; ?>'>Ask</a></li>
+                        <a href='<?= SHOW_URL; ?>'><li<?php if($page_controller->getTitle()==='show'){echo ' class="current"';} ?>>Show</li></a>
+                        <a href='<?= ASK_URL; ?>'><li<?php if($page_controller->getTitle()==='ask'){echo ' class="current"';} ?>>Ask</li></a>
                     </ul>
                 </nav>
             </div>
