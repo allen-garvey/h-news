@@ -21,7 +21,7 @@
             </div>
         </header>
         <main>
-            <ol>
+            <ol id='top_list'>
             </ol>
         </main>
         <footer>
@@ -33,9 +33,14 @@
             </div>
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
-        <script type="text/javascript">var HN={};HN.storiesUrl = '<?= $page_controller->getStoryIdsUrl(); ?>';
-        HN.storiesPerPage = <?= $page_controller->getNumStoriesPerPage(); ?>;
-        HN.shouldDisplayStory = <?= $page_controller->displayStoryFunction(); ?>;</script>
-        <script src="<?= SCRIPTS_URL.'app.min.js'; ?>" type="text/javascript"></script>
+        <?php 
+            if($page_controller->getControllerType() === 'comments'){
+                include(VIEWS_PATH.'comments_scripts.php');
+            }
+            else{
+                include(VIEWS_PATH.'story_scripts.php');
+            }
+         ?>
+        <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
     </body>
 </html>
