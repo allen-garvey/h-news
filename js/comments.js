@@ -10,7 +10,19 @@ HN.displayComments = function(){
 			return;
 		}
 		var story = new HN.Story(storyInfo);
-		$('main').prepend("<div class='container'>" + HN.util.getStoryTitleHTML(story) + "</div>");
+		var title_class = 'container'
+		var text = "";
+		var title;
+		console.log(HN.pageName);
+		if(HN.pageName === 'ask'){
+			title_class += ' ask';
+			text = "<h6>" + storyInfo.by + "</h6><article>" + storyInfo.text  + "</article>";
+			title = HN.util.getAskStoryTitle(story);
+		}
+		else{
+			title = HN.util.getStoryTitleHTML(story)
+		}
+		$('main').prepend("<section class='" + title_class + "'>" + title + text + "</section>");
 		displayAllCommentChildren(story.getTopLevelCommentsIds());
 		
 	})
