@@ -11,7 +11,7 @@ HN.Story = (function(){
 	HNStory.prototype.url = function() {
 		//for ask or show HN stories
 		if(this.isLocalHNUrl()){
-			return "https://news.ycombinator.com/item?id=" + this.storyInfo['id']; 
+			return HN.askUrl + this.storyInfo['id'];
 		}
 		return this.storyInfo['url'];
 	};
