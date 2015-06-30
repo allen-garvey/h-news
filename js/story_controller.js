@@ -6,14 +6,17 @@ HN.Story = (function(){
 
 	function HNStory(storyInfo){
 		this.storyInfo = storyInfo;
-	}
+	};
 
 	HNStory.prototype.url = function() {
 		//for ask or show HN stories
-		if(this.storyInfo['url'] === ''){
+		if(this.isLocalHNUrl()){
 			return "https://news.ycombinator.com/item?id=" + this.storyInfo['id']; 
 		}
 		return this.storyInfo['url'];
+	};
+	HNStory.prototype.isLocalHNUrl = function(){
+		return this.storyInfo['url'] === '';
 	};
 
 	/**
@@ -35,18 +38,37 @@ HN.Story = (function(){
 	};
 	HNStory.prototype.title = function(){
 		return this.storyInfo['title'];
-	}
+	};
+	HNStory.prototype.storyType = function(){
+		if(this.type() !== 'story'){
+			return false;
+		}
+		if(this.isLocalHNUrl()){
+			if(this.title().substring(0,3).toLowerCase() === 'ask'){
+				return 'ask';
+			}
+			return 'show';
+		}
+		return 'story';
+	};
 	HNStory.prototype.type = function(){
 		return this.storyInfo['type'];
-	}	
+	};
 	HNStory.prototype.numComments = function(){
-		if(!this.storyInfo['kids']){
+		if(!this.storyInfo['descendants']){
 			return 0;
 		}
-		return this.storyInfo['kids'].length;
-	}
+		return this.storyInfo['descendants'];
+	};
+	HNStory.prototype.getTopLevelCommentsIds = function(){
+		if(!this.storyInfo['kids']){
+			return [];
+		}
+		return this.storyInfo['kids'];
+	};
 	HNStory.prototype.commentsUrl = function(){
-		return 'https://news.ycombinator.com/item?id=' + this.storyInfo['id'];
-	}
+		// return 'https://news.ycombinator.com/item?id=' + this.storyInfo['id'];
+		return HN.commentsUrl + this.storyInfo['id'];
+	};
 	return HNStory;
 })();
