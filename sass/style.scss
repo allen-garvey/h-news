@@ -36,7 +36,7 @@ $bootstrap_lg_breakpoint : 1200px;
 %font_size_1{
 	font-size: 1rem / $type_scale;
 }
-%font_size_0{
+%font_size0{
 	font-size: 1rem;
 }
 %font_size1{
@@ -61,7 +61,7 @@ body{
 	background-color: #FFFAFA; //snow
 }
 
-h1,h2,h3,h4{
+h1,h2,h3,h4,h5,h6{
 	@extend %heading_font_family;
 	font-weight : normal;
 }
@@ -76,6 +76,12 @@ h3{
 }
 h4{
 	@extend %font_size1;
+}
+h5{
+	@extend %font_size0;
+}
+h6{
+	@extend %font_size_1;
 }
 a{
 	text-decoration:none;
@@ -161,7 +167,7 @@ main li{
 	padding: 0.5rem 0rem 1rem 0rem;
 }
 main p{
-	@extend %font_size_0;	
+	@extend %font_size0;	
 }
 main li h4{
 	margin-top:0;
@@ -185,6 +191,30 @@ footer{
 }
 
 /**
+* Comments page styles
+*/
+.comment article{
+	@extend %heading_font_family;
+	line-height: 1.5em;
+	// @extend %font_size1;
+	// font-family: Verdana;
+	font-size: 18px;
+	max-width: 43rem;
+	margin-top: -1em;
+	margin-bottom: 1em;
+}
+.comment article p{
+	font-size: 18px;
+}
+.comment article a{
+	@extend %font_size_1;
+}
+.comment h6{
+	margin-top: 0;
+}
+
+
+/**
 * Media queries
 */
 @media screen and (min-width: $sm_breakpoint){
@@ -204,14 +234,17 @@ footer{
 	.brand{
 		padding-right: 2rem;
 	}
+	.comment ol{
+		padding-left: 2rem;
+	}
 }
 
 @media screen and (min-width: $bootstrap_lg_breakpoint){
 	nav ul:nth-child(2){
 		margin-right : 0;
 	}
-	main p{
-		@extend %font_size_0;
+	main a p{
+		@extend %font_size0;
 		margin-top: -1em;
 	}
 
