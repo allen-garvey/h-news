@@ -8,7 +8,12 @@ HN.Comment = (function(){
 	function HNComment(commentInfo){
 		this.commentInfo = commentInfo;
 	}
-
+	HNComment.prototype.isDeleted = function(){
+		if(this.commentInfo['deleted'] === true){
+			return true;
+		}
+		return false;
+	}
 	HNComment.prototype.children = function(){
 		return this.commentInfo['kids'];
 	}

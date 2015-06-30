@@ -53,11 +53,18 @@ HN.displayComments = function(){
 		var topLevelComment = !appendToSelector;
 		appendToSelector = appendToSelector || "#top_list";
 		var comment = new HN.Comment(commentInfo);
+		if(comment.isDeleted()){
+			comment = getDeletedComment(commentInfo);
+		}
 		var commentHTML = "<li class='comment'>";
 		if(topLevelComment){
 			commentHTML += "<div class='container'>";
 		}
-		commentHTML += "<h6>" + comment.author() + "</h6><article>" + comment.text() + "</article>";
+		commentHTML += "<h6>" + comment.author() + "</h6><article";
+		if(comment.isDeleted()){
+			commentHTML += " class='deleted'";	
+		}
+		commentHTML += ">" + comment.text() + "</article>";
 		
 		if(comment.numChildren() > 0){
 			commentHTML += "<ol id='" + commentIdToCSSId(comment.commentId()) + "'></ol>";
@@ -66,12 +73,19 @@ HN.displayComments = function(){
 			commentHTML += "</div>";
 		}
 		commentHTML +=  "</li>";
+
 		$(appendToSelector).append(commentHTML);
 		displayAllCommentChildren(comment.children(), '#' + commentIdToCSSId(comment.commentId()));
 	}
 
 	function commentIdToCSSId(commentId){
 		return 'comment' + commentId;
+	}
+
+	function getDeletedComment(commentInfo){
+		commentInfo.by = '';
+		commentInfo.text = '[deleted]'
+		return new HN.Comment(commentInfo);
 	}
 };
 
