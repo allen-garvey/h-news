@@ -23,5 +23,12 @@ HN.util.getItemInfoUrlFromId = function(id){
 * Takes HN.Story object as a parameter and returns the html to display the title and link
 */
 HN.util.getStoryTitleHTML = function(story){
-	return "<a href='" + story.url() +"'><h4>" + story.title() + "<span class='small'> "+ story.urlRoot() +"</span></h4></a>";
+	return "<a href='" + story.url() +"'><h3>" + story.title() + "<span class='small'> "+ story.urlRoot() + "</span></h3></a>";
+}
+/**
+* Used for ask pages to display without the link
+*/
+
+HN.util.getAskStoryTitle = function(story){
+	return "<h3>" + story.title() + "</h3>";
 }
