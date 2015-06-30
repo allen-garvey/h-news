@@ -8,6 +8,49 @@ abstract class HNewsAbstractPageController{
 	*/
 	public abstract function getTitle();
 	public abstract function getStoryIdsUrl();
+	public abstract function getControllerType();
+	
+}
+
+/**
+* Controls such things as title of the page, and the parent id of the comments displayed
+*/
+class HNewsCommentsPageController{
+	protected $parentStoryId;
+	protected $title;
+	
+	function __construct($parentStoryId, $title=null) {
+		$this->parentStoryId = $parentStoryId;
+		if(isset($title)){
+			$this->title = $title;
+		}
+		else{
+			$this->title = 'home';
+		}
+	}
+	/**
+	* Title of the page, used to display navigation
+	*/
+	public function getTitle(){
+		return $this->title;
+	}
+	/**
+	* Used to retrieve json about parent story and get its comment ids
+	*/
+	public function getStoryIdsUrl(){
+		return 'https://hacker-news.firebaseio.com/v0/item/' . $this->parentStoryId . '.json';
+	}
+	public function getControllerType(){
+		return 'comments';
+	}
+	
+}
+
+/**
+* Controls such things as title of the page, which kinds of stories are displayed
+* for stories (homepage, ask and show main pages)
+*/
+abstract class HNewsAbstractStoryController extends HNewsAbstractPageController{
 	/**
 	* Returns a js function as string used by the javascript to determine if story should be displayed
 	*/
@@ -18,10 +61,13 @@ abstract class HNewsAbstractPageController{
 	public function getNumStoriesPerPage(){
 		return 30;
 	}
+	public function getControllerType(){
+		return 'story';
+	}
 	
 }
 
-class HNewsHomePageController extends HNewsAbstractPageController{
+class HNewsHomePageController extends HNewsAbstractStoryController{
 	public function getTitle(){
 		return 'home';
 	}
@@ -40,7 +86,7 @@ class HNewsHomePageController extends HNewsAbstractPageController{
 	}
 }
 
-class HNewsShowPageController extends HNewsAbstractPageController{
+class HNewsShowPageController extends HNewsAbstractStoryController{
 	public function getTitle(){
 		return 'show';
 	}
@@ -49,7 +95,7 @@ class HNewsShowPageController extends HNewsAbstractPageController{
 	}
 }
 
-class HNewsAskPageController extends HNewsAbstractPageController{
+class HNewsAskPageController extends HNewsAbstractStoryController{
 	public function getTitle(){
 		return 'ask';
 	}
