@@ -55,13 +55,19 @@ $bootstrap_lg_breakpoint : 1200px;
 	font-size: 1rem * $type_scale * $type_scale * $type_scale * $type_scale;
 }
 
+//colors
+%main_background_color{
+	background-color: #FFFAFA; //snow
+}
+
 /**
 * Base styles
 */
 body{
 	@extend %body_copy_font_family;
+	@extend %main_background_color;
 	font-size: 16px;
-	background-color: #FFFAFA; //snow
+	
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -192,9 +198,11 @@ main li h4{
 	@extend %font_size_1;
 }
 
-main li:nth-child(even){
+//just selects top level li so nested comments are not alternating colors
+#top_list > li:nth-child(even){
 	background-color: lighten($hn_orange, 45%);
 }
+
 /**
 * Footer styles
 */
@@ -234,6 +242,9 @@ footer{
 .deleted{
 	color : lighten(black, 50%);
 }
+.comment ol{
+	padding-left: 1rem;
+}
 
 /**
 * Media queries
@@ -254,6 +265,10 @@ footer{
 @media screen and (min-width: $med_breakpoint){
 	.brand{
 		padding-right: 2rem;
+	}
+	//so the brand doesn't look off-center when it's selected
+	.brand.current{
+		padding-right: $universal_left_right_padding;
 	}
 	.comment ol{
 		padding-left: 2rem;
