@@ -1,5 +1,12 @@
 RewriteEngine On
 
+#clean up requests for comments
+RewriteRule ^comments/(.*)$ index.php?comments=$1
+RewriteRule ^ask/comments/(.*)$ index.php?page=ask&comments=$1
+RewriteRule ^show/comments/(.*)$ index.php?page=show&comments=$1
+
 #clean up get requests for ask and show pages
-RewriteRule show$|show/.*$ index.php?page=show
-RewriteRule ask$|ask/.*$ index.php?page=ask
+RewriteRule ^show/?$ index.php?page=show
+RewriteRule ^ask/?$ index.php?page=ask
+
+
