@@ -64,6 +64,9 @@ abstract class HNewsAbstractStoryController extends HNewsAbstractPageController{
 	public function getControllerType(){
 		return 'story';
 	}
+	public function getCommentsUrl(){
+		return COMMENTS_QUERY_URL;
+	}
 	
 }
 
@@ -93,6 +96,9 @@ class HNewsShowPageController extends HNewsAbstractStoryController{
 	public function getStoryIdsUrl(){
 		return HNewsStoriesModel::showStoriesUrl();	
 	}
+	public function getCommentsUrl(){
+		return SHOW_COMMENTS_QUERY_URL;
+	}
 }
 
 class HNewsAskPageController extends HNewsAbstractStoryController{
@@ -101,5 +107,8 @@ class HNewsAskPageController extends HNewsAbstractStoryController{
 	}
 	public function getStoryIdsUrl(){
 		return HNewsStoriesModel::askStoriesUrl();	
+	}
+	public function getCommentsUrl(){
+		return ASK_COMMENTS_QUERY_URL;
 	}
 }
