@@ -41,6 +41,10 @@
                 include(VIEWS_PATH.'story_scripts.php');
             }
          ?>
-        <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
+         <?php if(ENVIRONMENT_CURRENT === ENVIRONMENT_PRODUCTION): ?>
+            <script src="<?= SCRIPTS_URL.'app.min.js'; ?>" type="text/javascript"></script>
+        <?php else: ?>
+            <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
+        <?php endif; ?>
     </body>
 </html>
