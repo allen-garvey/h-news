@@ -1,11 +1,16 @@
 <?php 
 define('ENVIRONMENT_DEVELOPMENT', 0);
 define('ENVIRONMENT_PRODUCTION', 1);
+define('ENVIRONMENT_HNEWS_CO', 2);
 require_once('current_environment.php');
 
 if(ENVIRONMENT_CURRENT === ENVIRONMENT_PRODUCTION){
 	define('BASE_URL','http://www.allengarvey.com/code/h-news/');
 	define('ROOT_PATH',$_SERVER['DOCUMENT_ROOT'] . '/code/h-news/');
+}
+elseif(ENVIRONMENT_CURRENT === ENVIRONMENT_HNEWS_CO){
+	define('BASE_URL','http://www.hnews.co/');
+	define('ROOT_PATH',$_SERVER['DOCUMENT_ROOT'] . '/');
 }
 else{
 	define('BASE_URL','/h-news/');
