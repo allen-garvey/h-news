@@ -46,7 +46,7 @@ HN.displayComments = function(){
 				displayComment(commentInfo, selector);
 			})
 			.fail(function() {
-				console.log("Erro retrieving info about comment: " + commentIdArray[i]);
+				console.log("Error retrieving info about comment: " + commentIdArray[i]);
 			});
 			
 		};
