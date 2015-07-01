@@ -13,7 +13,6 @@ HN.displayComments = function(){
 		var title_class = 'container'
 		var text = "";
 		var title;
-		console.log(HN.pageName);
 		if(HN.pageName === 'ask'){
 			title_class += ' ask';
 			text = "<h6>" + storyInfo.by + "</h6><article>" + storyInfo.text  + "</article>";
@@ -34,7 +33,9 @@ HN.displayComments = function(){
 		if(!commentIdArray){
 			return;
 		}
-		selector = selector || null;
+		// selector = selector || null;
+		var isTopLevelComment = !selector;
+		var $parent_list = selector ? $(selector) : $("#top_list");
 		var numCommentIds = commentIdArray.length;
 		for (var i = 0; i < numCommentIds; i++) {
 			$.ajax({
@@ -43,7 +44,7 @@ HN.displayComments = function(){
 				dataType: 'json'
 			})
 			.done(function(commentInfo){
-				displayComment(commentInfo, selector);
+				displayComment(commentInfo, $parent_list, isTopLevelComment);
 			})
 			.fail(function() {
 				console.log("Error retrieving info about comment: " + commentIdArray[i]);
@@ -58,18 +59,18 @@ HN.displayComments = function(){
 	* appendToSelector is a jquery selector string of where the comment should be appended to. 
 	* Defaults to the main ol which specifies it is a top level comment
 	*/
-	function displayComment(commentInfo, appendToSelector){
+	function displayComment(commentInfo, $parent_list, isTopLevelComment){
 		if(!commentInfo){
 			return;
 		}
-		var topLevelComment = !appendToSelector;
-		appendToSelector = appendToSelector || "#top_list";
+		// var isTopLevelComment = !$parent_list;
+		// appendToSelector = appendToSelector || "#top_list";
 		var comment = new HN.Comment(commentInfo);
 		if(comment.isDeleted()){
 			comment = getDeletedComment(commentInfo);
 		}
 		var commentHTML = "<li class='comment'>";
-		if(topLevelComment){
+		if(isTopLevelComment){
 			commentHTML += "<div class='container'>";
 		}
 		commentHTML += "<h6>" + comment.author() + "</h6><article";
@@ -81,12 +82,12 @@ HN.displayComments = function(){
 		if(comment.numChildren() > 0){
 			commentHTML += "<ol id='" + commentIdToCSSId(comment.commentId()) + "'></ol>";
 		}
-		if(topLevelComment){
+		if(isTopLevelComment){
 			commentHTML += "</div>";
 		}
 		commentHTML +=  "</li>";
 
-		$(appendToSelector).append(commentHTML);
+		$parent_list.append(commentHTML);
 		displayAllCommentChildren(comment.children(), '#' + commentIdToCSSId(comment.commentId()));
 	}
 
