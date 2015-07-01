@@ -1,3 +1,6 @@
+/**
+* used to story shared functions used in story and comments pages
+*/
 HN.util = {};
 /**
 		* returns object of info about a story based on integer id
@@ -25,10 +28,11 @@ HN.util.getItemInfoUrlFromId = function(id){
 HN.util.getStoryTitleHTML = function(story){
 	return "<a href='" + story.url() +"'><h3>" + story.title() + "<span class='small'> "+ story.urlRoot() + "</span></h3></a>";
 }
+
 /**
 * Used for ask pages to display without the link
+* Even though code only used on ask pages, is kept here because it should have the same style as getStoryTitleHTML()
 */
-
 HN.util.getAskStoryTitle = function(story){
 	return "<h3>" + story.title() + "</h3>";
 }

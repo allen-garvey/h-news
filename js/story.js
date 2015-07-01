@@ -1,3 +1,6 @@
+/**
+* used to display homepage, show and ask pages list of story links
+*/
 HN.displayStories = function(){
 	$.ajax({
 		url: HN.storiesUrl,

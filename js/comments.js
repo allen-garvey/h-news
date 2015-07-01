@@ -1,3 +1,6 @@
+/**
+* used to display comment and ask pages
+*/
 HN.displayComments = function(){
 	$.ajax({
 		url: HN.storiesUrl,
@@ -29,11 +32,14 @@ HN.displayComments = function(){
 		console.log("Error retrieving comments");
 	});
 
+	/**
+	* displays comment children of an array of comment ids
+	* if no selector is given, assumes it is top level comment and creates appropriate jquery selector object
+	*/
 	function displayAllCommentChildren(commentIdArray, selector){
 		if(!commentIdArray){
 			return;
 		}
-		// selector = selector || null;
 		var isTopLevelComment = !selector;
 		var $parent_list = selector ? $(selector) : $("#top_list");
 		var numCommentIds = commentIdArray.length;
@@ -56,15 +62,13 @@ HN.displayComments = function(){
 
 	/**
 	* displays comment
-	* appendToSelector is a jquery selector string of where the comment should be appended to. 
-	* Defaults to the main ol which specifies it is a top level comment
+	* $parent_list is a jquery object that the comment should be appended to
+	* isTopLevelComment is used for styling purposes, since top level comments are styled different than child comments
 	*/
 	function displayComment(commentInfo, $parent_list, isTopLevelComment){
 		if(!commentInfo){
 			return;
 		}
-		// var isTopLevelComment = !$parent_list;
-		// appendToSelector = appendToSelector || "#top_list";
 		var comment = new HN.Comment(commentInfo);
 		if(comment.isDeleted()){
 			comment = getDeletedComment(commentInfo);
@@ -90,11 +94,17 @@ HN.displayComments = function(){
 		$parent_list.append(commentHTML);
 		displayAllCommentChildren(comment.children(), '#' + commentIdToCSSId(comment.commentId()));
 	}
-
+	
+	/**
+	* Returns the correct jquery id selector for the parent ol to append comment to
+	*/
 	function commentIdToCSSId(commentId){
 		return 'comment' + commentId;
 	}
 
+	/**
+	* Returns the text used in place of deleted comments
+	*/
 	function getDeletedComment(commentInfo){
 		commentInfo.by = '';
 		commentInfo.text = '[deleted]'
