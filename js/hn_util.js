@@ -26,7 +26,7 @@ HN.util.getItemInfoUrlFromId = function(id){
 * Takes HN.Story object as a parameter and returns the html to display the title and link
 */
 HN.util.getStoryTitleHTML = function(story){
-	return "<a href='" + story.url() +"'><h3>" + story.title() + "<span class='small'> "+ story.urlRoot() + "</span></h3></a>";
+	return "<a href='" + story.url() +"'><h3>" + story.title() + "<span class='small url_source'> "+ story.urlRoot() + "</span></h3></a>";
 }
 
 /**

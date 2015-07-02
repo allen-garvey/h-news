@@ -7,8 +7,7 @@
 body{
 	@extend %body_copy_font_family;
 	@extend %main_background_color;
-	font-size: 16px;
-	
+	font-size: 18px;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -37,6 +36,11 @@ a{
 	text-decoration:none;
 	color: lighten($secondary_color, 10%);
 }
+a{
+	// white-space: pre-wrap; 
+	// overflow:hidden;
+	word-wrap:break-word; //so a tag's text wraps on small (iPhone screens)
+}
 a:visited{
 	color: darken($secondary_color, 10%);
 }
@@ -47,8 +51,8 @@ code{
 	@extend %code_font_family;
 	@extend %font_size_1;
 }
-/* Browser specific (not valid) styles to make preformatted text wrap */		
 
+/* Browser specific (not valid) styles to make preformatted text wrap */		
 pre {
  white-space: pre-wrap;       /* css-3 */
  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -129,14 +133,18 @@ main li{
 main p{
 	@extend %font_size0;	
 }
-main li h4{
-	margin-top:0;
+#top_list{
+	margin-top: 0;
 }
+
+/**
+* story content styles
+*/
 .small{
 	@extend %font_size_1;
 }
-#top_list{
-	margin-top: 0;
+.url_source{ //used to display url root next to or below story title
+	display:block;
 }
 
 //just selects top level li so nested comments are not alternating colors
@@ -161,15 +169,9 @@ footer{
 .comment article{
 	@extend %heading_font_family;
 	line-height: 1.5em;
-	// @extend %font_size1;
-	// font-family: Verdana;
-	font-size: 18px;
 	max-width: 43rem;
-	margin-top: -1em;
-	margin-bottom: 1em;
-}
-.comment article p{
-	font-size: 18px;
+	margin-top: -1rem;
+	margin-bottom: 1rem;
 }
 .comment article code, .comment article pre{
 	line-height: 1rem;
@@ -222,6 +224,7 @@ section.ask{
 		padding-left: 2rem;
 		padding-right:2rem;
 	}
+
 }
 
 @media screen and (min-width: $med_breakpoint){
@@ -235,6 +238,9 @@ section.ask{
 	}
 	.comment ol{
 		padding-left: 2rem;
+	}
+	.url_source{
+		display: inline;
 	}
 }
 
