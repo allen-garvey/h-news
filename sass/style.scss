@@ -4,10 +4,12 @@
 /**
 * Base styles
 */
+html{
+	font-size: 18px;
+}
 body{
 	@extend %body_copy_font_family;
 	@extend %main_background_color;
-	font-size: 18px;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -36,9 +38,7 @@ a{
 	text-decoration:none;
 	color: lighten($secondary_color, 10%);
 }
-a{
-	// white-space: pre-wrap; 
-	// overflow:hidden;
+a,p,article{
 	word-wrap:break-word; //so a tag's text wraps on small (iPhone screens)
 }
 a:visited{
@@ -102,7 +102,7 @@ nav ul{
 	padding: 1rem 1rem 1.5rem $universal_left_right_padding;
 }
 nav li{
-	padding: 1rem 1.5rem 1.5rem 1.5rem;
+	padding: 1rem 1.3rem 1.5rem 1.3rem;
 	margin:0;
 }
 
