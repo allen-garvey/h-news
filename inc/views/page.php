@@ -27,9 +27,11 @@
         <footer>
             <div class='container'>
                 <form method='GET' action='https://hn.algolia.com'>
-                    <input type='search' name='query' placeholder='Search archives' /><input class='hide_for_sm' type='submit' value='search'/>
+                    <input type='search' name='query' placeholder='Search archives' /><input class='hide_for_med' type='submit' value='search'/>
                 </form>
-                <a href='https://github.com/allen-garvey/h-news' class='hide_for_sm'><p>Source on github</p></a>
+                <p class='small'>Not affiliated with Hacker News or Y Combinator.</p>
+                <p class='small'>Designed and created by <a href='http://www.allengarvey.com'>Allen Garvey</a> using the Hacker News API.</p>
+                <p class='small'>Released under the MIT License. <a href='https://github.com/allen-garvey/h-news'>Source on github</a></p>
             </div>
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
