@@ -156,10 +156,12 @@ main p{
 * Footer styles
 */
 footer{
-	text-align: center;
 	margin: 4rem 0 4rem 0;
 }
-.hide_for_sm{
+footer p{
+	line-height: 1.5em;
+}
+.hide_for_med{ //used for search button
 	display:none;
 }
 
@@ -214,9 +216,6 @@ section.ask{
 	nav{
 		font-size: 1rem * $type_scale * $type_scale; //extending doesn't work here
 	}
-	.hide_for_sm{
-		display: initial;
-	}
 	nav ul li:first-of-type{
 		padding-right : 3rem;
 	}
@@ -242,6 +241,7 @@ section.ask{
 	.url_source{
 		display: inline;
 	}
+	
 }
 
 @media screen and (min-width: $bootstrap_lg_breakpoint){
@@ -256,6 +256,24 @@ section.ask{
 	nav{
 		font-size: 1rem * $type_scale; //extending doesn't work here
 	}
+	
+	/**
+	* Footer styles
+	*/
+	footer form{
+		text-align: center;
+	}
+	footer p:first-of-type{
+		margin-top: 1em;
+	}
+	footer p{
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	.hide_for_med{//used for search button
+		display: initial;
+	}
+
 
 }
 
