@@ -11,6 +11,9 @@ body{
 	@extend %body_copy_font_family;
 	@extend %main_background_color;
 }
+html,body{
+	height: 100%; //so footer stays at the bottom
+}
 
 h1,h2,h3,h4,h5,h6{
 	@extend %heading_font_family;
@@ -164,31 +167,40 @@ footer p{
 .hide_for_med{ //used for search button
 	display:none;
 }
+.total{
+	//used to place footer at the bottom of the page
+	min-height: 75%;
+	position: relative;
+}
 
 /**
 * Comments page styles
 */
-.comment article{
-	@extend %heading_font_family;
-	line-height: 1.5em;
-	max-width: 43rem;
-	margin-top: -1rem;
-	margin-bottom: 1rem;
-}
-.comment article code, .comment article pre{
-	line-height: 1rem;
-}
-.comment article a{
-	@extend %font_size_1;
-}
-.comment h6{
-	margin-top: 0;
+.comment{
+	article{
+		@extend %heading_font_family;
+		line-height: 1.5em;
+		max-width: 43rem;
+		margin-top: -1rem;
+		margin-bottom: 1rem;
+		
+		code, pre{
+			line-height: 1rem;
+		}
+		a{
+			@extend %font_size_1;
+		}
+	}
+	
+	h6{
+		margin-top: 0;
+	}
+	ol{
+		padding-left: 1rem;
+	}
 }
 .deleted{
 	color : lighten(black, 50%);
-}
-.comment ol{
-	padding-left: 1rem;
 }
 
 /**
@@ -273,8 +285,15 @@ section.ask{
 	.hide_for_med{//used for search button
 		display: initial;
 	}
-
-
 }
 
+/*
+* Theme imports
+*/
+// @import 'red_theme.scss';
+// @import 'blue_theme.scss';
+// @import 'silver_theme.scss';
+// @import 'green_theme.scss';
+// @import 'purple_theme.scss';
+// @import 'black_theme.scss';
 
