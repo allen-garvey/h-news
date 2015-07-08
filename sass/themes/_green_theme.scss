@@ -6,17 +6,18 @@ $secondary_color : dimgray;
 .green{
 	a{
 		color: lighten($secondary_color, 10%);
+		&:visited{
+			color: darken($secondary_color, 10%);
+		}	
 	}
-	a:visited{
-		color: darken($secondary_color, 10%);
-	}
-
+	
 	nav a{
 		color: darken($secondary_color, 10%);
+		&:visited{
+			color: $secondary_color;
+		}	
 	}
-	nav a:visited{
-		color: $secondary_color;
-	}
+
 	.jumbotron{
 		background-color: lighten($primary_color, 33%);
 	}
