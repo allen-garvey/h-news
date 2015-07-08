@@ -19,22 +19,22 @@ h1,h2,h3,h4,h5,h6{
 	font-weight : normal;
 }
 h1{
-	@extend %font_size4;
+	@include font_size(4);
 }
 h2{
-	@extend %font_size3;
+	@include font_size(3);
 }
 h3{
-	@extend %font_size2;
+	@include font_size(2);
 }
 h4{
-	@extend %font_size1;
+	@include font_size(1);
 }
 h5{
-	@extend %font_size0;
+	@include font_size(0);
 }
 h6{
-	@extend %font_size_1;
+	@include font_size(-1);
 }
 a,p,article{
 	word-wrap:break-word; //so a tag's text wraps on small (iPhone screens)
@@ -53,7 +53,7 @@ a{
 
 code{
 	@extend %code_font_family;
-	@extend %font_size_1;
+	@include font_size(-1);
 }
 
 /* Browser specific (not valid) styles to make preformatted text wrap */		
@@ -87,10 +87,10 @@ ul, ol{
 */
 .jumbotron{
 	@extend %brand_font_family;
-	background-color: lighten($hn_orange, 33%);
+	background-color: lighten($primary_color, 33%);
 }
 .current{
-	background-color: lighten($hn_orange, 20%);
+	background-color: lighten($primary_color, 20%);
 }
 nav ul, nav ul li, nav{
 	display:inline-block;
@@ -111,7 +111,7 @@ nav li{
 }
 
 nav{
-	@extend %font_size1;
+	@include font_size(1);
 	width: 100%;
 }
 
@@ -137,7 +137,7 @@ main{
 		padding: 0.5rem 0rem 1rem 0rem;
 	}
 	p{
-		@extend %font_size0;	
+		@include font_size(0);	
 	}	
 }
 
@@ -149,7 +149,7 @@ main{
 * story content styles
 */
 .small{
-	@extend %font_size_1;
+	@include font_size(-1);
 }
 .url_source{ //used to display url root next to or below story title
 	display:block;
@@ -157,7 +157,7 @@ main{
 
 //just selects top level li so nested comments are not alternating colors
 #top_list > li:nth-child(even){
-	background-color: lighten($hn_orange, 45%);
+	background-color: lighten($primary_color, 45%);
 }
 
 /**
@@ -195,7 +195,7 @@ footer{
 			line-height: 1rem;
 		}
 		a{
-			@extend %font_size_1;
+			@include font_size(-1);
 		}
 	}
 	
@@ -220,7 +220,7 @@ section.ask{
 
 .ask{
 	article, article p{
-		@extend %font_size1;
+		@include font_size(1);
 		line-height: 1.5em;
 	}
 	h3{
@@ -278,7 +278,7 @@ section.ask{
 	}
 
 	main a p{
-		@extend %font_size0;
+		@include font_size(0);
 		margin-top: -1em;
 	}
 	

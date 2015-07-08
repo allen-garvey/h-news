@@ -1,0 +1,3 @@
+@mixin font_size($pow, $scale : $type_scale){
+	font-size : #{pow($scale, $pow)}rem;
+}
