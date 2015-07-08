@@ -7,53 +7,17 @@ $type_scale : 1.25; //major third
 //layout
 $universal_left_right_padding : 1rem;
 
-//colors
+//color names
 $hn_orange : #ff6600;
-$secondary_color : #313C7A;
+$blue_violet : #313C7A;
+$snow : #FFFAFA;
+
+//colors roles
+$primary_color : $hn_orange;
+$secondary_color : $blue_violet;
+$main_background_color : $snow;
 
 //media queries
 $sm_breakpoint : 460px;
 $med_breakpoint : 562px;
 $bootstrap_lg_breakpoint : 1200px;
-
-/**
-* Abstract type classes
-*/
-//font families
-%brand_font_family{
-	font-family: Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-%heading_font_family{
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-%body_copy_font_family{
-	font-family: Georgia, 'Times', serif;
-}
-%code_font_family{
-	font-family: Menlo, Monaco, Consolas, Inconsolata, 'Courier New', monospace;
-}
-
-//font sizes
-%font_size_1{
-	font-size: 1rem / $type_scale;
-}
-%font_size0{
-	font-size: 1rem;
-}
-%font_size1{
-	font-size: 1rem * $type_scale;
-}
-%font_size2{
-	font-size: 1rem * $type_scale * $type_scale;
-}
-%font_size3{
-	font-size: 1rem * $type_scale * $type_scale * $type_scale;
-}
-%font_size4{
-	font-size: 1rem * $type_scale * $type_scale * $type_scale * $type_scale;
-}
-
-//colors
-%main_background_color{
-	background-color: #FFFAFA; //snow
-}

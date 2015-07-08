@@ -7,15 +7,15 @@ html{
 	font-size: 18px;
 }
 body{
-	@extend %body_copy_font_family;
-	@extend %main_background_color;
+	background-color: $main_background_color;
+	@include body_copy_font_family;
 }
 html,body{
 	height: 100%; //so footer stays at the bottom
 }
 
 h1,h2,h3,h4,h5,h6{
-	@extend %heading_font_family;
+	@include heading_font_family;
 	font-weight : normal;
 }
 h1{
@@ -52,22 +52,22 @@ a{
 }
 
 code{
-	@extend %code_font_family;
+	@include code_font_family;
 	@include font_size(-1);
 }
 
 /* Browser specific (not valid) styles to make preformatted text wrap */		
 pre {
- white-space: pre-wrap;       /* css-3 */
- white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
- white-space: -pre-wrap;      /* Opera 4-6 */
- white-space: -o-pre-wrap;    /* Opera 7 */
- word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 
 /**
-* Layout
+* Main layout
 */
 .container{
 	max-width: 950px;
@@ -86,7 +86,7 @@ ul, ol{
 * Header and nav styles
 */
 .jumbotron{
-	@extend %brand_font_family;
+	@include brand_font_family;
 	background-color: lighten($primary_color, 33%);
 }
 .current{
@@ -185,7 +185,7 @@ footer{
 */
 .comment{
 	article{
-		@extend %heading_font_family;
+		@include heading_font_family;
 		line-height: 1.5em;
 		max-width: 43rem;
 		margin-top: -1rem;

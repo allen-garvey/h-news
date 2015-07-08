@@ -1,3 +1,20 @@
 @mixin font_size($pow, $scale : $type_scale){
 	font-size : #{pow($scale, $pow)}rem;
 }
+
+@mixin brand_font_family{
+	font-family: Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	@content;
+}
+@mixin heading_font_family{
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	@content;
+}
+@mixin body_copy_font_family{
+	font-family: Georgia, 'Times', serif;
+	@content;
+}
+@mixin code_font_family{
+	font-family: Menlo, Monaco, Consolas, Inconsolata, 'Courier New', monospace;
+	@content;
+}
