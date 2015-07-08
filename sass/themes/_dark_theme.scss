@@ -1,0 +1,17 @@
+/*
+* dark theme
+*/
+$primary_color : #181818;
+$secondary_color : snow;
+.dark{
+	background-color: $primary_color;
+	color: $secondary_color;
+	@include theme_default_override;
+	#top_list > li:nth-child(even){
+		background-color: lighten($primary_color, 15%);
+	}
+}
+
+html{
+	font-size: 20px;
+}

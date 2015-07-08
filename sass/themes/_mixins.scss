@@ -1,9 +1,4 @@
-/*
-* black theme
-*/
-$primary_color : black;
-$secondary_color : white;
-.black{
+@mixin theme_default_override{
 	a{
 		color: lighten($secondary_color, 10%);
 		&:visited{
@@ -29,4 +24,5 @@ $secondary_color : white;
 	#top_list > li:nth-child(even){
 		background-color: lighten($primary_color, 45%);
 	}
+	@content;
 }

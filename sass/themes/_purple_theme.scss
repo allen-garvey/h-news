@@ -1,32 +1,8 @@
 /*
 * purple theme
 */
-$primary_color : #663399; //rebecca purple
+$primary_color : lighten(#663399, 10%); //rebecca purple
 $secondary_color : black;
 .purple{
-	a{
-		color: lighten($secondary_color, 10%);
-		&:visited{
-			color: darken($secondary_color, 10%);
-		}	
-	}
-	
-	nav a{
-		color: darken($secondary_color, 10%);
-		&:visited{
-			color: $secondary_color;
-		}	
-	}
-
-	.jumbotron{
-		background-color: lighten($primary_color, 33%);
-	}
-	.current{
-		background-color: lighten($primary_color, 20%);
-	}
-
-	//just selects top level li so nested comments are not alternating colors
-	#top_list > li:nth-child(even){
-		background-color: lighten($primary_color, 45%);
-	}
+	@include theme_default_override;
 }
