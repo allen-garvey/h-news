@@ -1,0 +1,31 @@
+/*
+* Red theme
+*/
+$primary_color : red;
+$secondary_color : green;
+.red{
+	a{
+		color: lighten($secondary_color, 10%);
+	}
+	a:visited{
+		color: darken($secondary_color, 10%);
+	}
+
+	nav a{
+		color: darken($secondary_color, 10%);
+	}
+	nav a:visited{
+		color: $secondary_color;
+	}
+	.jumbotron{
+		background-color: lighten($primary_color, 33%);
+	}
+	.current{
+		background-color: lighten($primary_color, 20%);
+	}
+
+	//just selects top level li so nested comments are not alternating colors
+	#top_list > li:nth-child(even){
+		background-color: lighten($primary_color, 45%);
+	}
+}

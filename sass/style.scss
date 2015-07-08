@@ -1,5 +1,4 @@
-@import 'normalize.scss';
-@import 'constants.scss';
+@import 'base/index.scss';
 
 /**
 * Base styles
@@ -290,10 +289,5 @@ section.ask{
 /*
 * Theme imports
 */
-// @import 'red_theme.scss';
-// @import 'blue_theme.scss';
-// @import 'silver_theme.scss';
-// @import 'green_theme.scss';
-// @import 'purple_theme.scss';
-// @import 'black_theme.scss';
+@import 'themes/index.scss';
 
