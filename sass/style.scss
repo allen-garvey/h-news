@@ -237,7 +237,7 @@ section.ask{
 */
 @media screen and (min-width: $sm_breakpoint){
 	nav{
-		font-size: 1rem * $type_scale * $type_scale; //extending doesn't work here
+		@include font_size(2);
 		
 		ul li:first-of-type{
 			padding-right : 3rem;
@@ -270,7 +270,7 @@ section.ask{
 @media screen and (min-width: $bootstrap_lg_breakpoint){
 
 	nav{
-		font-size: 1rem * $type_scale; //extending doesn't work here
+		@include font_size(1);
 	
 		ul:nth-child(2){
 			margin-right : 0;
