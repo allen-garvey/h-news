@@ -1,0 +1,19 @@
+legend{
+	@include heading_font_family;
+	@include font_size(2);
+}
+fieldset{
+	border: 1px solid silver;
+	margin: 0 0 1rem 0;
+}
+.form-group{
+	margin-bottom: 1.5em;
+}
+label{
+	@include font_size(-1);
+}
+@media screen and(min-width: $lg_breakpoint){
+	.form-group{
+		margin-bottom: 0.5em;
+	}
+}
