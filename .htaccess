@@ -8,5 +8,6 @@ RewriteRule ^show/comments/(.*)$ index.php?page=show&comments=$1
 #clean up get requests for ask and show pages
 RewriteRule ^show/?$ index.php?page=show
 RewriteRule ^ask/?$ index.php?page=ask
+RewriteRule ^settings/?$ index.php?page=settings
 
 
