@@ -267,7 +267,7 @@ section.ask{
 	
 }
 
-@media screen and (min-width: $bootstrap_lg_breakpoint){
+@media screen and (min-width: $lg_breakpoint){
 
 	nav{
 		@include font_size(1);
