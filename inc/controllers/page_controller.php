@@ -1,21 +1,70 @@
 <?php 
+require_once(MODELS_PATH.'settings_cookie.php');
 /**
 * Controls such things as title of the page, which kinds of stories are displayed
 */
-abstract class HNewsAbstractPageController{
+interface HNewsPage{
 	/**
 	* Title of the page, used to display navigation
 	*/
-	public abstract function getTitle();
-	public abstract function getStoryIdsUrl();
-	public abstract function getControllerType();
+	public function getTitle();
+	public function getControllerType();
 	
+}
+interface HNewsAjaxPage{
+	public function getStoryIdsUrl();
+}
+
+/**
+* Controls such things as initial the settings, which is just visual themes for now
+*/
+class HNewsSettingsPageController implements HNewsPage{
+	public static $userThemeFormName = "userTheme";
+	protected $settingsCookie;
+	protected $currentTheme;
+
+	function __construct(){
+		$this->settingsCookie = new SettingsCookie;
+	}
+	public function getTitle(){
+		return 'settings';
+	}
+	public function getControllerType(){
+		return 'settings';
+	}
+	public function getThemeList(){
+		return ['default', 'dark', 'blue', 'green', 'purple', 'silver', 'red'];
+	}
+	public function getThemeIdPrefix(){
+		return 'theme_';
+	}
+	public function getCurrentTheme(){
+		if(isset($this->currentTheme)){
+			return $this->currentTheme; //required because cookie doesn't refresh immediately after cookies is set
+		}
+		$userTheme = $this->settingsCookie->getUserTheme();
+		if(isset($userTheme) && $this->isValidThemeName($userTheme)){
+			return $userTheme;
+		}
+		return 'default';
+	}
+
+	public function isValidThemeName($theme){
+		return in_array($theme, $this->getThemeList());
+	}
+
+	public function saveUserTheme($userTheme){
+		if($this->isValidThemeName($userTheme)){
+			$this->settingsCookie->setUserTheme($userTheme);
+			$this->currentTheme = $userTheme;
+		}
+	}
 }
 
 /**
 * Controls such things as title of the page, and the parent id of the comments displayed
 */
-class HNewsCommentsPageController{
+class HNewsCommentsPageController implements HNewsPage, HNewsAjaxPage{
 	protected $parentStoryId;
 	protected $title;
 	
@@ -50,7 +99,7 @@ class HNewsCommentsPageController{
 * Controls such things as title of the page, which kinds of stories are displayed
 * for stories (homepage, ask and show main pages)
 */
-abstract class HNewsAbstractStoryController extends HNewsAbstractPageController{
+abstract class HNewsAbstractStoryController implements HNewsPage, HNewsAjaxPage{
 	/**
 	* Returns a js function as string used by the javascript to determine if story should be displayed
 	*/

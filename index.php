@@ -3,8 +3,18 @@ require_once('inc/config.php');
 require_once(MODELS_PATH.'story_model.php');
 require_once(CONTROLLERS_PATH.'page_controller.php');
 
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST[HNewsSettingsPageController::$userThemeFormName])){
+	$settings_controller = new HNewsSettingsPageController;
+	$settings_controller->saveUserTheme($_POST[HNewsSettingsPageController::$userThemeFormName]);
+}
+
 if(isset($_GET['page'])){
-	if($_GET['page'] == 'ask'){
+	if($_GET['page'] == 'settings'){
+		$page_controller = new HNewsSettingsPageController;
+		include(VIEWS_PATH.'settings.php');
+		die();
+	}
+	elseif($_GET['page'] == 'ask'){
 		$page_controller = new HNewsAskPageController;
 		$page = 'ask';
 	}
@@ -13,6 +23,10 @@ if(isset($_GET['page'])){
 		$page = 'show';
 	}
 }
+if(!isset($settings_controller)){
+	$settings_controller = new HNewsSettingsPageController;
+}
+
 if (isset($_GET['comments'])) {
 	$comments_for = isset($page) ? $page : null;
 	$page_controller = new HNewsCommentsPageController((int) $_GET['comments'], $comments_for);
