@@ -10,10 +10,12 @@ if(ENVIRONMENT_CURRENT === ENVIRONMENT_PRODUCTION){
 }
 elseif(ENVIRONMENT_CURRENT === ENVIRONMENT_HNEWS_CO){
 	define('BASE_URL','http://www.hnews.co/');
+	define('COOKIE_URL', 'hnews.co');
 	define('ROOT_PATH',$_SERVER['DOCUMENT_ROOT'] . '/');
 }
 else{
 	define('BASE_URL','/h-news/');
+	define('COOKIE_URL', BASE_URL);
 	define('ROOT_PATH',$_SERVER['DOCUMENT_ROOT'] . '/h-news/');	
 }
 define('INC_PATH', ROOT_PATH.'inc/');

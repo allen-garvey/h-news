@@ -22,6 +22,6 @@ class SettingsCookie{
 	}
 
 	public function setUserTheme($userTheme){
-		setcookie(SettingsCookie::$cookieNameUserTheme, $userTheme, time() + SettingsCookie::$cookieExpirationDate, BASE_URL);
+		setcookie(SettingsCookie::$cookieNameUserTheme, $userTheme, time() + SettingsCookie::$cookieExpirationDate, '/', COOKIE_URL);
 	}
 }
