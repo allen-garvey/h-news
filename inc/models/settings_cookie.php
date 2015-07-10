@@ -22,6 +22,12 @@ class SettingsCookie{
 	}
 
 	public function setUserTheme($userTheme){
-		setcookie(SettingsCookie::$cookieNameUserTheme, $userTheme, time() + SettingsCookie::$cookieExpirationDate, '/', COOKIE_URL);
+		if(ENVIRONMENT_CURRENT === ENVIRONMENT_DEVELOPMENT){
+			setcookie(SettingsCookie::$cookieNameUserTheme, $userTheme, time() + SettingsCookie::$cookieExpirationDate, COOKIE_URL);
+		}
+		else{
+			setcookie(SettingsCookie::$cookieNameUserTheme, $userTheme, time() + SettingsCookie::$cookieExpirationDate, '/', COOKIE_URL);	
+		}
+		
 	}
 }
