@@ -8,28 +8,24 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST[HNewsSettingsPageContro
 	$settings_controller->saveUserTheme($_POST[HNewsSettingsPageController::$userThemeFormName]);
 }
 
-if(isset($_GET['page'])){
+if(isset($_GET['comments'])) {
+	$comments_for = isset($_GET['page']) ? $_GET['page'] : null;
+	$page_controller = new HNewsCommentsPageController((int) $_GET['comments'], $comments_for);
+}
+else if(isset($_GET['page'])){
 	if($_GET['page'] == 'settings'){
 		$page_controller = new HNewsSettingsPageController;
-		include(VIEWS_PATH.'settings.php');
-		die();
 	}
 	elseif($_GET['page'] == 'ask'){
 		$page_controller = new HNewsAskPageController;
-		$page = 'ask';
 	}
 	elseif($_GET['page'] == 'show'){
 		$page_controller = new HNewsShowPageController;
-		$page = 'show';
 	}
 }
+
 if(!isset($settings_controller)){
 	$settings_controller = new HNewsSettingsPageController;
-}
-
-if (isset($_GET['comments'])) {
-	$comments_for = isset($page) ? $page : null;
-	$page_controller = new HNewsCommentsPageController((int) $_GET['comments'], $comments_for);
 }
 
 if(!isset($page_controller)){
