@@ -4,16 +4,25 @@
 $primary_color : #181818;
 $secondary_color : snow;
 .dark{
+	@include theme_default_override;
 	font-size: 20px;
 	body{
 		background-color: $primary_color;
 		color: $secondary_color;	
 	}
-	@include theme_default_override;
+	
 	#top_list > li:nth-child(even){
 		background-color: lighten($primary_color, 15%);
 	}
 	button, input{
 		color: $primary_color;
+	}
+	.btn-primary{
+		background-color: darken($secondary_color, 10%);
+		border: 1px solid darken($secondary_color, 20%);
+	}
+	.btn-primary:active{
+		background-color: darken($secondary_color, 20%);
+		color: $main_background_color;
 	}
 }
