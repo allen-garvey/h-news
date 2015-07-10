@@ -9,6 +9,7 @@ interface HNewsPage{
 	*/
 	public function getTitle();
 	public function getControllerType();
+	public function getPageTitle();
 	
 }
 interface HNewsAjaxPage{
@@ -31,6 +32,9 @@ class HNewsSettingsPageController implements HNewsPage{
 	}
 	public function getControllerType(){
 		return 'settings';
+	}
+	public function getPageTitle(){
+		return PAGE_TITLE_DEFAULT.'&mdash;Settings';
 	}
 	public function getThemeList(){
 		return ['default', 'dark', 'blue', 'green', 'purple', 'silver', 'red'];
@@ -70,7 +74,7 @@ class HNewsCommentsPageController implements HNewsPage, HNewsAjaxPage{
 	
 	function __construct($parentStoryId, $title=null) {
 		$this->parentStoryId = $parentStoryId;
-		if(isset($title)){
+		if(isset($title) & in_array($title, ['show', 'ask'])){
 			$this->title = $title;
 		}
 		else{
@@ -82,6 +86,9 @@ class HNewsCommentsPageController implements HNewsPage, HNewsAjaxPage{
 	*/
 	public function getTitle(){
 		return $this->title;
+	}
+	public function getPageTitle(){
+		return PAGE_TITLE_DEFAULT;
 	}
 	/**
 	* Used to retrieve json about parent story and get its comment ids
@@ -105,6 +112,9 @@ abstract class HNewsAbstractStoryController implements HNewsPage, HNewsAjaxPage{
 	*/
 	public function displayStoryFunction(){
 		return 'function(story){return true;}';
+	}
+	public function getPageTitle(){
+		return PAGE_TITLE_DEFAULT;
 	}
 	
 	public function getNumStoriesPerPage(){
@@ -142,6 +152,9 @@ class HNewsShowPageController extends HNewsAbstractStoryController{
 	public function getTitle(){
 		return 'show';
 	}
+	public function getPageTitle(){
+		return PAGE_TITLE_DEFAULT.'&mdash;Show';
+	}
 	public function getStoryIdsUrl(){
 		return HNewsStoriesModel::showStoriesUrl();	
 	}
@@ -153,6 +166,9 @@ class HNewsShowPageController extends HNewsAbstractStoryController{
 class HNewsAskPageController extends HNewsAbstractStoryController{
 	public function getTitle(){
 		return 'ask';
+	}
+	public function getPageTitle(){
+		return PAGE_TITLE_DEFAULT.'&mdash;Ask';
 	}
 	public function getStoryIdsUrl(){
 		return HNewsStoriesModel::askStoriesUrl();	
