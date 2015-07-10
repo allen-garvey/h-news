@@ -33,3 +33,5 @@ define('COMMENTS_QUERY_URL', BASE_URL.'comments/');
 define('ASK_COMMENTS_QUERY_URL', ASK_URL.'comments/');
 define('SHOW_COMMENTS_QUERY_URL', SHOW_URL.'comments/');
 
+define('PAGE_TITLE_DEFAULT', 'H News');
+
