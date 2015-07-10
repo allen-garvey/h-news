@@ -18,7 +18,7 @@ HN.displayComments = function(){
 		var title;
 		if(HN.pageName === 'ask'){
 			title_class += ' ask';
-			text = "<h6>" + storyInfo.by + "</h6><article>" + storyInfo.text  + "</article>";
+			text = "<h6>" + storyInfo.by + "</h6><article>" + HN.util.smartenQuotesHTML(storyInfo.text)  + "</article>";
 			title = HN.util.getAskStoryTitle(story);
 		}
 		else{
@@ -82,7 +82,7 @@ HN.displayComments = function(){
 		if(comment.isDeleted()){
 			commentHTML += " class='deleted'";	
 		}
-		commentHTML += ">" + comment.text() + "</article>";
+		commentHTML += ">" + HN.util.smartenQuotesHTML(comment.text()) + "</article>";
 		
 		if(comment.numChildren() > 0){
 			commentHTML += "<ol id='" + commentIdToCSSId(comment.commentId()) + "'></ol>";

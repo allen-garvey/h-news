@@ -27,7 +27,7 @@ HN.util.getItemInfoUrlFromId = function(id){
 */
 HN.util.getStoryTitleHTML = function(story){
 	return "<a href='" + story.url() +"'><h3>" + story.title() + "<span class='small url_source'> "+ story.urlRoot() + "</span></h3></a>";
-}
+};
 
 /**
 * Used for ask pages to display without the link
@@ -35,4 +35,79 @@ HN.util.getStoryTitleHTML = function(story){
 */
 HN.util.getAskStoryTitle = function(story){
 	return "<h3>" + story.title() + "</h3>";
+};
+
+/**
+* Used for comment HTML text to smarten quotes
+* takes html string and returns html string with dumb quotes replaced with smart quotes
+* preserves dumbquotes in html attributes
+*/
+HN.util.smartenQuotesHTML = function(dumbString){
+	return HN.util.replaceSmartQuoteEntities(HN.util.transformTextNodes(dumbString, function(text){
+		return HN.util.replaceDumbQuotes(text);
+	}));
+};
+
+/**
+* Used to transform just the textNodes in html
+* used for smarten quotes
+* @element first argument is either the result of document.getElementById() 
+* or a string of html such as 'text' or 'text <div>more text</div>' or '<div>text</div>'
+* @textTransformFunc is a function used to transform the text nodes
+* it should be of the format: function(text){return text.toUpperCase();} or however the text is to be transformed
+* @returns either the transformed string if was originally a string or transformed element if was originally an element
+*/
+HN.util.transformTextNodes = function (element, textTransformFunc) {
+    var elementType = typeof element;
+    
+    if(elementType === 'string'){
+        var div = document.createElement('div');
+        div.innerHTML = element;
+        element = div;
+    }
+
+    var walker = document.createTreeWalker(
+        element, 
+        NodeFilter.SHOW_TEXT, 
+        null, 
+        false
+    );
+
+    var textNode;
+
+    while(textNode = walker.nextNode()) {
+        textNode.nodeValue = textTransformFunc(textNode.nodeValue);
+    }
+    if(elementType === 'string'){
+        return element.innerHTML;
+    }
+    return element;
+};
+
+/**
+* Used to replace dumb quotes in a text string
+* uses a second replace in the function passed to replace to preserve the non word characters before the quote, such as spaces or parens
+*/
+HN.util.replaceDumbQuotes = function(dumbString){
+	var rightSingleSmartQuote = "&#8217;";
+	var leftSingleSmartQuote = "&#8216;";
+	var rightDoubleSmartQuote = "&#8221;";
+	var leftDoubleSmartQuote = "&#8220;";
+	return dumbString
+			   		 .replace(/^'|\W'/g, function(match, str, offset){return match.replace(/'/g, leftSingleSmartQuote);})
+		       		 .replace(/'/g, rightSingleSmartQuote)
+		       		 .replace(/^"|\W"/g, function(match, str, offset){return match.replace(/"/g, leftDoubleSmartQuote);})
+		       		 .replace(/"/g, rightDoubleSmartQuote);
+};
+/**
+* Required because the treeWalker automatically escapes our ampersands
+*/
+HN.util.replaceSmartQuoteEntities = function(string){
+	return string.replace(/&amp;#8216;/g, '&#8216;')
+	.replace(/&amp;#8217;/g, '&#8217;')
+	.replace(/&amp;#8221;/g, '&#8221;')
+	.replace(/&amp;#8220;/g, '&#8220;');
+
 }
+
+
