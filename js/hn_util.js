@@ -99,15 +99,14 @@ HN.util.replaceDumbQuotes = function(dumbString){
 		       		 .replace(/^"|\W"/g, function(match, str, offset){return match.replace(/"/g, leftDoubleSmartQuote);})
 		       		 .replace(/"/g, rightDoubleSmartQuote);
 };
+
 /**
-* Required because the treeWalker automatically escapes our ampersands
+* Required because the treeWalker automatically escapes ampersands
 */
 HN.util.replaceSmartQuoteEntities = function(string){
-	return string.replace(/&amp;#8216;/g, '&#8216;')
-	.replace(/&amp;#8217;/g, '&#8217;')
-	.replace(/&amp;#8221;/g, '&#8221;')
-	.replace(/&amp;#8220;/g, '&#8220;');
-
-}
+	return string.replace(/&amp;#[\d]{4};/g, function(match, str, offset){
+		return match.replace('&amp;', '&');
+	});
+};
 
 
