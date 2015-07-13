@@ -1,5 +1,7 @@
 RewriteEngine On
 
+ErrorDocument 404 http://hnews.co
+
 #clean up requests for comments
 RewriteRule ^comments/(.*)$ index.php?comments=$1
 RewriteRule ^ask/comments/(.*)$ index.php?page=ask&comments=$1
