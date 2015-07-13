@@ -3,9 +3,12 @@ require_once('inc/config.php');
 require_once(MODELS_PATH.'story_model.php');
 require_once(CONTROLLERS_PATH.'page_controller.php');
 
+// echo var_dump($_COOKIE);
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST[HNewsSettingsPageController::$userThemeFormName])){
+	// echo var_dump($_POST);
 	$settings_controller = new HNewsSettingsPageController;
-	$settings_controller->saveUserTheme($_POST[HNewsSettingsPageController::$userThemeFormName]);
+	$settings_controller->saveSettings($_POST);
+
 }
 
 if(isset($_GET['comments'])) {

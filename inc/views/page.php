@@ -42,6 +42,9 @@
             </div>
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        var HN={};HN.pageType='<?= $page_controller->getControllerType(); ?>';HN.settings = {};
+        HN.settings.shouldAutoDarkMode=<?php if($settings_controller->getShouldAutoDarkMode()){echo 'true';}else{echo 'false';} ?>;
         <?php 
             if($page_controller->getControllerType() === 'comments'){
                 include(VIEWS_PATH.'comments_scripts.php');
@@ -53,6 +56,7 @@
                 include(VIEWS_PATH.'story_scripts.php');
             }
          ?>
+         </script>
          <?php if(ENVIRONMENT_CURRENT === ENVIRONMENT_DEVELOPMENT): ?>
             <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
         <?php else: ?>

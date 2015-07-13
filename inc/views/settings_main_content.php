@@ -17,6 +17,10 @@
             <?php 
                 endforeach;
             ?>
+            <div class='form-group'>
+                <input type="checkbox" id="auto_dark_mode" name="<?= HNewsSettingsPageController::$autoDarkModeFormName; ?>" <?php if($settings_controller->getShouldAutoDarkMode()){echo "checked='checked'";} ?> />
+                <label for="auto_dark_mode" >Automatically switch to dark mode from 11pm to 6am</label>
+            </div>
         </fieldset>
         <input class='btn btn-primary' type='submit' value='Save' />
         <p class='small'>By clicking the save button you are agreeing to accept cookies to save your preferences</p>

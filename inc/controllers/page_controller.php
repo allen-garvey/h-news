@@ -21,8 +21,10 @@ interface HNewsAjaxPage{
 */
 class HNewsSettingsPageController implements HNewsPage{
 	public static $userThemeFormName = "userTheme";
+	public static $autoDarkModeFormName = "autoDark";
 	protected $settingsCookie;
 	protected $currentTheme;
+	protected $shouldAutoDarkMode;
 
 	function __construct(){
 		$this->settingsCookie = new SettingsCookie;
@@ -53,15 +55,37 @@ class HNewsSettingsPageController implements HNewsPage{
 		return 'default';
 	}
 
+	public function getShouldAutoDarkMode(){
+		if(isset($this->shouldAutoDarkMode)){
+			return $this->shouldAutoDarkMode;
+		}
+		return $this->settingsCookie->getShouldAutoDarkMode();
+
+	}
+
 	public function isValidThemeName($theme){
 		return in_array($theme, $this->getThemeList());
 	}
 
-	public function saveUserTheme($userTheme){
+	protected function saveUserTheme($userTheme){
 		if($this->isValidThemeName($userTheme)){
 			$this->settingsCookie->setUserTheme($userTheme);
 			$this->currentTheme = $userTheme;
 		}
+	}
+	protected function saveAutoDarkModeSetting($shouldAutoDark){
+		$this->settingsCookie->setAutoDarkModeSetting($shouldAutoDark);
+		$this->shouldAutoDarkMode = $shouldAutoDark;
+	}
+	public function saveSettings(array $post_data){
+		$this->saveUserTheme($post_data[HNewsSettingsPageController::$userThemeFormName]);
+		if(!isset($post_data[HNewsSettingsPageController::$autoDarkModeFormName]) || $post_data[HNewsSettingsPageController::$autoDarkModeFormName] !== 'on'){
+			$shouldAutoDarkMode = false;
+		}
+		else{
+			$shouldAutoDarkMode = true;
+		}
+		$this->saveAutoDarkModeSetting($shouldAutoDarkMode);
 	}
 }
 
