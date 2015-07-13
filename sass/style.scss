@@ -193,6 +193,10 @@ footer{
 	min-height: 75%;
 	position: relative;
 }
+.settings_link{
+	margin-bottom: 2em;
+	display: block;
+}
 
 /**
 * Comments page styles
@@ -314,6 +318,10 @@ section.ask{
 	}
 	.hide_for_med{//used for search button
 		display: initial;
+	}
+	.settings_link{
+		margin-bottom: 0;
+		display: inline;
 	}
 }
 
