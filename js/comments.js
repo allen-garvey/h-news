@@ -16,7 +16,7 @@ HN.displayComments = function(){
 		var title_class = 'container'
 		var text = "";
 		var title;
-		if(HN.pageName === 'ask'){
+		if(HN.pageName === 'ask' || story.title().match(/^Ask HN:/)){
 			title_class += ' ask';
 			text = "<h6>" + storyInfo.by + "</h6><article>" + HN.util.smartenQuotesHTML(storyInfo.text)  + "</article>";
 			title = HN.util.getAskStoryTitle(story);
@@ -55,9 +55,10 @@ HN.displayComments = function(){
 			})
 			.fail(function() {
 				console.log("Error retrieving info about comment: " + commentIdArray[i]);
-			});
-			
+			});	
 		};
+		//change hacker news links to hnews links
+		HN.settings.redirectLinks();
 
 	}
 

@@ -45,6 +45,7 @@
         <script type="text/javascript">
         var HN={};HN.pageType='<?= $page_controller->getControllerType(); ?>';HN.settings = {};
         HN.settings.shouldAutoDarkMode=<?php if($settings_controller->getShouldAutoDarkMode()){echo 'true';}else{echo 'false';} ?>;
+        HN.settings.commentsUrl='<?= COMMENTS_QUERY_URL; ?>';
         <?php 
             if($page_controller->getControllerType() === 'comments'){
                 include(VIEWS_PATH.'comments_scripts.php');
