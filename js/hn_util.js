@@ -93,11 +93,13 @@ HN.util.replaceDumbQuotes = function(dumbString){
 	var leftSingleSmartQuote = "&#8216;";
 	var rightDoubleSmartQuote = "&#8221;";
 	var leftDoubleSmartQuote = "&#8220;";
+	var emDash = "&#8212;";
 	return dumbString
-			   		 .replace(/^'|\W'/g, function(match, str, offset){return match.replace(/'/g, leftSingleSmartQuote);})
+			   		 .replace(/^'|\b'/g, function(match, str, offset){return match.replace(/'/g, leftSingleSmartQuote);})
 		       		 .replace(/'/g, rightSingleSmartQuote)
-		       		 .replace(/^"|\W"/g, function(match, str, offset){return match.replace(/"/g, leftDoubleSmartQuote);})
-		       		 .replace(/"/g, rightDoubleSmartQuote);
+		       		 .replace(/^"|\b"/g, function(match, str, offset){return match.replace(/"/g, leftDoubleSmartQuote);})
+		       		 .replace(/"/g, rightDoubleSmartQuote)
+		       		 .replace(/\D\s*-+\s*\D|\s*[-]{2,}\s*/, function(match, str, offset){return match.replace(/\s*-+\s*/g, emDash);});
 };
 
 /**
