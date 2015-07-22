@@ -94,12 +94,14 @@ HN.util.replaceDumbQuotes = function(dumbString){
 	var rightDoubleSmartQuote = "&#8221;";
 	var leftDoubleSmartQuote = "&#8220;";
 	var emDash = "&#8212;";
+	var ellipsis = "&#8230;";
 	return dumbString
 			   		 .replace(/\b'|[\.?,-\/#!$%\^&\*;:{}<>=|\-_`~()\[\]]'/g, function(match, str, offset){return match.replace(/'/g, rightSingleSmartQuote);})
 		       		 .replace(/'/g, leftSingleSmartQuote)
 		       		 .replace(/\b"|[\.?,-\/#!$%\^&\*;:{}<>|=\-_`~()\[\]]"/g, function(match, str, offset){return match.replace(/"/g, rightDoubleSmartQuote);})
 		       		 .replace(/"/g, leftDoubleSmartQuote)
-		       		 .replace(/\D\s*-+\s*\D|\s*[-]{2,}\s*/, function(match, str, offset){return match.replace(/\s*-+\s*/g, emDash);});
+		       		 .replace(/\D\s*-+\s*\D|\s*[-]{2,}\s*/, function(match, str, offset){return match.replace(/\s*-+\s*/g, emDash);})
+		       		 .replace(/\.\s?\.\s?\.\s?/g, ellipsis);
 };
 
 /**
