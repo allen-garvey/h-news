@@ -95,10 +95,10 @@ HN.util.replaceDumbQuotes = function(dumbString){
 	var leftDoubleSmartQuote = "&#8220;";
 	var emDash = "&#8212;";
 	return dumbString
-			   		 .replace(/^'|\b'/g, function(match, str, offset){return match.replace(/'/g, leftSingleSmartQuote);})
-		       		 .replace(/'/g, rightSingleSmartQuote)
-		       		 .replace(/^"|\b"/g, function(match, str, offset){return match.replace(/"/g, leftDoubleSmartQuote);})
-		       		 .replace(/"/g, rightDoubleSmartQuote)
+			   		 .replace(/\b'|[\.?,-\/#!$%\^&\*;:{}<>=|\-_`~()\[\]]'/g, function(match, str, offset){return match.replace(/'/g, rightSingleSmartQuote);})
+		       		 .replace(/'/g, leftSingleSmartQuote)
+		       		 .replace(/\b"|[\.?,-\/#!$%\^&\*;:{}<>|=\-_`~()\[\]]"/g, function(match, str, offset){return match.replace(/"/g, rightDoubleSmartQuote);})
+		       		 .replace(/"/g, leftDoubleSmartQuote)
 		       		 .replace(/\D\s*-+\s*\D|\s*[-]{2,}\s*/, function(match, str, offset){return match.replace(/\s*-+\s*/g, emDash);});
 };
 
