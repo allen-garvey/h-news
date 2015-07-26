@@ -100,7 +100,7 @@ HN.util.replaceDumbQuotes = function(dumbString){
 		       		 .replace(/'/g, leftSingleSmartQuote)
 		       		 .replace(/\b"|[\.?,-\/#!$%\^&\*;:{}<>|=\-_`~()\[\]]"/g, function(match, str, offset){return match.replace(/"/g, rightDoubleSmartQuote);})
 		       		 .replace(/"/g, leftDoubleSmartQuote)
-		       		 .replace(/\D\s*-+\s*\D|\s*[-]{2,}\s*/, function(match, str, offset){return match.replace(/\s*-+\s*/g, emDash);})
+		       		 .replace(/\D\s+-+\s*\D|\D\s*-+\s+\D|\s*--+\s*/, function(match, str, offset){return match.replace(/\s*-+\s*/g, emDash);})
 		       		 .replace(/\.\s?\.\s?\.\s?/g, ellipsis);
 };
 
