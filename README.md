@@ -12,7 +12,7 @@ A redesign of [Hacker News](http://news.ycombinator.com) with a focus on usabili
 
 * Download or clone the project and cd into the project directory
 * Type `npm install` to install the dependencies
-* If you do not have Gulp installed type `npm install gulp -g` or 'sudo npm install gulp -g' to install Gulp
+* If you do not have Gulp installed type `npm install gulp -g` or `sudo npm install gulp -g` to install Gulp
 * Type `gulp build` to build the project
 
 ##License
