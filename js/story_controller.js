@@ -16,7 +16,10 @@ HN.Story = (function(){
 		return this.storyInfo['url'];
 	};
 	HNStory.prototype.isLocalHNUrl = function(){
-		return this.storyInfo['url'] === '';
+		if(!this.storyInfo['url']){
+			return true;
+		}
+		return false;
 	};
 
 	/**
@@ -25,11 +28,11 @@ HN.Story = (function(){
 	*/
 	HNStory.prototype.urlRoot = function() {
 		//for ask or show HN stories
-		if(this.storyInfo['url'] === ''){
+		if(this.isLocalHNUrl()){
 			return ''; 
 		}
 		//removes first part of url (http://www.)
-		var base_url = this.storyInfo['url'];
+		var base_url = this.url();
 		base_url =  base_url.replace(/^http(s)?:\/\/(www.)?/, '');
 		//removes subfolders from url (/index.html)
 		base_url = base_url.replace(/\/.*$/, '');
