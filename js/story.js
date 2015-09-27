@@ -31,7 +31,6 @@ HN.displayStories = function(){
 						return;
 					}
 					var story = new HN.Story(storyInfo);
-					// console.log(story);
 					if(HN.shouldDisplayStory(story)){
 						$top_list.append(getStoryHTML(story));
 					}
