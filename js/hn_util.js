@@ -70,13 +70,18 @@ HN.util.transformTextNodes = function (element, textTransformFunc) {
         div.innerHTML = element;
         element = div;
     }
-
-    var walker = document.createTreeWalker(
-        element, 
-        NodeFilter.SHOW_TEXT, 
-        null, 
-        false
-    );
+    try{
+	    var walker = document.createTreeWalker(
+	        element, 
+	        NodeFilter.SHOW_TEXT, 
+	        null, 
+	        false
+	    );
+	}
+	catch(e){
+		console.log(e);
+		return element;
+	}
 
     var textNode;
 
@@ -113,6 +118,9 @@ HN.util.replaceDumbQuotes = function(dumbString){
 * Required because the treeWalker automatically escapes ampersands
 */
 HN.util.replaceSmartQuoteEntities = function(string){
+	if(typeof string != 'string'){
+		return string;
+	}
 	return string.replace(/&amp;#[\d]{4};/g, function(match, str, offset){
 		return match.replace('&amp;', '&');
 	});
