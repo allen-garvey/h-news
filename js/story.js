@@ -16,7 +16,7 @@ HN.displayStories = function(){
 	});
 
 	function getStoryInfo(storyIds){
-		var $top_list = $('#top_list');
+		var top_list = document.getElementById('top_list');
 		for(var i=0;i<HN.storiesPerPage;i++){
 			var storyInfoUrl = HN.util.getItemInfoUrlFromId(storyIds[i]);
 			if(storyInfoUrl){
@@ -32,7 +32,7 @@ HN.displayStories = function(){
 					}
 					var story = new HN.Story(storyInfo);
 					if(HN.shouldDisplayStory(story)){
-						$top_list.append(getStoryHTML(story));
+						top_list.insertAdjacentHTML('beforeend', getStoryHTML(story));
 					}
 				})
 				.fail(function() {
