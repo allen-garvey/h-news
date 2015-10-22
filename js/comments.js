@@ -2,36 +2,30 @@
 * used to display comment and ask pages
 */
 HN.displayComments = function(){
-	$.ajax({
-		url: HN.storiesUrl,
-		type: 'GET',
-		dataType: 'json'
-	})
-	.done(function(storyInfo) {
-		if(!storyInfo){
-			console.log('No info about the story returned');
-			return;
-		}
-		var story = new HN.Story(storyInfo);
-		var title_class = 'container'
-		var text = "";
-		var title;
-		if(HN.pageName === 'ask' || story.title().match(/^Ask HN:/)){
-			title_class += ' ask';
-			text = "<h6>" + storyInfo.by + "</h6><article>" + HN.util.smartenQuotesHTML(storyInfo.text)  + "</article>";
-			title = HN.util.getAskStoryTitle(story);
-		}
-		else{
-			title = HN.util.getStoryTitleHTML(story)
-		}
-		document.title = document.title + " - " + story.title();
-		document.getElementById('content_main').insertAdjacentHTML('afterbegin', "<section class='" + title_class + "'>" + title + text + "</section>");
-		displayAllCommentChildren(story.getTopLevelCommentsIds());
-		
-	})
-	.fail(function() {
-		console.log("Error retrieving comments");
-	});
+	HN.getJSON(HN.storiesUrl, function(storyInfo){
+			if(!storyInfo){
+				console.log('No info about the story returned');
+				return;
+			}
+			var story = new HN.Story(storyInfo);
+			var title_class = 'container'
+			var text = "";
+			var title;
+			if(HN.pageName === 'ask' || story.title().match(/^Ask HN:/)){
+				title_class += ' ask';
+				text = "<h6>" + storyInfo.by + "</h6><article>" + HN.util.smartenQuotesHTML(storyInfo.text)  + "</article>";
+				title = HN.util.getAskStoryTitle(story);
+			}
+			else{
+				title = HN.util.getStoryTitleHTML(story)
+			}
+			document.title = document.title + " - " + story.title();
+			document.getElementById('content_main').insertAdjacentHTML('afterbegin', "<section class='" + title_class + "'>" + title + text + "</section>");
+			displayAllCommentChildren(story.getTopLevelCommentsIds());	
+		},
+
+		function(){console.log("Error retrieving comments");}
+	);
 
 	/**
 	* displays comment children of an array of comment ids
@@ -45,17 +39,13 @@ HN.displayComments = function(){
 		var $parent_list = selector ? $(selector) : $("#top_list");
 		var numCommentIds = commentIdArray.length;
 		for (var i = 0; i < numCommentIds; i++) {
-			$.ajax({
-				url: HN.util.getItemInfoUrlFromId(commentIdArray[i]),
-				type: 'GET',
-				dataType: 'json'
-			})
-			.done(function(commentInfo){
-				displayComment(commentInfo, $parent_list, isTopLevelComment);
-			})
-			.fail(function() {
-				console.log("Error retrieving info about comment: " + commentIdArray[i]);
-			});	
+			HN.getJSON(HN.util.getItemInfoUrlFromId(commentIdArray[i]), function(commentInfo){
+					displayComment(commentInfo, $parent_list, isTopLevelComment);
+				},
+				
+				function(){console.log("Error retrieving info about comment: " + commentIdArray[i]);}
+			);
+
 		};
 		//change hacker news links to hnews links
 		HN.settings.redirectLinks();
