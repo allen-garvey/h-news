@@ -2,42 +2,25 @@
 * used to display homepage, show and ask pages list of story links
 */
 HN.displayStories = function(){
-	$.ajax({
-		url: HN.storiesUrl,
-		type: 'GET',
-		dataType: 'json'
-	})
-	.done(function(storyIds) {
-		getStoryInfo(storyIds);
-
-	})
-	.fail(function() {
-		console.log("Error retrieving story ids");
-	});
+	HN.getJSON(HN.storiesUrl, function(storyIds){getStoryInfo(storyIds);}, function(){console.log("Error retrieving story ids");});
 
 	function getStoryInfo(storyIds){
 		var top_list = document.getElementById('top_list');
 		for(var i=0;i<HN.storiesPerPage;i++){
 			var storyInfoUrl = HN.util.getItemInfoUrlFromId(storyIds[i]);
 			if(storyInfoUrl){
-				$.ajax({
-					url: storyInfoUrl,
-					type: 'GET',
-					dataType: 'json'
-				})
-				.done(function(storyInfo) {
-					if(!storyInfo){
-						console.log('Story info is: ' + storyInfo + ' for story id: ' + storyIds[i]);
-						return;
-					}
-					var story = new HN.Story(storyInfo);
-					if(HN.shouldDisplayStory(story)){
-						top_list.insertAdjacentHTML('beforeend', getStoryHTML(story));
-					}
-				})
-				.fail(function() {
-					console.log("failed to get info about story: " + story.id);
-				});
+				HN.getJSON(storyInfoUrl, function(storyInfo){
+								if(!storyInfo){
+									console.log('Story info is: ' + storyInfo + ' for story id: ' + storyIds[i]);
+									return;
+								}
+								var story = new HN.Story(storyInfo);
+								if(HN.shouldDisplayStory(story)){
+									top_list.insertAdjacentHTML('beforeend', getStoryHTML(story));
+								}	
+					}, 
+					function(){console.log("failed to get info about story: " + story.id);}
+				);
 			}
 		}
 	}
