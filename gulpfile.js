@@ -7,7 +7,7 @@ var rename = require('gulp-rename');
 var maps = require('gulp-sourcemaps');
 
 gulp.task('concatScripts', function(){
-	return gulp.src(['js/fastclick.js', 'js/story_controller.js', 'js/comment_controller.js', 'js/hn_util.js', 'js/story.js', 'js/comments.js', 'js/settings.js', 'js/app.js'])
+	return gulp.src(['js/story_controller.js', 'js/comment_controller.js', 'js/hn_util.js', 'js/story.js', 'js/comments.js', 'js/settings.js', 'js/app.js'])
 		.pipe(maps.init())
 		.pipe(concat('app.js'))
 		.pipe(maps.write('./'))

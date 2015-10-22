@@ -7,8 +7,6 @@ else if(HN.pageType === 'settings'){
 else{
 	HN.displayStories();
 }
-//add fastclick
-FastClick.attach(document.body);
 
 //initialize settings
 HN.settings.initSettings();
