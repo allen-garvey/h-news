@@ -126,4 +126,33 @@ HN.util.replaceSmartQuoteEntities = function(string){
 	});
 };
 
+/*
+ * Wrapper for ajax
+ * 
+ * @param url - string for url to get request
+ * @param success - function to be run on success - takes one argument of the data returned
+ * @param failure - function to be run on error - take one argument of error
+ * @return null
+ */
+HN.getJSON = function(url, success, failure){
+	var request = new XMLHttpRequest();
+	request.open('GET', url, true);
+
+	request.onload = function() {
+	  if (this.status >= 200 && this.status < 400) {
+	    var data = JSON.parse(this.response);
+	    success(data);
+	  } else {
+	    // We reached our target server, but it returned an error
+	    failure(this.response);
+	  }
+	};
+
+	request.onerror = function() {
+	  // There was a connection error of some sort
+	  failure(this.response);
+	};
+
+	request.send();
+};
 
