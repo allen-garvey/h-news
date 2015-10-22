@@ -29,18 +29,18 @@ HN.displayComments = function(){
 
 	/**
 	* displays comment children of an array of comment ids
-	* if no selector is given, assumes it is top level comment and creates appropriate jquery selector object
+	* if no cssId is given, assumes it is top level comment and creates appropriate jquery cssId object
 	*/
-	function displayAllCommentChildren(commentIdArray, selector){
+	function displayAllCommentChildren(commentIdArray, cssId){
 		if(!commentIdArray){
 			return;
 		}
-		var isTopLevelComment = !selector;
-		var $parent_list = selector ? $(selector) : $("#top_list");
+		var isTopLevelComment = !cssId;
+		var parent_list = cssId ? document.getElementById(cssId) : document.getElementById('top_list');
 		var numCommentIds = commentIdArray.length;
 		for (var i = 0; i < numCommentIds; i++) {
 			HN.getJSON(HN.util.getItemInfoUrlFromId(commentIdArray[i]), function(commentInfo){
-					displayComment(commentInfo, $parent_list, isTopLevelComment);
+					displayComment(commentInfo, parent_list, isTopLevelComment);
 				},
 				
 				function(){console.log("Error retrieving info about comment: " + commentIdArray[i]);}
@@ -54,10 +54,10 @@ HN.displayComments = function(){
 
 	/**
 	* displays comment
-	* $parent_list is a jquery object that the comment should be appended to
+	* parent_list is a dom object that the comment should be appended to
 	* isTopLevelComment is used for styling purposes, since top level comments are styled different than child comments
 	*/
-	function displayComment(commentInfo, $parent_list, isTopLevelComment){
+	function displayComment(commentInfo, parent_list, isTopLevelComment){
 		if(!commentInfo){
 			return;
 		}
@@ -83,12 +83,12 @@ HN.displayComments = function(){
 		}
 		commentHTML +=  "</li>";
 
-		$parent_list.append(commentHTML);
-		displayAllCommentChildren(comment.children(), '#' + commentIdToCSSId(comment.commentId()));
+		parent_list.insertAdjacentHTML('beforeend', commentHTML);
+		displayAllCommentChildren(comment.children(), commentIdToCSSId(comment.commentId()));
 	}
 	
 	/**
-	* Returns the correct jquery id selector for the parent ol to append comment to
+	* Returns the correct jquery id cssId for the parent ol to append comment to
 	*/
 	function commentIdToCSSId(commentId){
 		return 'comment' + commentId;
