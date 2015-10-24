@@ -48,7 +48,7 @@ HN.displayComments = function(){
 
 		};
 		//change hacker news links to hnews links
-		HN.settings.redirectLinks();
+		HN.util.redirectLinks();
 
 	}
 

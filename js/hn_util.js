@@ -156,3 +156,25 @@ HN.getJSON = function(url, success, failure){
 	request.send();
 };
 
+/*
+* Used for comments to change ycombinator links to hnews links
+*/
+HN.util.redirectLinks = function(){
+	var ycombinatorLink = 'https://news.ycombinator.com/item?id=';
+	$("#top_list a[href^='" + ycombinatorLink + "']").each(function() {
+		var link = $(this);
+		var hrefSplit = link.attr('href').split(ycombinatorLink);
+		//make sure it's a comment url
+		if(hrefSplit.length !== 2){
+			return;
+		}
+		var commentId = hrefSplit[1];
+		//make sure comment id is number
+		if(!commentId.match(/^[0-9]*$/)){
+			return;
+		}
+		var hnewsUrl = HN.settings.commentsUrl + commentId;
+		link.attr('href', hnewsUrl);
+		link.text(hnewsUrl);
+	});
+}
