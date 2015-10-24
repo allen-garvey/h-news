@@ -157,13 +157,28 @@ HN.getJSON = function(url, success, failure){
 };
 
 /*
+ * Used to iterate over array or array-like collection (e.g. NodeList)
+ * 
+ * @param collection - collection to be iterated over
+ * @param action - anynomous function to be called for each item in collection - arguments are item, and (int) index of item
+ * @return null
+ */
+
+ HN.util.each = function(collection, action){
+ 	var length = collection.length;
+ 	for (var i = 0; i < length; i++) {
+ 		action(collection[i], i);
+ 	};
+ };
+
+/*
 * Used for comments to change ycombinator links to hnews links
 */
 HN.util.redirectLinks = function(){
 	var ycombinatorLink = 'https://news.ycombinator.com/item?id=';
-	$("#top_list a[href^='" + ycombinatorLink + "']").each(function() {
-		var link = $(this);
-		var hrefSplit = link.attr('href').split(ycombinatorLink);
+	var links = document.querySelectorAll("#top_list a[href^='" + ycombinatorLink + "']");
+	HN.util.each(links, function(link){
+		var hrefSplit = link.href.split(ycombinatorLink);
 		//make sure it's a comment url
 		if(hrefSplit.length !== 2){
 			return;
@@ -174,7 +189,7 @@ HN.util.redirectLinks = function(){
 			return;
 		}
 		var hnewsUrl = HN.settings.commentsUrl + commentId;
-		link.attr('href', hnewsUrl);
-		link.text(hnewsUrl);
+		link.setAttribute('href', hnewsUrl);
+		link.text = hnewsUrl;
 	});
-}
+};
