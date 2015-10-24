@@ -41,7 +41,6 @@
                 <p class='small'>Released under the MIT License. <a href='https://github.com/allen-garvey/h-news'>Source on github</a></p>
             </div>
         </footer>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
         <script type="text/javascript">
         var HN={};HN.pageType='<?= $page_controller->getControllerType(); ?>';HN.settings = {};
         HN.settings.shouldAutoDarkMode=<?php if($settings_controller->getShouldAutoDarkMode()){echo 'true';}else{echo 'false';} ?>;
