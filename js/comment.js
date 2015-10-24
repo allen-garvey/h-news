@@ -1,5 +1,5 @@
 /**
-* Comment controller
+* Comment model
 * Used to get process info about a comment such as kids and parent id
 */
 

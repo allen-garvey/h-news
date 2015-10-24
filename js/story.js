@@ -1,41 +1,83 @@
 /**
-* used to display homepage, show and ask pages list of story links
+* Story model
+* Used to get process info about a story such as url, title, and type
 */
-HN.displayStories = function(){
-	HN.getJSON(HN.storiesUrl, function(storyIds){getStoryInfo(storyIds);}, function(){console.log("Error retrieving story ids");});
+HN.Story = (function(){
 
-	function getStoryInfo(storyIds){
-		var top_list = document.getElementById('top_list');
-		for(var i=0;i<HN.storiesPerPage;i++){
-			var storyInfoUrl = HN.util.getItemInfoUrlFromId(storyIds[i]);
-			if(storyInfoUrl){
-				HN.getJSON(storyInfoUrl, function(storyInfo){
-								if(!storyInfo){
-									console.log('Story info is: ' + storyInfo + ' for story id: ' + storyIds[i]);
-									return;
-								}
-								var story = new HN.Story(storyInfo);
-								if(HN.shouldDisplayStory(story)){
-									top_list.insertAdjacentHTML('beforeend', getStoryHTML(story));
-								}	
-					}, 
-					function(){console.log("failed to get info about story: " + story.id);}
-				);
-			}
-		}
-	}
+	function HNStory(storyInfo){
+		this.storyInfo = storyInfo;
+	};
 
-	function getStoryHTML(story){
-		var html = "<li><div class='container'>" + HN.util.getStoryTitleHTML(story);
-		var num_comments = story.numComments();
-		if(num_comments > 0){
-			var comments_text = ' comment';
-			if(num_comments > 1){
-				comments_text = ' comments';
-			}
-			html = html + "<a href='" + story.commentsUrl() +"'><p>" + num_comments  + comments_text + "</p></a>";
+	HNStory.prototype.url = function() {
+		//for ask or show HN stories
+		if(this.isLocalHNUrl()){
+			return HN.askUrl + this.storyInfo['id'];
 		}
-		html = html + "</div></li>";
-		return html;
-	}
-};
+		return this.storyInfo['url'];
+	};
+	HNStory.prototype.isLocalHNUrl = function(){
+		if(!this.storyInfo['url']){
+			return true;
+		}
+		return false;
+	};
+
+	/**
+	* gets the url root domain for display with story
+	* http://www.nytimes.com/story becomes (nytimes.com)
+	*/
+	HNStory.prototype.urlRoot = function() {
+		//for ask or show HN stories
+		if(this.isLocalHNUrl()){
+			return ''; 
+		}
+		//removes first part of url (http://www.)
+		var base_url = this.url();
+		base_url =  base_url.replace(/^http(s)?:\/\/(www.)?/, '');
+		//removes subfolders from url (/index.html)
+		base_url = base_url.replace(/\/.*$/, '');
+		//removes get requests from url (?q=something)
+		return '(' + base_url.replace(/\?.*$/,'') + ')';
+	};
+	HNStory.prototype.title = function(){
+		return this.storyInfo['title'] || '';
+	};
+	HNStory.prototype.text = function(){
+		return this.storyInfo['text'] || '';
+	};
+	HNStory.prototype.author = function(){
+		return this.storyInfo['by'] || '';
+	};
+	HNStory.prototype.storyType = function(){
+		if(this.type() !== 'story'){
+			return false;
+		}
+		if(this.isLocalHNUrl()){
+			if(this.title().substring(0,3).toLowerCase() === 'ask'){
+				return 'ask';
+			}
+			return 'show';
+		}
+		return 'story';
+	};
+	HNStory.prototype.type = function(){
+		return this.storyInfo['type'];
+	};
+	HNStory.prototype.numComments = function(){
+		if(!this.storyInfo['descendants']){
+			return 0;
+		}
+		return this.storyInfo['descendants'];
+	};
+	HNStory.prototype.getTopLevelCommentsIds = function(){
+		if(!this.storyInfo['kids']){
+			return [];
+		}
+		return this.storyInfo['kids'];
+	};
+	HNStory.prototype.commentsUrl = function(){
+		// return 'https://news.ycombinator.com/item?id=' + this.storyInfo['id'];
+		return HN.commentsUrl + this.storyInfo['id'];
+	};
+	return HNStory;
+})();
