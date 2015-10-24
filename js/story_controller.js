@@ -42,6 +42,12 @@ HN.Story = (function(){
 	HNStory.prototype.title = function(){
 		return this.storyInfo['title'] || '';
 	};
+	HNStory.prototype.text = function(){
+		return this.storyInfo['text'] || '';
+	};
+	HNStory.prototype.author = function(){
+		return this.storyInfo['by'] || '';
+	};
 	HNStory.prototype.storyType = function(){
 		if(this.type() !== 'story'){
 			return false;
