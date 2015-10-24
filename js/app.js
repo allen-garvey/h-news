@@ -1,3 +1,6 @@
+//initialize settings
+HN.settings.initSettings();
+
 if(HN.pageType === 'comments'){
 	HN.displayComments();
 }
@@ -7,6 +10,3 @@ else if(HN.pageType === 'settings'){
 else{
 	HN.displayStories();
 }
-
-//initialize settings
-HN.settings.initSettings();
