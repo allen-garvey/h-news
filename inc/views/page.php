@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class='<?= $settings_controller->getCurrentTheme(); ?>'>
+<html>
     <head>
         <meta charset="utf-8"/>
         <title><?= $page_controller->getPageTitle(); ?></title>
@@ -43,8 +43,8 @@
         </footer>
         <script type="text/javascript">
         var HN={};HN.pageType='<?= $page_controller->getControllerType(); ?>';HN.settings = {};
-        HN.settings.shouldAutoDarkMode=<?php if($settings_controller->getShouldAutoDarkMode()){echo 'true';}else{echo 'false';} ?>;
         HN.settings.commentsUrl='<?= COMMENTS_QUERY_URL; ?>';
+        HN.settings.themeNames=<?= json_encode(HNewsSettingsPageController::getThemeList()); ?>;
         <?php 
             if($page_controller->getControllerType() === 'comments'){
                 include(VIEWS_PATH.'comments_scripts.php');
