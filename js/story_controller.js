@@ -40,7 +40,7 @@ HN.Story = (function(){
 		return '(' + base_url.replace(/\?.*$/,'') + ')';
 	};
 	HNStory.prototype.title = function(){
-		return this.storyInfo['title'];
+		return this.storyInfo['title'] || '';
 	};
 	HNStory.prototype.storyType = function(){
 		if(this.type() !== 'story'){
