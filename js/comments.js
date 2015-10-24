@@ -9,12 +9,14 @@ HN.displayComments = function(){
 			}
 			var story = new HN.Story(storyInfo);
 			var title_class = 'container'
-			var text = "";
-			var title;
-			if(HN.pageName === 'ask' || story.title().match(/^Ask HN:/)){
-				title_class += ' ask';
-				text = "<h6>" + storyInfo.by + "</h6><article>" + HN.util.smartenQuotesHTML(storyInfo.text)  + "</article>";
-				title = HN.util.getAskStoryTitle(story);
+			var text = story.text();
+			var title = '';
+			if(text){
+				text = "<h6>" + story.author() + "</h6><article>" + HN.util.smartenQuotesHTML(story.text())  + "</article>";
+				if(HN.pageName === 'ask' || story.title().match(/^(Ask|Tell) HN:/)){
+					title_class += ' ask';
+					title = HN.util.getAskStoryTitle(story);
+				}
 			}
 			else{
 				title = HN.util.getStoryTitleHTML(story)
