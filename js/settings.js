@@ -51,4 +51,5 @@ HN.settings.save = function(){
 	if(HN.settings.themeNames.includes(userTheme)){
 		ls.setItem(HN.settings.LS_USER_THEME_KEY, userTheme);
 	}
+	window.location.href = document.querySelector('form').action;
 };
