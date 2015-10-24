@@ -22,7 +22,7 @@ HN.settings.initSettingsPage = function(){
 HN.settings.getUserTheme = function(){
 	var ls = window.localStorage;
 	var userTheme = ls.getItem(HN.settings.LS_USER_THEME_KEY);
-	if(!HN.settings.themeNames.includes(userTheme)){
+	if(HN.settings.themeNames.indexOf(userTheme) < 0){
 		userTheme = HN.settings.themeNames[0];
 	}
 	return userTheme;
@@ -48,7 +48,7 @@ HN.settings.save = function(){
 	var ls = window.localStorage;
 	ls.setItem(HN.settings.LS_AUTODARK_KEY, document.getElementById('autodark_checkbox').checked);
 	var userTheme = document.querySelector('input[name="' + HN.settings.userThemeFormName + '"]:checked').value;
-	if(HN.settings.themeNames.includes(userTheme)){
+	if(HN.settings.themeNames.indexOf(userTheme) >= 0){
 		ls.setItem(HN.settings.LS_USER_THEME_KEY, userTheme);
 	}
 	window.location.href = document.querySelector('form').action;
