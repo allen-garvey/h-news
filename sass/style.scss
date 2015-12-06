@@ -5,6 +5,10 @@
 */
 html{
 	font-size: 18px;
+	box-sizing: border-box;
+}
+*{
+	box-sizing: inherit;
 }
 body{
 	background-color: $main_background_color;
@@ -109,6 +113,7 @@ ul, ol{
 	top: 0;
 	width: 100%;
 	height: $header_height;
+	overflow: hidden;
 }
 .current{
 	background-color: lighten($primary_color, 20%);
