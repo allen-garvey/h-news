@@ -8,12 +8,10 @@ fieldset{
 }
 .form-group{
 	margin-bottom: 1.5em;
+	@include media_q(lg){
+		margin-bottom: 0.5em;
+	}
 }
 label{
 	@include font_size(-1);
-}
-@media screen and(min-width: $lg_breakpoint){
-	.form-group{
-		margin-bottom: 0.5em;
-	}
 }
