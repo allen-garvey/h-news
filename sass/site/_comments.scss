@@ -22,14 +22,11 @@
 	}
 	ol{
 		padding-left: 1rem;
+		@include media_q(med){
+			padding-left: 2rem;
+		}
 	}
 }
 .deleted{
 	color : lighten(black, 50%);
-}
-
-@media screen and (min-width: $med_breakpoint){
-	.comment ol{
-		padding-left: 2rem;
-	}
 }

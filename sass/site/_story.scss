@@ -5,14 +5,9 @@
 	@include font_size(-1);
 }
 .url_source{ //used to display url root next to or below story title
-	display:block;
-}
-
-@media screen and (min-width: $med_breakpoint){
-	.url_source{
-		display: inline;
+	@include media_q_inverse(med){
+		display: block;
 	}
-	
 }
 
 //just selects top level li so nested comments are not alternating colors

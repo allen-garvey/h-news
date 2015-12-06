@@ -18,16 +18,15 @@ main{
 	}
 	p{
 		@include font_size(0);	
-	}	
+	}
+	a p{
+		@include media_q(lg){
+			@include font_size(0);
+			margin-top: -1em;
+		}
+	}
 }
 
 #top_list{
 	margin-top: 0;
-}
-
-@media screen and (min-width: $lg_breakpoint){
-	main a p{
-		@include font_size(0);
-		margin-top: -1em;
-	}
 }
