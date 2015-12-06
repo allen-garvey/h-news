@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" type="text/css" href="<?= STYLES_URL.'style.css'; ?>"/>
     </head>
-    <body>
+    <body class='<?= $page_controller->getBodyTags(); ?>'>
         <div class='total'>
             <header class='jumbotron'>
                 <div class='container'>
