@@ -109,7 +109,6 @@ ul, ol{
 	top: 0;
 	width: 100%;
 	height: $header_height;
-	box-shadow: 1px 1px 15px rgba(0,0,0,0.2);
 }
 .current{
 	background-color: lighten($primary_color, 20%);
