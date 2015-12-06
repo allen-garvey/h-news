@@ -39,7 +39,7 @@ HN.settings.initSettings = function(){
 HN.settings.darkAtNight = function(){
 	var currentDate = new Date();
 	var currentHour = currentDate.getHours();
-	if(currentHour >= 23 || currentHour < 6){
+	if(currentHour >= 22 || currentHour < 6){
 		document.documentElement.className = 'dark';
 	}
 };
