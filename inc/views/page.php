@@ -13,7 +13,7 @@
                 <div class='container'>
                     <nav>
                         <a href='<?= HOME_URL; ?>'><span class='brand <?php if($page_controller->getTitle()==='home'){echo 'current';} ?>'><?= PAGE_TITLE_DEFAULT; ?></span></a>
-                        <ul>
+                        <ul class="page_links">
                             <a href='<?= SHOW_URL; ?>'><li<?php if($page_controller->getTitle()==='show'){echo ' class="current"';} ?>>Show</li></a>
                             <a href='<?= ASK_URL; ?>'><li<?php if($page_controller->getTitle()==='ask'){echo ' class="current"';} ?>>Ask</li></a>
                         </ul>
