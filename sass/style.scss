@@ -101,6 +101,7 @@ ul, ol{
 /**
 * Header and nav styles
 */
+
 .jumbotron{
 	@include brand_font_family;
 	background-color: lighten($primary_color, 33%);
@@ -149,9 +150,15 @@ nav a:hover{
 /**
 * main content styles
 */
-
-main{
+.main{
 	margin-top: $header_height;
+}
+.page_settings, .page_comments{
+	.main{
+		margin-top: $header_height + 40px;
+	}	
+}
+main{
 	ol{
 		padding:0;
 	}
