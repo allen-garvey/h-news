@@ -1,4 +1,4 @@
-<main class='container'>
+<main class='container main'>
     <h1>Settings</h1>
     <form action='<?= HOME_URL; ?>' method='POST'>
         <fieldset>
@@ -18,7 +18,7 @@
             ?>
             <div class='form-group'>
                 <input id='autodark_checkbox' type="checkbox" name="<?= HNewsSettingsPageController::$autoDarkModeFormName; ?>" />
-                <label for="autodark_checkbox" >Automatically switch to dark mode from 11pm to 6am</label>
+                <label for="autodark_checkbox" >Automatically switch to dark mode from 10pm to 6am</label>
             </div>
         </fieldset>
         <input class='btn btn-primary' type='button' onclick="HN.settings.save()" value='Save' />
