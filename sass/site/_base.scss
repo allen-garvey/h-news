@@ -1,0 +1,83 @@
+/**
+* Base styles
+*/
+html{
+	font-size: 18px;
+	box-sizing: border-box;
+}
+*{
+	box-sizing: inherit;
+}
+body{
+	background-color: $main_background_color;
+	@include body_copy_font_family;
+}
+html,body{
+	height: 100%; //so footer stays at the bottom
+}
+ul, ol{
+	list-style-type: none;
+}
+
+h1,h2,h3,h4,h5,h6{
+	@include heading_font_family;
+	font-weight : normal;
+}
+h1{
+	@include font_size(4);
+}
+h2{
+	@include font_size(3);
+}
+h3{
+	@include font_size(2);
+}
+h4{
+	@include font_size(1);
+}
+h5{
+	@include font_size(0);
+}
+h6{
+	@include font_size(-1);
+}
+a,p,article{
+	word-wrap:break-word; //so a tag's text wraps on small (iPhone screens)
+}
+a{
+	text-decoration:none;
+	color: lighten($secondary_color, 10%);
+
+	&:visited{
+		color: darken($secondary_color, 10%);
+	}
+	&:hover{
+		text-decoration:underline;
+	}
+}
+
+code{
+	@include code_font_family;
+	@include font_size(-1);
+}
+
+/* Browser specific (not valid) styles to make preformatted text wrap */		
+pre {
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+/**
+* Main layout
+*/
+.container{
+	max-width: 950px;
+	margin: 0 auto;
+	padding: 0 $universal_left_right_padding;
+}
+.center{
+	text-align: center;
+}

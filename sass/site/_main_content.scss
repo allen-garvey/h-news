@@ -1,0 +1,33 @@
+/**
+* main content styles
+*/
+.main{
+	margin-top: $header_height;
+}
+.page_settings, .page_comments{
+	.main{
+		margin-top: $header_height + 40px;
+	}	
+}
+main{
+	ol{
+		padding:0;
+	}
+	li{
+		padding: 0.5rem 0rem 1rem 0rem;
+	}
+	p{
+		@include font_size(0);	
+	}	
+}
+
+#top_list{
+	margin-top: 0;
+}
+
+@media screen and (min-width: $lg_breakpoint){
+	main a p{
+		@include font_size(0);
+		margin-top: -1em;
+	}
+}

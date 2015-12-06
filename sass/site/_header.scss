@@ -1,0 +1,89 @@
+/**
+* Header and nav styles
+*/
+
+.jumbotron{
+	@include brand_font_family;
+	background-color: lighten($primary_color, 33%);
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: $header_height;
+	overflow: hidden;
+}
+.current{
+	background-color: lighten($primary_color, 20%);
+}
+nav ul, nav ul li, nav{
+	display:inline-block;
+}
+nav ul{
+	padding:0;
+	float : right;
+	margin:0;
+}
+.brand{
+	position: relative;//because of floated li breaks vertical alignment
+	top: 1rem;
+	padding: 1rem 1rem 1.5rem $universal_left_right_padding;
+}
+nav li{
+	padding: 1rem 1.3rem 1.5rem 1.3rem;
+	margin:0;
+}
+
+nav{
+	@include font_size(1);
+	width: 100%;
+}
+
+nav a{
+	color: darken($secondary_color, 10%);
+}
+nav a:visited{
+	color: $secondary_color;
+}
+nav a:hover{
+	text-decoration:underline;
+}
+
+header .container{
+	padding:0;
+}
+
+@media screen and (min-width: $sm_breakpoint){
+	nav{
+		@include font_size(2);
+		
+		ul li:first-of-type{
+			padding-right : 3rem;
+		}
+		li{
+			padding-left: 2rem;
+			padding-right:2rem;
+		}
+	}
+}
+
+@media screen and (min-width: $med_breakpoint){
+
+	.brand{
+		padding-right: 2rem;
+	}
+	//so the brand doesn't look off-center when it's selected
+	.brand.current{
+		padding-right: $universal_left_right_padding;
+	}
+	
+}
+
+@media screen and (min-width: $lg_breakpoint){
+
+	nav{
+		@include font_size(1);
+	
+		ul:nth-child(2){
+			margin-right : 0;
+		}
+	}
+}

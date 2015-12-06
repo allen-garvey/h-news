@@ -1,0 +1,21 @@
+/**
+* ask page styles
+*/
+section.ask{
+	margin-bottom: 3rem;
+}
+
+
+.ask{
+	article, article p{
+		@include font_size(1);
+		line-height: 1.5em;
+	}
+	h3{
+		margin-bottom: 0.3rem;
+	}
+	h6{
+		margin-top: 0;
+		margin-bottom: 1em;
+	}
+}
