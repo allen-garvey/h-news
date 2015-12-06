@@ -3,14 +3,27 @@
 */
 footer{
 	margin: 4rem 0 4rem 0;
-	
+	form{
+		@include media_q(lg){
+			text-align: center;
+		}
+	}
 	p{
 		line-height: 1.5em;
+		@include media_q(lg){
+			margin-top: 0;
+			margin-bottom: 0;		
+			&:first-of-type{
+				margin-top: 1em;
+			}
+		}
 	}
 }
 
 .hide_for_med{ //used for search button
-	display:none;
+	@include media_q_inverse(lg){
+		display:none;	
+	}
 }
 .total{
 	//used to place footer at the bottom of the page
@@ -20,26 +33,7 @@ footer{
 .settings_link{
 	margin-bottom: 2em;
 	display: block;
-}
-
-
-@media screen and (min-width: $lg_breakpoint){
-	footer{
-		form{
-			text-align: center;
-		}	
-		p{
-			margin-top: 0;
-			margin-bottom: 0;		
-			&:first-of-type{
-				margin-top: 1em;
-			}
-		}	
-	}
-	.hide_for_med{//used for search button
-		display: initial;
-	}
-	.settings_link{
+	@include media_q(lg){
 		margin-bottom: 0;
 		display: inline;
 	}
