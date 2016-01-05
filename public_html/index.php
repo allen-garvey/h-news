@@ -1,5 +1,5 @@
 <?php 
-require_once('inc/config.php');
+require_once('../inc/config.php');
 require_once(MODELS_PATH.'story_model.php');
 require_once(CONTROLLERS_PATH.'page_controller.php');
 

@@ -4,9 +4,9 @@
 **/.sass-cache/*
 .sass-cache
 .sass-cache/*
-styles/*.css
+public_html/styles/*.css
 node_modules/*
-scripts/*.js
-scripts/*.map
+public_html/scripts/*.js
+public_html/scripts/*.map
 *.ico
 *.png
