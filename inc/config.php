@@ -15,7 +15,7 @@ if(ENVIRONMENT_CURRENT === ENVIRONMENT_HNEWS_CO){
 	define('COOKIE_URL', 'hnews.co');
 }
 else{
-	define('BASE_URL','/h-news/');
+	define('BASE_URL','/h-news/public_html/');
 	define('COOKIE_URL', BASE_URL);
 }
 
