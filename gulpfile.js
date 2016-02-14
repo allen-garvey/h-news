@@ -15,6 +15,7 @@ var SASS_SOURCE_DIR = 'sass/';
 var STYLES_DEST_DIR = 'public_html/styles/';
 var SASS_OPTIONS = {
   errLogToConsole: true,
+  // sourceComments: true, //turns on line number comments 
   outputStyle: 'compressed' //options: expanded, nested, compact, compressed
 };
 
