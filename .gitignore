@@ -10,3 +10,4 @@ public_html/scripts/*.js
 public_html/scripts/*.map
 *.ico
 *.png
+inc/current_environment.php
