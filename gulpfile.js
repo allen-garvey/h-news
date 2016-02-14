@@ -5,26 +5,45 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var maps = require('gulp-sourcemaps');
+var sass = require('gulp-sass');
 
-var output_dir = 'public_html/scripts';
+var JS_SOURCE_DIR = 'js/';
+var JS_DEST_DIR = 'public_html/scripts/';
+var DIST_NAME = 'app'; //name of compiled file to be served i.e. app.js and app.min.js
+
+var SASS_SOURCE_DIR = 'sass/';
+var STYLES_DEST_DIR = 'public_html/styles/';
+var SASS_OPTIONS = {
+  errLogToConsole: true,
+  outputStyle: 'compressed' //options: expanded, nested, compact, compressed
+};
 
 gulp.task('concatScripts', function(){
-	return gulp.src(['js/story.js', 'js/comment.js', 'js/hn_util.js', 'js/stories_controller.js', 'js/comments_controller.js', 'js/settings.js', 'js/app.js'])
+	return gulp.src(['story', 'comment', 'hn_util', 'stories_controller', 'comments_controller', 'settings', 'app'].map(function(file){return JS_SOURCE_DIR + file + '.js';}))
 		.pipe(maps.init())
-		.pipe(concat('app.js'))
+		.pipe(concat(DIST_NAME + '.js'))
 		.pipe(maps.write('./'))
-		.pipe(gulp.dest(output_dir));
+		.pipe(gulp.dest(JS_DEST_DIR));
 });
 
 gulp.task('minifyScripts', ['concatScripts'], function(){
-	return gulp.src(output_dir + '/app.js')
+	return gulp.src(JS_DEST_DIR + DIST_NAME + '.js')
 		.pipe(uglify())
-		.pipe(rename('app.min.js'))
-		.pipe(gulp.dest(output_dir));
+		.pipe(rename(DIST_NAME + '.min.js'))
+		.pipe(gulp.dest(JS_DEST_DIR));
 });
 gulp.task('watchScripts', function(){
-	gulp.watch('js/**/*.js', ['minifyScripts']);
+	gulp.watch(JS_SOURCE_DIR + '**/*.js', ['minifyScripts']);
 });
 
-gulp.task('build', ['minifyScripts']);
+gulp.task('sass', function() {
+    gulp.src(SASS_SOURCE_DIR + '**/*.scss')
+        .pipe(sass(SASS_OPTIONS).on('error', sass.logError))
+        .pipe(gulp.dest(STYLES_DEST_DIR));
+});
+gulp.task('watchSass',function() {
+    gulp.watch(SASS_SOURCE_DIR + '**/*.scss', ['sass']);
+});
+
+gulp.task('build', ['minifyScripts', 'sass']);
 gulp.task('default', ['build']);
