@@ -5,11 +5,13 @@
 .jumbotron{
 	@include brand_font_family;
 	background-color: lighten($primary_color, 33%);
-	position: fixed;
 	top: 0;
 	width: 100%;
 	height: $header_height;
 	overflow: hidden;
+	@include media_q(med){
+		position: fixed;
+	}
 }
 .current{
 	background-color: lighten($primary_color, 20%);

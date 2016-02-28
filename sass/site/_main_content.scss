@@ -2,11 +2,17 @@
 * main content styles
 */
 .main{
-	margin-top: $header_height;
+	//so it doesn't overlap fixed header
+	@include media_q(med){
+		margin-top: $header_height;
+	}
 }
 .page_settings, .page_comments{
+	//so it doesn't overlap fixed header
 	.main{
+		@include media_q(med){
 		margin-top: $header_height + 40px;
+		}
 	}	
 }
 main{
