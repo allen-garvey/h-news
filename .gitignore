@@ -9,4 +9,4 @@ node_modules/*
 public_html/scripts/*.js
 public_html/scripts/*.map
 *.png
-inc/current_environment.php
+inc/environment.php

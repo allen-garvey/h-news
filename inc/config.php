@@ -8,7 +8,7 @@ define('VIEWS_PATH', INC_PATH.'views/');
 define('CONTROLLERS_PATH', INC_PATH.'controllers/');
 define('MODELS_PATH', INC_PATH.'models/');
 
-require_once(INC_PATH.'current_environment.php');
+require_once(INC_PATH.'environment.php');
 
 if(ENVIRONMENT_CURRENT === ENVIRONMENT_HNEWS_CO){
 	define('BASE_URL','http://www.hnews.co/');
