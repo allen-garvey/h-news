@@ -4,7 +4,8 @@
   "description": "A redesign of [Hacker News](http://news.ycombinator.com) with a focus on usability and mobile first design using the official [Hacker News API.](https://github.com/HackerNews/API)",
   "main": "index.php",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "gulp & if [ ! -f ./inc/environment.php ]; then cp ./inc/environment_example.php ./inc/environment.php; fi"
   },
   "repository": {
     "type": "git",
