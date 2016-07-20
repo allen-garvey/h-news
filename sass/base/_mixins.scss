@@ -3,11 +3,11 @@
 }
 
 @mixin brand_font_family{
-	font-family: Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Ubuntu, Calibri, Arial, sans-serif;
 	@content;
 }
 @mixin heading_font_family{
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Ubuntu, Calibri, Arial, sans-serif;
 	@content;
 }
 @mixin body_copy_font_family{
