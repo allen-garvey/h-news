@@ -2,6 +2,8 @@
 HN.settings.initSettings();
 
 if(HN.pageType === 'comments'){
+	//add listener for if user clicks on comments link while on comments page
+	window.addEventListener('hashchange', HN.displayComments, false);
 	HN.displayComments();
 }
 else if(HN.pageType === 'settings'){

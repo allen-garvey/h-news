@@ -2,7 +2,15 @@
 * used to display comment and ask pages
 */
 HN.displayComments = function(){
-	HN.getJSON(HN.storiesUrl, function(storyInfo){
+	var storyId = window.location.href.match(/\d+\/?$/);
+	if(storyId){
+		var storyUrl = 'https://hacker-news.firebaseio.com/v0/item/' + storyId[0] + '.json';
+	}
+	else{
+		console.log("No story id found");
+		return;
+	}
+	HN.getJSON(storyUrl, function(storyInfo){
 			if(!storyInfo){
 				console.log('No info about the story returned');
 				return;
