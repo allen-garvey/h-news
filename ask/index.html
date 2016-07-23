@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>H News&mdash;Ask</title>
+        <meta name="description" content="H News, a trimmed-down, mobile-friendly, read-only version of your favorite programming and start-up news site"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" type="text/css" href="http://www.hnews.co/styles/style.css"/>
+    </head>
+    <body class='page_H News&mdash;Ask'>
+        <div class='total'>
+            <header class='jumbotron'>
+                <div class='container'>
+                    <nav>
+                        <a href='http://www.hnews.co/'><span class='brand '>H News</span></a>
+                        <ul class="page_links">
+                            <li>
+                                <a href='http://www.hnews.co/show/'>Show</a>
+                            </li>
+                            <li class="current">
+                                <a href='http://www.hnews.co/ask/'>Ask</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <noscript class='container center'><h3>H-News requires JavaScript in order to download stories and comments</h3></noscript>
+            <main id="content_main" class="main">
+    <ol id='top_list'>
+    </ol>
+</main>        </div>
+        <footer>
+            <div class='container'>
+                <a href="http://www.hnews.co/settings/" class='settings_link'>Settings</a>
+<form method='GET' action='https://hn.algolia.com'>
+    <input type='search' name='query' placeholder='Search archives' /><input class='hide_for_med' type='submit' value='Search'/>
+</form>                <p class='small'>Not affiliated with Hacker News or Y Combinator.</p>
+                <p class='small'>Designed and created by <a href='http://www.allengarvey.com'>Allen Garvey</a> using the Hacker News API.</p>
+                <p class='small'>Released under the MIT License. <a href='https://github.com/allen-garvey/h-news'>Source on github</a></p>
+            </div>
+        </footer>
+        <script type="text/javascript">
+        var HN={};HN.pageType='story';HN.settings = {};
+        HN.settings.commentsUrl='http://www.hnews.co/comments/#';
+        HN.settings.themeNames=["default","dark","blue","green","purple","silver","red"];
+        HN.storiesUrl = 'https://hacker-news.firebaseio.com/v0/askstories.json';
+HN.storiesPerPage = 30;
+HN.shouldDisplayStory = function(story){return true;};
+HN.commentsUrl = 'http://www.hnews.co/ask/comments/#';
+HN.pageName='ask';HN.askUrl='http://www.hnews.co/ask/comments/#';         </script>
+                     <script src="http://www.hnews.co/scripts/app.min.js" type="text/javascript"></script>
+            </body>
+</html>
