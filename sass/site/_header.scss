@@ -42,15 +42,18 @@ nav{
 		margin:0;
 	}
 	li{
-		padding: 1rem 1.3rem 1.5rem;
 		margin:0;
-		@include media_q(sm){
-			padding-left: 2rem;
-			padding-right:2rem;
-		}
-		&:first-of-type{
+		&:first-of-type a{
 			@include media_q(sm){
 				padding-right : 3rem;
+			}
+		}
+		a{
+			display: inline-block;
+			padding: 1rem 1.3rem 1.5rem;
+			@include media_q(sm){
+				padding-left: 2rem;
+				padding-right:2rem;
 			}
 		}
 	}

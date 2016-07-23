@@ -14,8 +14,12 @@
                     <nav>
                         <a href='<?= HOME_URL; ?>'><span class='brand <?php if($page_controller->getTitle()==='home'){echo 'current';} ?>'><?= PAGE_TITLE_DEFAULT; ?></span></a>
                         <ul class="page_links">
-                            <a href='<?= SHOW_URL; ?>'><li<?php if($page_controller->getTitle()==='show'){echo ' class="current"';} ?>>Show</li></a>
-                            <a href='<?= ASK_URL; ?>'><li<?php if($page_controller->getTitle()==='ask'){echo ' class="current"';} ?>>Ask</li></a>
+                            <li<?php if($page_controller->getTitle()==='show'){echo ' class="current"';} ?>>
+                                <a href='<?= SHOW_URL; ?>'>Show</a>
+                            </li>
+                            <li<?php if($page_controller->getTitle()==='ask'){echo ' class="current"';} ?>>
+                                <a href='<?= ASK_URL; ?>'>Ask</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
