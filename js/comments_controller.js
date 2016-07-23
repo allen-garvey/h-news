@@ -1,6 +1,10 @@
 /**
 * used to display comment and ask pages
 */
+HN.clearComments = function(){
+	document.getElementById('content_main').innerHTML = '';
+};
+
 HN.displayComments = function(){
 	var storyId = window.location.href.match(/\d+\/?$/);
 	if(storyId){
