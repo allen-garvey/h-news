@@ -12,9 +12,6 @@ body{
 	background-color: $main_background_color;
 	@include body_copy_font_family;
 }
-html,body{
-	height: 100%; //so footer stays at the bottom
-}
 ul, ol{
 	list-style-type: none;
 }
