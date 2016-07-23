@@ -12,17 +12,15 @@ require_once(INC_PATH.'environment.php');
 
 if(ENVIRONMENT_CURRENT === ENVIRONMENT_HNEWS_CO){
 	define('BASE_URL','http://www.hnews.co/');
-	define('COOKIE_URL', 'hnews.co');
 }
 else{
 	define('BASE_URL','/h-news/public_html/');
-	define('COOKIE_URL', BASE_URL);
 }
 
 define('STYLES_URL', BASE_URL.'styles/');
 define('SCRIPTS_URL', BASE_URL.'scripts/');
 
-define('HOME_URL', BASE_URL.'index.php');
+define('HOME_URL', BASE_URL);
 define('SHOW_URL', BASE_URL.'show/');
 define('ASK_URL', BASE_URL.'ask/');
 define('SETTINGS_URL', BASE_URL.'settings/');
