@@ -35,7 +35,7 @@ HN.displayComments = function(commentsType){
 			else{
 				title = HN.util.getStoryTitleHTML(story)
 			}
-			document.title = document.title + " - " + story.title();
+			document.title = document.title + " | " + story.title();
 			document.getElementById('content_main').insertAdjacentHTML('afterbegin', "<section class='" + title_class + "'>" + title + text + "</section>");
 			displayAllCommentChildren(story.getTopLevelCommentsIds());	
 		},

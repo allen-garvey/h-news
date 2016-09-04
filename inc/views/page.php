@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title><?= $page_controller->getPageTitle(); ?></title>
+        <title><?= PAGE_TITLE_DEFAULT; ?></title>
         <meta name="description" content="H News, a trimmed-down, mobile-friendly, read-only version of your favorite programming and start-up news site"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" type="text/css" href="<?= STYLES_URL.'style.css'; ?>"/>
@@ -50,19 +50,24 @@
             'home' : {
                 storiesUrl: 'https://hacker-news.firebaseio.com/v0/topstories.json',
                 shouldDisplayStory: function(story){if(story.type()==="job"){return false;} return true;},
-                commentsUrl: '<?= COMMENTS_QUERY_URL; ?>'
+                commentsUrl: '<?= COMMENTS_QUERY_URL; ?>',
+                pageTitle: '<?= PAGE_TITLE_DEFAULT ?>'
             },
             'ask' : {
                 storiesUrl: 'https://hacker-news.firebaseio.com/v0/askstories.json',
                 shouldDisplayStory: function(story){return true;},
-                commentsUrl: '<?= ASK_COMMENTS_QUERY_URL; ?>'
+                commentsUrl: '<?= ASK_COMMENTS_QUERY_URL; ?>',
+                pageTitle: '<?= PAGE_TITLE_DEFAULT ?> | Ask'
             },
             'show': {
                 storiesUrl: 'https://hacker-news.firebaseio.com/v0/showstories.json',
                 shouldDisplayStory: function(story){return true;},
-                commentsUrl: '<?= SHOW_COMMENTS_QUERY_URL; ?>'
+                commentsUrl: '<?= SHOW_COMMENTS_QUERY_URL; ?>',
+                pageTitle: '<?= PAGE_TITLE_DEFAULT ?> | Show'
             },
-            'settings' : {},
+            'settings' : {
+                pageTitle: '<?= PAGE_TITLE_DEFAULT ?> | Settings'
+            },
             'comments' : {
                 
             }
