@@ -8,7 +8,9 @@ HN.clearComments = function(){
 HN.displayComments = function(commentsType){
 	var storyId = window.location.href.match(/\d+\/?$/);
 	if(storyId){
-		var storyUrl = 'https://hacker-news.firebaseio.com/v0/item/' + storyId[0] + '.json';
+		//remove possible trailing slash
+		storyId = storyId[0].replace(/\/$/, '');
+		var storyUrl = 'https://hacker-news.firebaseio.com/v0/item/' + storyId + '.json';
 	}
 	else{
 		console.log("No story id found");
