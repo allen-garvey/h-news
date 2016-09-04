@@ -15,8 +15,8 @@ HN.displayStories = function(pageSettings){
 									return;
 								}
 								var story = new HN.Story(storyInfo);
-								if(HN.shouldDisplayStory(story)){
-									top_list.insertAdjacentHTML('beforeend', getStoryHTML(story));
+								if(pageSettings.shouldDisplayStory(story)){
+									top_list.insertAdjacentHTML('beforeend', getStoryHTML(story, pageSettings));
 								}	
 					}, 
 					function(){console.log("failed to get info about story: " + story.id);}
@@ -25,7 +25,7 @@ HN.displayStories = function(pageSettings){
 		}
 	}
 
-	function getStoryHTML(story){
+	function getStoryHTML(story, pageSettings){
 		var html = "<li><div class='container'>" + HN.util.getStoryTitleHTML(story);
 		var num_comments = story.numComments();
 		if(num_comments > 0){
@@ -33,7 +33,7 @@ HN.displayStories = function(pageSettings){
 			if(num_comments > 1){
 				comments_text = ' comments';
 			}
-			html = html + "<a href='" + story.commentsUrl() +"'><p>" + num_comments  + comments_text + "</p></a>";
+			html = html + "<a href='" + story.commentsUrl(pageSettings.commentsUrl) +"'><p>" + num_comments  + comments_text + "</p></a>";
 		}
 		html = html + "</div></li>";
 		return html;

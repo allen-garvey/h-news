@@ -52,13 +52,19 @@
         HN.settings.themeNames=<?= json_encode(HNewsSettingsPageController::getThemeList()); ?>;
         HN.pages = {
             'home' : {
-                storiesUrl: 'https://hacker-news.firebaseio.com/v0/topstories.json'
+                storiesUrl: 'https://hacker-news.firebaseio.com/v0/topstories.json',
+                shouldDisplayStory: function(story){if(story.type()==="job"){return false;} return true;},
+                commentsUrl: '<?= COMMENTS_QUERY_URL; ?>'
             },
             'ask' : {
-                storiesUrl: 'https://hacker-news.firebaseio.com/v0/askstories.json'
+                storiesUrl: 'https://hacker-news.firebaseio.com/v0/askstories.json',
+                shouldDisplayStory: function(story){return true;},
+                commentsUrl: '<?= ASK_COMMENTS_QUERY_URL; ?>'
             },
             'show': {
-                storiesUrl: 'https://hacker-news.firebaseio.com/v0/showstories.json'
+                storiesUrl: 'https://hacker-news.firebaseio.com/v0/showstories.json',
+                shouldDisplayStory: function(story){return true;},
+                commentsUrl: '<?= SHOW_COMMENTS_QUERY_URL; ?>'
             },
             'settings' : {},
             'comments' : {
@@ -71,11 +77,6 @@
         HN.settings.themeIdPrefix='<?= HNewsSettingsPageController::$themeIdPrefix; ?>';
         <?php //used for story pages ?>
         HN.askUrl='<?= ASK_COMMENTS_QUERY_URL; ?>';
-        <?php 
-            if($page_controller->getControllerType() !== 'settings' && $page_controller->getControllerType() !== 'comments'){
-                include(VIEWS_PATH.'story_scripts.php');
-            }
-         ?>
          </script>
          <?php if(ENVIRONMENT_CURRENT === ENVIRONMENT_DEVELOPMENT): ?>
             <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>

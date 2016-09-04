@@ -83,33 +83,20 @@ class HNewsCommentsPageController implements HNewsPage{
 * for stories (homepage, ask and show main pages)
 */
 abstract class HNewsAbstractStoryController implements HNewsPage{
-	/**
-	* Returns a js function as string used by the javascript to determine if story should be displayed
-	*/
-	public function displayStoryFunction(){
-		return 'function(story){return true;}';
-	}
 	public function getPageTitle(){
 		return PAGE_TITLE_DEFAULT;
 	}
 	public function getControllerType(){
 		return 'story';
 	}
-	public function getCommentsUrl(){
-		return COMMENTS_QUERY_URL;
-	}
 	public function getBodyTags(){
 		return 'page_' . $this->getPageTitle();
-	}
-	
+	}	
 }
 
 class HNewsHomePageController extends HNewsAbstractStoryController{
 	public function getTitle(){
 		return 'home';
-	}
-	public function displayStoryFunction(){
-		return 'function(story){if(story.type()==="job"){return false;} return true;}';
 	}
 }
 
@@ -120,9 +107,6 @@ class HNewsShowPageController extends HNewsAbstractStoryController{
 	public function getPageTitle(){
 		return PAGE_TITLE_DEFAULT.'&mdash;Show';
 	}
-	public function getCommentsUrl(){
-		return SHOW_COMMENTS_QUERY_URL;
-	}
 }
 
 class HNewsAskPageController extends HNewsAbstractStoryController{
@@ -131,8 +115,5 @@ class HNewsAskPageController extends HNewsAbstractStoryController{
 	}
 	public function getPageTitle(){
 		return PAGE_TITLE_DEFAULT.'&mdash;Ask';
-	}
-	public function getCommentsUrl(){
-		return ASK_COMMENTS_QUERY_URL;
 	}
 }

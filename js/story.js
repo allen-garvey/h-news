@@ -75,9 +75,9 @@ HN.Story = (function(){
 		}
 		return this.storyInfo['kids'];
 	};
-	HNStory.prototype.commentsUrl = function(){
+	HNStory.prototype.commentsUrl = function(commentsUrl){
 		// return 'https://news.ycombinator.com/item?id=' + this.storyInfo['id'];
-		return HN.commentsUrl + this.storyInfo['id'];
+		return commentsUrl + this.storyInfo['id'];
 	};
 	return HNStory;
 })();
