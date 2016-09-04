@@ -5,7 +5,7 @@ require_once(CONTROLLERS_PATH.'page_controller.php');
 
 if(isset($_GET['comments'])) {
 	$comments_for = isset($_GET['page']) ? $_GET['page'] : null;
-	$page_controller = new HNewsCommentsPageController((int) $_GET['comments'], $comments_for);
+	$page_controller = new HNewsCommentsPageController($comments_for);
 }
 else if(isset($_GET['page'])){
 	if($_GET['page'] == 'settings'){

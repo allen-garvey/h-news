@@ -42,11 +42,9 @@ class HNewsSettingsPageController implements HNewsPage{
 * Controls such things as title of the page, and the parent id of the comments displayed
 */
 class HNewsCommentsPageController implements HNewsPage{
-	protected $parentStoryId;
 	protected $title;
 	
-	function __construct($parentStoryId, $title=null) {
-		$this->parentStoryId = $parentStoryId;
+	function __construct($title=null) {
 		if(isset($title) & in_array($title, ['show', 'ask'])){
 			$this->title = $title;
 		}
