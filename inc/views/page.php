@@ -66,12 +66,12 @@
             }
         };
         HN.storiesPerPage = 30;
+        <?php //used for settings page ?>
+        HN.settings.userThemeFormName='<?= HNewsSettingsPageController::$userThemeFormName; ?>';
+        HN.settings.themeIdPrefix='<?= $page_controller->getThemeIdPrefix(); ?>';
         <?php 
             if($page_controller->getControllerType() === 'comments'){
                 include(VIEWS_PATH.'comments_scripts.php');
-            }
-            else if($page_controller->getControllerType() === 'settings'){
-                include(VIEWS_PATH.'settings_scripts.php');
             }
             else{
                 include(VIEWS_PATH.'story_scripts.php');
