@@ -108,12 +108,6 @@ class HNewsHomePageController extends HNewsAbstractStoryController{
 	public function getTitle(){
 		return 'home';
 	}
-	public function shouldDisplayStory(HNewsStoryController $story){
-		if($story->getType() !== 'job'){
-			return true;
-		}
-		return false;
-	}
 	public function displayStoryFunction(){
 		return 'function(story){if(story.type()==="job"){return false;} return true;}';
 	}
