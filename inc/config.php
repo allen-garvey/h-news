@@ -25,9 +25,9 @@ define('SHOW_URL', BASE_URL.'show/');
 define('ASK_URL', BASE_URL.'ask/');
 define('SETTINGS_URL', BASE_URL.'settings/');
 
-define('COMMENTS_QUERY_URL', BASE_URL.'comments/#');
-define('ASK_COMMENTS_QUERY_URL', ASK_URL.'comments/#');
-define('SHOW_COMMENTS_QUERY_URL', SHOW_URL.'comments/#');
+define('COMMENTS_QUERY_URL', BASE_URL.'comments/');
+define('ASK_COMMENTS_QUERY_URL', ASK_URL.'comments/');
+define('SHOW_COMMENTS_QUERY_URL', SHOW_URL.'comments/');
 
 define('PAGE_TITLE_DEFAULT', 'H News');
 

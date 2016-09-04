@@ -16,8 +16,6 @@
 		else if(currentUrl.match(/show\/comments\/?.*$/i)){
 			commentsType = 'show';
 		}
-		//add listener for if user clicks on comments link while on comments page
-		window.addEventListener('hashchange', function(){HN.clearComments(); HN.displayComments(commentsType);}, false);
 		HN.displayComments(commentsType);
 	}
 	//settings route
