@@ -97,10 +97,6 @@ abstract class HNewsAbstractStoryController implements HNewsPage, HNewsAjaxPage{
 	public function getPageTitle(){
 		return PAGE_TITLE_DEFAULT;
 	}
-	
-	public function getNumStoriesPerPage(){
-		return 30;
-	}
 	public function getControllerType(){
 		return 'story';
 	}

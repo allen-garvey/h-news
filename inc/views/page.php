@@ -50,6 +50,7 @@
         var HN={};HN.pageType='<?= $page_controller->getControllerType(); ?>';HN.settings = {};
         HN.settings.commentsUrl='<?= COMMENTS_QUERY_URL; ?>';
         HN.settings.themeNames=<?= json_encode(HNewsSettingsPageController::getThemeList()); ?>;
+        HN.storiesPerPage = 30;
         <?php 
             if($page_controller->getControllerType() === 'comments'){
                 include(VIEWS_PATH.'comments_scripts.php');
