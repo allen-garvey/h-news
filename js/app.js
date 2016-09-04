@@ -22,13 +22,13 @@ else if(HN.pageType === 'settings'){
 }
 else{
 	if(currentUrl.match(/ask\/?$/i)){
-		var pageSettings = HN.page.ask;
+		var pageSettings = HN.pages.ask;
 	}
 	else if(currentUrl.match(/show\/?$/i)){
-		var pageSettings = HN.page.show;
+		var pageSettings = HN.pages.show;
 	}
 	else{
-		var pageSettings = HN.page.home;
+		var pageSettings = HN.pages.home;
 	}
 	HN.displayStories(pageSettings);
 }
