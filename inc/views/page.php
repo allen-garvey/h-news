@@ -47,7 +47,7 @@
             </div>
         </footer>
         <script type="text/javascript">
-        var HN={};HN.pageType='<?= $page_controller->getControllerType(); ?>';HN.settings = {};
+        var HN={};HN.settings = {};
         HN.settings.commentsUrl='<?= COMMENTS_QUERY_URL; ?>';
         HN.settings.themeNames=<?= json_encode(HNewsSettingsPageController::getThemeList()); ?>;
         HN.pages = {
