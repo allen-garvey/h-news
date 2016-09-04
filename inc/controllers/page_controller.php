@@ -31,9 +31,6 @@ class HNewsSettingsPageController implements HNewsPage{
 	public function getPageTitle(){
 		return PAGE_TITLE_DEFAULT.'&mdash;Settings';
 	}
-	public function getThemeIdPrefix(){
-		return 'theme_';
-	}
 	public function getBodyTags(){
 		return 'page_settings';
 	}
