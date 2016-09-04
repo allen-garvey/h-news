@@ -4,14 +4,12 @@ HN.settings.initSettings();
 var currentUrl = window.location.href;
 
 if(currentUrl.match(/\/comments\/?.*$/i)){
+	var commentsType = 'general';
 	if(currentUrl.match(/ask\/comments\/?.*$/i)){
-		var commentsType = 'ask';
+		commentsType = 'ask';
 	}
 	else if(currentUrl.match(/show\/comments\/?.*$/i)){
-		var commentsType = 'show';
-	}
-	else{
-		var commentsType = 'general';
+		commentsType = 'show';
 	}
 	//add listener for if user clicks on comments link while on comments page
 	window.addEventListener('hashchange', function(){HN.clearComments(); HN.displayComments(commentsType);}, false);
@@ -21,14 +19,12 @@ else if(currentUrl.match(/\/settings\/?$/i)){
 	HN.settings.initSettingsPage();
 }
 else{
+	var pageSettings = HN.pages.home;
 	if(currentUrl.match(/ask\/?$/i)){
-		var pageSettings = HN.pages.ask;
+		pageSettings = HN.pages.ask;
 	}
 	else if(currentUrl.match(/show\/?$/i)){
-		var pageSettings = HN.pages.show;
-	}
-	else{
-		var pageSettings = HN.pages.home;
+		pageSettings = HN.pages.show;
 	}
 	HN.displayStories(pageSettings);
 }
