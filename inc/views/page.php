@@ -12,12 +12,12 @@
             <header class='jumbotron'>
                 <div class='container'>
                     <nav>
-                        <a href='<?= HOME_URL; ?>'><span class='brand <?php if($page_controller->getTitle()==='home'){echo 'current';} ?>'><?= PAGE_TITLE_DEFAULT; ?></span></a>
+                        <a href='<?= HOME_URL; ?>'><span class='brand nav-link-home'><?= PAGE_TITLE_DEFAULT; ?></span></a>
                         <ul class="page_links">
-                            <li<?php if($page_controller->getTitle()==='show'){echo ' class="current"';} ?>>
+                            <li class="nav-link-show">
                                 <a href='<?= SHOW_URL; ?>'>Show</a>
                             </li>
-                            <li<?php if($page_controller->getTitle()==='ask'){echo ' class="current"';} ?>>
+                            <li class="nav-link-ask">
                                 <a href='<?= ASK_URL; ?>'>Ask</a>
                             </li>
                         </ul>

@@ -20,14 +20,19 @@
 
 	//Comments Route
 	if(currentUrl.match(/\/comments\/?.*$/i)){
-		var commentsType = 'general';
+		var pageSettings = HN.pages.comments;
 		if(currentUrl.match(/ask\/comments\/?.*$/i)){
-			commentsType = 'ask';
+			var commentsType = 'ask';
+			pageSettings.bodyTags.push('nav_ask');
 		}
 		else if(currentUrl.match(/show\/comments\/?.*$/i)){
-			commentsType = 'show';
+			var commentsType = 'show';
+			pageSettings.bodyTags.push('nav_show');
 		}
-		var pageSettings = HN.pages.comments;
+		else{
+			var commentsType = 'general';
+			pageSettings.bodyTags.push('nav_home');
+		}	
 		initPage(pageSettings);
 		HN.displayComments(commentsType);
 	}

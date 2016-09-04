@@ -13,21 +13,12 @@
 		position: fixed;
 	}
 }
-.current{
-	background-color: lighten($primary_color, 20%);
-}
 .brand{
 	position: relative;//because of floated li breaks vertical alignment
 	top: 1rem;
 	padding: 1rem 1rem 1.5rem $universal_left_right_padding;
 	@include media_q(med){
 		padding-right: 2rem;
-	}
-	&.current{
-		@include media_q(med){
-			//so the brand doesn't look off-center when it's selected
-			padding-right: $universal_left_right_padding;
-		}
 	}
 }
 nav, nav ul, nav ul li{
@@ -67,4 +58,24 @@ nav{
 
 header .container{
 	padding:0;
+}
+
+/*
+* Current page nav link highlight
+*/
+@mixin current_nav_link(){
+	background-color: lighten($primary_color, 20%);
+}
+.page_home .nav-link-home, .nav_home .nav-link-home{
+	@include current_nav_link;
+	@include media_q(med){
+		//so the brand doesn't look off-center when it's selected
+		padding-right: $universal_left_right_padding;
+	}
+}
+.page_show .nav-link-show, .nav_show .nav-link-show{
+	@include current_nav_link;
+}
+.page_ask .nav-link-ask, .nav_ask .nav-link-ask{
+	@include current_nav_link;
 }
