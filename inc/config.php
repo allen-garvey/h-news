@@ -14,6 +14,7 @@ if(ENVIRONMENT_CURRENT === ENVIRONMENT_HNEWS_CO){
 	define('BASE_URL','http://www.hnews.co/');
 }
 else{
+	error_reporting(E_ALL);
 	define('BASE_URL','/h-news/public_html/');
 }
 
