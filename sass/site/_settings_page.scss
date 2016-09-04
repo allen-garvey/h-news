@@ -15,3 +15,11 @@ fieldset{
 label{
 	@include font_size(-1);
 }
+
+.settings-main{
+	display: none;
+}
+
+.page_settings .settings-main{
+	display: block;
+}

@@ -25,13 +25,9 @@
                 </div>
             </header>
             <noscript class='container center'><h3>H-News requires JavaScript in order to download stories and comments</h3></noscript>
-            <?php 
-                if ($page_controller->getControllerType() === 'settings') {
-                    include(VIEWS_PATH.'settings_main_content.php');
-                }
-                else{
-                    include(VIEWS_PATH.'page_main_content.php');   
-                }
+            <?php
+                include(VIEWS_PATH.'settings_main_content.php');
+                include(VIEWS_PATH.'page_main_content.php');   
              ?>
         </div>
         <footer>
