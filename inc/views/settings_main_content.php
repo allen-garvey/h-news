@@ -1,10 +1,10 @@
-<main class='container main'>
+<main class='container main settings-main'>
     <h1>Settings</h1>
     <form action='<?= HOME_URL; ?>' method='POST'>
         <fieldset>
             <legend>Theme</legend>
             <?php 
-                $themes = $page_controller->getThemeList();
+                $themes = HNewsSettingsPageController::getThemeList();
                 foreach ($themes as $theme):
                     $theme_id = HNewsSettingsPageController::$themeIdPrefix.$theme;
             ?>
