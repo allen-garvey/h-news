@@ -9,7 +9,6 @@ interface HNewsPage{
 	public function getTitle();
 	public function getControllerType();
 	public function getPageTitle();
-	public function getBodyTags();
 	
 }
 
@@ -31,9 +30,6 @@ class HNewsSettingsPageController implements HNewsPage{
 	}
 	public function getPageTitle(){
 		return PAGE_TITLE_DEFAULT.'&mdash;Settings';
-	}
-	public function getBodyTags(){
-		return 'page_settings';
 	}
 
 }
@@ -70,9 +66,6 @@ class HNewsCommentsPageController implements HNewsPage{
 	public function getControllerType(){
 		return 'comments';
 	}
-	public function getBodyTags(){
-		return 'page_comments';
-	}
 	
 }
 
@@ -87,9 +80,6 @@ abstract class HNewsAbstractStoryController implements HNewsPage{
 	public function getControllerType(){
 		return 'story';
 	}
-	public function getBodyTags(){
-		return 'page_' . $this->getPageTitle();
-	}	
 }
 
 class HNewsHomePageController extends HNewsAbstractStoryController{

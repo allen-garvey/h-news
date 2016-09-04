@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" type="text/css" href="<?= STYLES_URL.'style.css'; ?>"/>
     </head>
-    <body class='<?= $page_controller->getBodyTags(); ?>'>
+    <body>
         <div class='total'>
             <header class='jumbotron'>
                 <div class='container'>
@@ -51,25 +51,29 @@
                 storiesUrl: 'https://hacker-news.firebaseio.com/v0/topstories.json',
                 shouldDisplayStory: function(story){if(story.type()==="job"){return false;} return true;},
                 commentsUrl: '<?= COMMENTS_QUERY_URL; ?>',
-                pageTitle: '<?= PAGE_TITLE_DEFAULT ?>'
+                pageTitle: '<?= PAGE_TITLE_DEFAULT ?>',
+                bodyTags: ['page_home']
             },
             'ask' : {
                 storiesUrl: 'https://hacker-news.firebaseio.com/v0/askstories.json',
                 shouldDisplayStory: function(story){return true;},
                 commentsUrl: '<?= ASK_COMMENTS_QUERY_URL; ?>',
-                pageTitle: '<?= PAGE_TITLE_DEFAULT ?> | Ask'
+                pageTitle: '<?= PAGE_TITLE_DEFAULT ?> | Ask',
+                bodyTags: ['page_ask']
             },
             'show': {
                 storiesUrl: 'https://hacker-news.firebaseio.com/v0/showstories.json',
                 shouldDisplayStory: function(story){return true;},
                 commentsUrl: '<?= SHOW_COMMENTS_QUERY_URL; ?>',
-                pageTitle: '<?= PAGE_TITLE_DEFAULT ?> | Show'
+                pageTitle: '<?= PAGE_TITLE_DEFAULT ?> | Show',
+                bodyTags: ['page_show']
             },
             'settings' : {
-                pageTitle: '<?= PAGE_TITLE_DEFAULT ?> | Settings'
+                pageTitle: '<?= PAGE_TITLE_DEFAULT ?> | Settings',
+                bodyTags: ['page_settings']
             },
             'comments' : {
-                
+                bodyTags: ['page_comments']
             }
         };
         HN.storiesPerPage = 30;

@@ -7,7 +7,12 @@
 
 	//setup page based on routing
 	function initPage(pageSettings){
-		document.title = pageSettings.pageTitle;
+		if(pageSettings.pageTitle){
+			document.title = pageSettings.pageTitle;
+		}
+		if(pageSettings.bodyTags){
+			document.body.className += (' ' + pageSettings.bodyTags.join(' '));
+		}
 	}
 
 
@@ -22,6 +27,8 @@
 		else if(currentUrl.match(/show\/comments\/?.*$/i)){
 			commentsType = 'show';
 		}
+		var pageSettings = HN.pages.comments;
+		initPage(pageSettings);
 		HN.displayComments(commentsType);
 	}
 	//settings route
