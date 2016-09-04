@@ -6,7 +6,7 @@
             <?php 
                 $themes = $page_controller->getThemeList();
                 foreach ($themes as $theme):
-                    $theme_id = $page_controller->getThemeIdPrefix().$theme;
+                    $theme_id = HNewsSettingsPageController::$themeIdPrefix.$theme;
             ?>
                 <div class='form-group'>
                     <input type="radio" name="<?= HNewsSettingsPageController::$userThemeFormName; ?>" value="<?= $theme; ?>" id="<?= $theme_id; ?>" />

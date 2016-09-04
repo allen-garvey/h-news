@@ -19,6 +19,7 @@ interface HNewsPage{
 class HNewsSettingsPageController implements HNewsPage{
 	public static $userThemeFormName = "userTheme";
 	public static $autoDarkModeFormName = "autoDark";
+	public static $themeIdPrefix = "theme_";
 	public static function getThemeList(){
 		return ['default', 'dark', 'blue', 'green', 'purple', 'silver', 'red'];
 	}

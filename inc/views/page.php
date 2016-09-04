@@ -68,10 +68,13 @@
         HN.storiesPerPage = 30;
         <?php //used for settings page ?>
         HN.settings.userThemeFormName='<?= HNewsSettingsPageController::$userThemeFormName; ?>';
-        HN.settings.themeIdPrefix='theme_';
+        HN.settings.themeIdPrefix='<?= HNewsSettingsPageController::$themeIdPrefix; ?>';
         <?php 
             if($page_controller->getControllerType() === 'comments'){
                 include(VIEWS_PATH.'comments_scripts.php');
+            }
+            else if($page_controller->getControllerType() === 'settings'){
+
             }
             else{
                 include(VIEWS_PATH.'story_scripts.php');
