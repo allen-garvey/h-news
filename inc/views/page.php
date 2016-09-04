@@ -69,14 +69,10 @@
         <?php //used for settings page ?>
         HN.settings.userThemeFormName='<?= HNewsSettingsPageController::$userThemeFormName; ?>';
         HN.settings.themeIdPrefix='<?= HNewsSettingsPageController::$themeIdPrefix; ?>';
+        <?php //used for story pages ?>
+        HN.askUrl='<?= ASK_COMMENTS_QUERY_URL; ?>';
         <?php 
-            if($page_controller->getControllerType() === 'comments'){
-                include(VIEWS_PATH.'comments_scripts.php');
-            }
-            else if($page_controller->getControllerType() === 'settings'){
-
-            }
-            else{
+            if($page_controller->getControllerType() !== 'settings' && $page_controller->getControllerType() !== 'comments'){
                 include(VIEWS_PATH.'story_scripts.php');
             }
          ?>

@@ -5,7 +5,7 @@ HN.clearComments = function(){
 	document.getElementById('content_main').innerHTML = '';
 };
 
-HN.displayComments = function(){
+HN.displayComments = function(commentsType){
 	var storyId = window.location.href.match(/\d+\/?$/);
 	if(storyId){
 		var storyUrl = 'https://hacker-news.firebaseio.com/v0/item/' + storyId[0] + '.json';
@@ -25,7 +25,7 @@ HN.displayComments = function(){
 			var title = '';
 			if(text){
 				text = "<h6>" + story.author() + "</h6><article>" + HN.util.smartenQuotesHTML(story.text())  + "</article>";
-				if(HN.pageName === 'ask' || story.title().match(/^(Ask|Tell) HN:/)){
+				if(commentsType === 'ask' || story.title().match(/^(Ask|Tell) HN:/)){
 					title_class += ' ask';
 					title = HN.util.getAskStoryTitle(story);
 				}
