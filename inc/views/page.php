@@ -36,11 +36,11 @@
         </div>
         <footer>
             <div class='container'>
-                <?php 
-                    if($page_controller->getControllerType() !== 'settings'){
+                <div class='footer-controls'>
+                    <?php 
                         include(VIEWS_PATH.'footer_controls.php');
-                    }
-                 ?>
+                     ?>
+                 </div>
                 <p class='small'>Not affiliated with Hacker News or Y Combinator.</p>
                 <p class='small'>Designed and created by <a href='http://www.allengarvey.com'>Allen Garvey</a> using the Hacker News API.</p>
                 <p class='small'>Released under the MIT License. <a href='https://github.com/allen-garvey/h-news'>Source on github</a></p>
