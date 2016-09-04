@@ -7,12 +7,12 @@ var rename = require('gulp-rename');
 var maps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
 
-var JS_SOURCE_DIR = 'js/';
-var JS_DEST_DIR = 'public_html/scripts/';
+var JS_SOURCE_DIR = __dirname + 'js/';
+var JS_DEST_DIR = __dirname + 'public_html/scripts/';
 var DIST_NAME = 'app'; //name of compiled file to be served i.e. app.js and app.min.js
 
-var SASS_SOURCE_DIR = 'sass/';
-var STYLES_DEST_DIR = 'public_html/styles/';
+var SASS_SOURCE_DIR = __dirname + 'sass/';
+var STYLES_DEST_DIR = __dirname + 'public_html/styles/';
 var SASS_OPTIONS = {
   errLogToConsole: true,
   // sourceComments: true, //turns on line number comments 
