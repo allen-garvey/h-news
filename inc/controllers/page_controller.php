@@ -12,9 +12,6 @@ interface HNewsPage{
 	public function getBodyTags();
 	
 }
-interface HNewsAjaxPage{
-	public function getStoryIdsUrl();
-}
 
 /**
 * Controls such things as initial the settings, which is just visual themes for now
@@ -46,7 +43,7 @@ class HNewsSettingsPageController implements HNewsPage{
 /**
 * Controls such things as title of the page, and the parent id of the comments displayed
 */
-class HNewsCommentsPageController implements HNewsPage, HNewsAjaxPage{
+class HNewsCommentsPageController implements HNewsPage{
 	protected $parentStoryId;
 	protected $title;
 	
@@ -87,7 +84,7 @@ class HNewsCommentsPageController implements HNewsPage, HNewsAjaxPage{
 * Controls such things as title of the page, which kinds of stories are displayed
 * for stories (homepage, ask and show main pages)
 */
-abstract class HNewsAbstractStoryController implements HNewsPage, HNewsAjaxPage{
+abstract class HNewsAbstractStoryController implements HNewsPage{
 	/**
 	* Returns a js function as string used by the javascript to determine if story should be displayed
 	*/
@@ -113,10 +110,6 @@ class HNewsHomePageController extends HNewsAbstractStoryController{
 	public function getTitle(){
 		return 'home';
 	}
-	public function getStoryIdsUrl(){
-		return HNewsStoriesModel::topStoriesUrl();	
-	}
-
 	public function shouldDisplayStory(HNewsStoryController $story){
 		if($story->getType() !== 'job'){
 			return true;
@@ -135,9 +128,6 @@ class HNewsShowPageController extends HNewsAbstractStoryController{
 	public function getPageTitle(){
 		return PAGE_TITLE_DEFAULT.'&mdash;Show';
 	}
-	public function getStoryIdsUrl(){
-		return HNewsStoriesModel::showStoriesUrl();	
-	}
 	public function getCommentsUrl(){
 		return SHOW_COMMENTS_QUERY_URL;
 	}
@@ -149,9 +139,6 @@ class HNewsAskPageController extends HNewsAbstractStoryController{
 	}
 	public function getPageTitle(){
 		return PAGE_TITLE_DEFAULT.'&mdash;Ask';
-	}
-	public function getStoryIdsUrl(){
-		return HNewsStoriesModel::askStoriesUrl();	
 	}
 	public function getCommentsUrl(){
 		return ASK_COMMENTS_QUERY_URL;

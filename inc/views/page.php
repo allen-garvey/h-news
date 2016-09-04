@@ -50,6 +50,21 @@
         var HN={};HN.pageType='<?= $page_controller->getControllerType(); ?>';HN.settings = {};
         HN.settings.commentsUrl='<?= COMMENTS_QUERY_URL; ?>';
         HN.settings.themeNames=<?= json_encode(HNewsSettingsPageController::getThemeList()); ?>;
+        HN.pages = {
+            'home' : {
+                storiesUrl: 'https://hacker-news.firebaseio.com/v0/topstories.json'
+            },
+            'ask' : {
+                storiesUrl: 'https://hacker-news.firebaseio.com/v0/askstories.json'
+            },
+            'show': {
+                storiesUrl: 'https://hacker-news.firebaseio.com/v0/showstories.json'
+            },
+            'settings' : {},
+            'comments' : {
+                
+            }
+        };
         HN.storiesPerPage = 30;
         <?php 
             if($page_controller->getControllerType() === 'comments'){

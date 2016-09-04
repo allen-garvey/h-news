@@ -1,8 +1,8 @@
 /**
 * used to display homepage, show and ask pages list of story links
 */
-HN.displayStories = function(){
-	HN.getJSON(HN.storiesUrl, function(storyIds){getStoryInfo(storyIds);}, function(){console.log("Error retrieving story ids");});
+HN.displayStories = function(pageSettings){
+	HN.getJSON(pageSettings.storiesUrl, function(storyIds){getStoryInfo(storyIds);}, function(){console.log("Error retrieving story ids");});
 
 	function getStoryInfo(storyIds){
 		var top_list = document.getElementById('top_list');

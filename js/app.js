@@ -10,5 +10,15 @@ else if(HN.pageType === 'settings'){
 	HN.settings.initSettingsPage();
 }
 else{
-	HN.displayStories();
+	var currentUrl = window.location.href;
+	if(currentUrl.match(/ask\/?$/)){
+		var pageSettings = HN.page.ask;
+	}
+	else if(currentUrl.match(/show\/?$/)){
+		var pageSettings = HN.page.show;
+	}
+	else{
+		var pageSettings = HN.page.home;
+	}
+	HN.displayStories(pageSettings);
 }
