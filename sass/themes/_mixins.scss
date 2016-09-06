@@ -16,7 +16,11 @@
 	.jumbotron{
 		background-color: lighten($primary_color, 33%);
 	}
-	.current{
+	.current, 
+	.page_home .nav-link-home, .nav_home .nav-link-home, 
+	.page_show .nav-link-show, .nav_show .nav-link-show,
+	.page_ask .nav-link-ask, .nav_ask .nav-link-ask
+	{
 		background-color: lighten($primary_color, 20%);
 	}
 
