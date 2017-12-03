@@ -52,17 +52,18 @@ HN.displayComments = function(commentsType){
 			return;
 		}
 		var isTopLevelComment = !cssId;
-		var parent_list = cssId ? document.getElementById(cssId) : document.getElementById('top_list');
+		var parentList = cssId ? document.getElementById(cssId) : document.getElementById('top_list');
 		var numCommentIds = commentIdArray.length;
-		for (var i = 0; i < numCommentIds; i++) {
-			HN.getJSON(HN.util.getItemInfoUrlFromId(commentIdArray[i]), function(commentInfo){
-					displayComment(commentInfo, parent_list, isTopLevelComment);
+		
+		commentIdArray.forEach(function(commentId){
+			HN.getJSON(HN.util.getItemInfoUrlFromId(commentId), function(commentInfo){
+					displayComment(commentInfo, parentList, isTopLevelComment);
 				},
-				
-				function(){console.log("Error retrieving info about comment: " + commentIdArray[i]);}
+				function(){console.log("Error retrieving info about comment: " + commentId);}
 			);
-
-		};
+			
+		});
+		
 		//change hacker news links to hnews links
 		HN.util.redirectLinks();
 
@@ -78,6 +79,9 @@ HN.displayComments = function(commentsType){
 			return;
 		}
 		var comment = new HN.Comment(commentInfo);
+		if(comment.isDead()){
+			return;
+		}
 		if(comment.isDeleted()){
 			comment = getDeletedComment(commentInfo);
 		}
