@@ -6,11 +6,6 @@ import util from './hn_util.js';
 import { HNStory } from './story.js';
 import { HNComment } from './comment.js';
 
-
-// HN.clearComments = function(){
-// 	document.getElementById('content_main').innerHTML = '';
-// };
-
 export function displayComments(commentsType){
 	var storyId = window.location.href.match(/\d+\/?$/);
 	if(storyId){
