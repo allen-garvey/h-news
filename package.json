@@ -9,7 +9,7 @@
     "gulp": "gulp",
     "start": "webpack-dev-server --open",
     "webpack:dev": "webpack --config webpack.config.js",
-    "webpack:prod": "webpack --config webpack.production.config.js",
+    "webpack:prod": "webpack --config webpack.config.js --mode='production'",
     "webpack:watch": "webpack --config webpack.watch.config.js"
   },
   "repository": {
