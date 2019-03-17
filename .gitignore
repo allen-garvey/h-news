@@ -11,3 +11,5 @@ public_html/scripts/*.map
 public_html/*.html
 *.png
 inc/environment.php
+.directory
+.DS_Store
