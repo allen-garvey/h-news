@@ -9,6 +9,7 @@ node_modules/*
 public_html/scripts/*.js
 public_html/scripts/*.map
 public_html/*.html
+public_html/assets/*
 *.png
 inc/environment.php
 .directory
