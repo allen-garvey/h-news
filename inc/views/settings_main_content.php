@@ -21,6 +21,6 @@
                 <label for="autodark_checkbox" >Automatically switch to dark mode from 10pm to 6am</label>
             </div>
         </fieldset>
-        <input class='btn btn-primary' type='button' onclick="HN.settings.save()" value='Save' />
+        <input class='btn btn-primary' type='button' id='settings_save_button' value='Save' />
     </form>
 </main>

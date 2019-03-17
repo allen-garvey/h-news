@@ -21,6 +21,7 @@ export function initSettingsPage(){
 			document.documentElement.className = theme;
 		};
 	});
+	document.getElementById('settings_save_button').onclick = save;
 };
 
 function getUserTheme(){
