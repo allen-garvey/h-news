@@ -10,16 +10,10 @@ define('MODELS_PATH', INC_PATH.'models/');
 
 require_once(INC_PATH.'environment.php');
 
-if(ENVIRONMENT_CURRENT === ENVIRONMENT_HNEWS_CO){
-	define('BASE_URL','http://www.hnews.co/');
-}
-else{
-	error_reporting(E_ALL);
-	define('BASE_URL','/h-news/public_html/');
-}
+define('BASE_URL','/');
 
-define('STYLES_URL', BASE_URL.'styles/');
-define('SCRIPTS_URL', BASE_URL.'scripts/');
+define('STYLES_URL', BASE_URL.'assets/');
+define('SCRIPTS_URL', BASE_URL.'assets/');
 
 define('HOME_URL', BASE_URL);
 define('SHOW_URL', BASE_URL.'show/');
