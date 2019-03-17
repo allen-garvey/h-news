@@ -8,6 +8,7 @@ PHP_SOURCE != find ./inc -type f -name '*.php'
 
 
 all: $(HTML_INDEX)
+	npm run gulp
 
 setup:
 	npm install
