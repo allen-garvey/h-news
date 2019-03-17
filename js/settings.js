@@ -44,7 +44,7 @@ export function initSettings(){
 function darkAtNight(){
 	var currentDate = new Date();
 	var currentHour = currentDate.getHours();
-	if(currentHour >= 22 || currentHour < 6){
+	if(currentHour >= 21 || currentHour < 5){
 		document.documentElement.className = 'dark';
 	}
 };

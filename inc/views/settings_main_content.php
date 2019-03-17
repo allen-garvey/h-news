@@ -18,7 +18,7 @@
             ?>
             <div class='form-group'>
                 <input id='autodark_checkbox' type="checkbox" name="<?= HNewsSettingsPageController::$autoDarkModeFormName; ?>" />
-                <label for="autodark_checkbox" >Automatically switch to dark mode from 10pm to 6am</label>
+                <label for="autodark_checkbox" >Automatically switch to dark mode from 9pm to 5am</label>
             </div>
         </fieldset>
         <input class='btn btn-primary' type='button' id='settings_save_button' value='Save' />
