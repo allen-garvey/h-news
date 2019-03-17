@@ -1,9 +1,15 @@
 /*
  * Routes and app initialization
  */
-(function(){
+import { routes } from './routes.js';
+import { displayStories } from './stories_controller.js';
+import { displayComments } from './comments_controller.js';
+import { initSettings, initSettingsPage } from './settings.js';
+
+
+export function start(){
 	//initialize settings based on saved settings in localStorage
-	HN.settings.initSettings();
+	initSettings();
 
 	//setup page based on routing
 	function initPage(pageSettings){
@@ -16,11 +22,11 @@
 	}
 
 
-	var currentUrl = window.location.href;
+	const currentUrl = window.location.href;
 
 	//Comments Route
 	if(currentUrl.match(/\/comments\/?.*$/i)){
-		var pageSettings = HN.pages.comments;
+		const pageSettings = routes.comments;
 		if(currentUrl.match(/ask\/comments\/?.*$/i)){
 			var commentsType = 'ask';
 			pageSettings.bodyTags.push('nav_ask');
@@ -34,26 +40,26 @@
 			pageSettings.bodyTags.push('nav_home');
 		}	
 		initPage(pageSettings);
-		HN.displayComments(commentsType);
+		displayComments(commentsType);
 	}
 	//settings route
 	else if(currentUrl.match(/\/settings\/?$/i)){
-		var pageSettings = HN.pages.settings;
+		const pageSettings = routes.settings;
 		initPage(pageSettings);
-		HN.settings.initSettingsPage();
+		initSettingsPage();
 	}
 	//Main category page routes - Home page, show and ask main pages
 	//Home page also acts as 404, since unknown routes will end up there
 	else{
-		var pageSettings = HN.pages.home;
+		let pageSettings = routes.home;
 		if(currentUrl.match(/ask\/?$/i)){
-			pageSettings = HN.pages.ask;
+			pageSettings = routes.ask;
 		}
 		else if(currentUrl.match(/show\/?$/i)){
-			pageSettings = HN.pages.show;
+			pageSettings = routes.show;
 		}
 		initPage(pageSettings);
-		HN.displayStories(pageSettings);
+		displayStories(pageSettings);
 	}
 
-})();
+}

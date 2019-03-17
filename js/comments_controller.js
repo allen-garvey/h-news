@@ -1,11 +1,17 @@
 /**
 * used to display comment and ask pages
 */
-HN.clearComments = function(){
-	document.getElementById('content_main').innerHTML = '';
-};
 
-HN.displayComments = function(commentsType){
+import util from './hn_util.js';
+import { HNStory } from './story.js';
+import { HNComment } from './comment.js';
+
+
+// HN.clearComments = function(){
+// 	document.getElementById('content_main').innerHTML = '';
+// };
+
+export function displayComments(commentsType){
 	var storyId = window.location.href.match(/\d+\/?$/);
 	if(storyId){
 		//remove possible trailing slash
@@ -16,24 +22,24 @@ HN.displayComments = function(commentsType){
 		console.log("No story id found");
 		return;
 	}
-	HN.getJSON(storyUrl, function(storyInfo){
+	util.getJSON(storyUrl, function(storyInfo){
 			if(!storyInfo){
 				console.log('No info about the story returned');
 				return;
 			}
-			var story = new HN.Story(storyInfo);
+			var story = new HNStory(storyInfo);
 			var title_class = 'container'
 			var text = story.text();
 			var title = '';
 			if(text){
-				text = "<h6>" + story.author() + "</h6><article>" + HN.util.smartenQuotesHTML(story.text())  + "</article>";
+				text = "<h6>" + story.author() + "</h6><article>" + util.smartenQuotesHTML(story.text())  + "</article>";
 				if(commentsType === 'ask' || story.title().match(/^(Ask|Tell) HN:/)){
 					title_class += ' ask';
-					title = HN.util.getAskStoryTitle(story);
+					title = util.getAskStoryTitle(story);
 				}
 			}
 			else{
-				title = HN.util.getStoryTitleHTML(story)
+				title = util.getStoryTitleHTML(story)
 			}
 			document.title = document.title + " | " + story.title();
 			document.getElementById('content_main').insertAdjacentHTML('afterbegin', "<section class='" + title_class + "'>" + title + text + "</section>");
@@ -56,7 +62,7 @@ HN.displayComments = function(commentsType){
 		var numCommentIds = commentIdArray.length;
 		
 		commentIdArray.forEach(function(commentId){
-			HN.getJSON(HN.util.getItemInfoUrlFromId(commentId), function(commentInfo){
+			util.getJSON(util.getItemInfoUrlFromId(commentId), function(commentInfo){
 					displayComment(commentInfo, parentList, isTopLevelComment);
 				},
 				function(){console.log("Error retrieving info about comment: " + commentId);}
@@ -65,7 +71,7 @@ HN.displayComments = function(commentsType){
 		});
 		
 		//change hacker news links to hnews links
-		HN.util.redirectLinks();
+		util.redirectLinks();
 
 	}
 
@@ -78,7 +84,7 @@ HN.displayComments = function(commentsType){
 		if(!commentInfo){
 			return;
 		}
-		var comment = new HN.Comment(commentInfo);
+		var comment = new HNComment(commentInfo);
 		if(comment.isDead()){
 			return;
 		}
@@ -93,7 +99,7 @@ HN.displayComments = function(commentsType){
 		if(comment.isDeleted()){
 			commentHTML += " class='deleted'";	
 		}
-		commentHTML += ">" + HN.util.smartenQuotesHTML(comment.text()) + "</article>";
+		commentHTML += ">" + util.smartenQuotesHTML(comment.text()) + "</article>";
 		
 		if(comment.numChildren() > 0){
 			commentHTML += "<ol id='" + commentIdToCSSId(comment.commentId()) + "'></ol>";
@@ -120,7 +126,7 @@ HN.displayComments = function(commentsType){
 	function getDeletedComment(commentInfo){
 		commentInfo.by = '';
 		commentInfo.text = '[deleted]'
-		return new HN.Comment(commentInfo);
+		return new HNComment(commentInfo);
 	}
 };
 

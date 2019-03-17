@@ -1,7 +1,11 @@
 /**
 * used to story shared functions used in story and comments pages
 */
-HN.util = {};
+
+import APP_CONSTANTS from './app-constants.js';
+
+
+const util = {};
 /**
 		* returns object of info about a story based on integer id
 		* id		The item's unique id.
@@ -19,13 +23,13 @@ HN.util = {};
 		* parts		A list of related pollopts, in display order.
 		* descendants	In the case of stories or polls, the total comment count.
 		*/
-HN.util.getItemInfoUrlFromId = function(id){
+util.getItemInfoUrlFromId = function(id){
 		return 'https://hacker-news.firebaseio.com/v0/item/' + id + '.json';
 	};
 /**
 * Takes HN.Story object as a parameter and returns the html to display the title and link
 */
-HN.util.getStoryTitleHTML = function(story){
+util.getStoryTitleHTML = function(story){
 	var title = "<a href='" + story.url() +"'><h3>" + story.title();
 	if(story.urlRoot() !== ''){
 		title += "<span class='small url_source'> " + story.urlRoot() + "</span>";
@@ -38,7 +42,7 @@ HN.util.getStoryTitleHTML = function(story){
 * Used for ask pages to display without the link
 * Even though code only used on ask pages, is kept here because it should have the same style as getStoryTitleHTML()
 */
-HN.util.getAskStoryTitle = function(story){
+util.getAskStoryTitle = function(story){
 	return "<h3>" + story.title() + "</h3>";
 };
 
@@ -47,9 +51,9 @@ HN.util.getAskStoryTitle = function(story){
 * takes html string and returns html string with dumb quotes replaced with smart quotes
 * preserves dumbquotes in html attributes
 */
-HN.util.smartenQuotesHTML = function(dumbString){
-	return HN.util.replaceSmartQuoteEntities(HN.util.transformTextNodes(dumbString, function(text){
-		return HN.util.replaceDumbQuotes(text);
+util.smartenQuotesHTML = function(dumbString){
+	return util.replaceSmartQuoteEntities(util.transformTextNodes(dumbString, function(text){
+		return util.replaceDumbQuotes(text);
 	}));
 };
 
@@ -62,7 +66,7 @@ HN.util.smartenQuotesHTML = function(dumbString){
 * it should be of the format: function(text){return text.toUpperCase();} or however the text is to be transformed
 * @returns either the transformed string if was originally a string or transformed element if was originally an element
 */
-HN.util.transformTextNodes = function (element, textTransformFunc) {
+util.transformTextNodes = function (element, textTransformFunc) {
     var elementType = typeof element;
     
     if(elementType === 'string'){
@@ -98,7 +102,7 @@ HN.util.transformTextNodes = function (element, textTransformFunc) {
 * Used to replace dumb quotes in a text string
 * uses a second replace in the function passed to replace to preserve the non word characters before the quote, such as spaces or parens
 */
-HN.util.replaceDumbQuotes = function(dumbString){
+util.replaceDumbQuotes = function(dumbString){
 	var rightSingleSmartQuote = "&#8217;";
 	var leftSingleSmartQuote = "&#8216;";
 	var rightDoubleSmartQuote = "&#8221;";
@@ -117,7 +121,7 @@ HN.util.replaceDumbQuotes = function(dumbString){
 /**
 * Required because the treeWalker automatically escapes ampersands
 */
-HN.util.replaceSmartQuoteEntities = function(string){
+util.replaceSmartQuoteEntities = function(string){
 	if(typeof string != 'string'){
 		return string;
 	}
@@ -134,7 +138,7 @@ HN.util.replaceSmartQuoteEntities = function(string){
  * @param failure - function to be run on error - take one argument of error
  * @return null
  */
-HN.getJSON = function(url, success, failure){
+util.getJSON = function(url, success, failure){
 	var request = new XMLHttpRequest();
 	request.open('GET', url, true);
 
@@ -164,7 +168,7 @@ HN.getJSON = function(url, success, failure){
  * @return null
  */
 
- HN.util.each = function(collection, action){
+ util.each = function(collection, action){
  	var length = collection.length;
  	for (var i = 0; i < length; i++) {
  		action(collection[i], i);
@@ -174,10 +178,10 @@ HN.getJSON = function(url, success, failure){
 /*
 * Used for comments to change ycombinator links to hnews links
 */
-HN.util.redirectLinks = function(){
+util.redirectLinks = function(){
 	var ycombinatorLink = 'https://news.ycombinator.com/item?id=';
 	var links = document.querySelectorAll("#top_list a[href^='" + ycombinatorLink + "']");
-	HN.util.each(links, function(link){
+	util.each(links, function(link){
 		var hrefSplit = link.href.split(ycombinatorLink);
 		//make sure it's a comment url
 		if(hrefSplit.length !== 2){
@@ -188,8 +192,10 @@ HN.util.redirectLinks = function(){
 		if(!commentId.match(/^[0-9]*$/)){
 			return;
 		}
-		var hnewsUrl = HN.settings.commentsUrl + commentId;
+		var hnewsUrl = APP_CONSTANTS.urls.comments + commentId;
 		link.setAttribute('href', hnewsUrl);
 		link.text = hnewsUrl;
 	});
 };
+
+export default util;

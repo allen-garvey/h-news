@@ -1,35 +1,41 @@
 /**
 * used to display homepage, show and ask pages list of story links
 */
-HN.displayStories = function(pageSettings){
-	HN.getJSON(pageSettings.storiesUrl, function(storyIds){getStoryInfo(storyIds);}, function(){console.log("Error retrieving story ids");});
+
+import util from './hn_util.js';
+import APP_CONSTANTS from './app-constants.js';
+import { HNStory } from './story.js';
+
+export function displayStories(pageSettings){
+	util.getJSON(pageSettings.storiesUrl, function(storyIds){getStoryInfo(storyIds);}, function(){console.log("Error retrieving story ids");});
 
 	function getStoryInfo(storyIds){
 		var top_list = document.getElementById('top_list');
-		for(var i=0;i<HN.storiesPerPage;i++){
-			var storyInfoUrl = HN.util.getItemInfoUrlFromId(storyIds[i]);
+		for(let i=0;i<APP_CONSTANTS.storiesPerPage;i++){
+			const storyId = storyIds[i];
+			const storyInfoUrl = util.getItemInfoUrlFromId(storyId);
 			if(storyInfoUrl){
-				HN.getJSON(storyInfoUrl, function(storyInfo){
+				util.getJSON(storyInfoUrl, function(storyInfo){
 								if(!storyInfo){
-									console.log('Story info is: ' + storyInfo + ' for story id: ' + storyIds[i]);
+									console.log('Story info is: ' + storyInfo + ' for story id: ' + storyId);
 									return;
 								}
-								var story = new HN.Story(storyInfo);
+								const story = new HNStory(storyInfo);
 								if(pageSettings.shouldDisplayStory(story)){
 									top_list.insertAdjacentHTML('beforeend', getStoryHTML(story, pageSettings));
 								}	
 					}, 
-					function(){console.log("failed to get info about story: " + story.id);}
+					function(){console.log("failed to get info about story: " + storyId);}
 				);
 			}
 		}
 	}
 
 	function getStoryHTML(story, pageSettings){
-		var html = "<li><div class='container'>" + HN.util.getStoryTitleHTML(story);
-		var num_comments = story.numComments();
+		let html = "<li><div class='container'>" + util.getStoryTitleHTML(story);
+		const num_comments = story.numComments();
 		if(num_comments > 0){
-			var comments_text = ' comment';
+			let comments_text = ' comment';
 			if(num_comments > 1){
 				comments_text = ' comments';
 			}
