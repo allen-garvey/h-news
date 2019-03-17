@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "gulp & if [ ! -f ./inc/environment.php ]; then cp ./inc/environment_example.php ./inc/environment.php; fi",
-    "gh_pages": "gulp & curl http://localhost/h-news/public_html/index.php > ./public_html/index.html"
+    "gh_pages": "gulp & curl http://localhost/h-news/public_html/index.php > ./public_html/index.html",
+    "gulp": "gulp"
   },
   "repository": {
     "type": "git",
