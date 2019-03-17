@@ -4,18 +4,18 @@ A redesign of [Hacker News](http://news.ycombinator.com) with a focus on usabili
 
 ##Dependencies
 
-* PHP 5.6.* or higher
-* Gulp 3.9.* or higher 
-* npm to install dependencies needed to build the project
+* PHP 7.1 or higher with `cli` module
+* node >= 8.15
+* npm
+* make
+* Unix / Linux / macOS operating system to build project
 
 ##Getting Started
 
 * Download or clone the project and `cd` into the project directory
-* Type `npm install` to install the dependencies
-* If you do not have Gulp installed type `npm install gulp -g` or `sudo npm install gulp -g` to install Gulp
-* Type `npm run setup` to set up the project for the first time
+* Run `make setup` to setup the project
 * Edit the current environment in `inc/environment.php` as necessary
-* Type `gulp build` to build the project thereafter
+* Run `make` to build the project
 
 ##License
 
