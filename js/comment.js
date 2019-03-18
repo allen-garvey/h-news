@@ -8,32 +8,32 @@ export class HNComment{
 		this.commentInfo = commentInfo;
 	}
 
-	isDeleted(){
+	get isDeleted(){
 		return !!this.commentInfo['deleted'];
 	};
-	isDead(){
+	get isDead(){
 		return !!this.commentInfo['dead'];	
 	};
-	children(){
+	get children(){
 		return this.commentInfo['kids'];
 	};
-	parentId(){
+	get parentId(){
 		return this.commentInfo['parent'];
 	};
-	text(){
+	get text(){
 		return this.commentInfo['text'];
 	};
-	author(){
+	get author(){
 		return this.commentInfo['by'];
 	};
-	commentId(){
+	get commentId(){
 		return this.commentInfo['id'];
 	};
 	
-	numChildren(){
-		if(!this.children()){
+	get numChildren(){
+		if(!this.children){
 			return 0;
 		}
-		return this.children().length;
+		return this.children.length;
 	};
 }

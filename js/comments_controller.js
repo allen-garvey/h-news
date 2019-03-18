@@ -80,24 +80,24 @@ export function displayComments(commentsType){
 			return;
 		}
 		var comment = new HNComment(commentInfo);
-		if(comment.isDead()){
+		if(comment.isDead){
 			return;
 		}
-		if(comment.isDeleted()){
+		if(comment.isDeleted){
 			comment = getDeletedComment(commentInfo);
 		}
 		var commentHTML = "<li class='comment'>";
 		if(isTopLevelComment){
 			commentHTML += "<div class='container'>";
 		}
-		commentHTML += "<h6>" + comment.author() + "</h6><article";
-		if(comment.isDeleted()){
+		commentHTML += "<h6>" + comment.author + "</h6><article";
+		if(comment.isDeleted){
 			commentHTML += " class='deleted'";	
 		}
-		commentHTML += ">" + util.smartenQuotesHTML(comment.text()) + "</article>";
+		commentHTML += ">" + util.smartenQuotesHTML(comment.text) + "</article>";
 		
-		if(comment.numChildren() > 0){
-			commentHTML += "<ol id='" + commentIdToCSSId(comment.commentId()) + "'></ol>";
+		if(comment.numChildren > 0){
+			commentHTML += "<ol id='" + commentIdToCSSId(comment.commentId) + "'></ol>";
 		}
 		if(isTopLevelComment){
 			commentHTML += "</div>";
@@ -105,7 +105,7 @@ export function displayComments(commentsType){
 		commentHTML +=  "</li>";
 
 		parent_list.insertAdjacentHTML('beforeend', commentHTML);
-		displayAllCommentChildren(comment.children(), commentIdToCSSId(comment.commentId()));
+		displayAllCommentChildren(comment.children, commentIdToCSSId(comment.commentId));
 	}
 	
 	/**
