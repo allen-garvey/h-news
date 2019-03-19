@@ -30,11 +30,11 @@ export function displayComments(commentsType){
 				text = "<h6>" + story.author + "</h6><article>" + util.smartenQuotesHTML(story.text)  + "</article>";
 				if(commentsType === 'ask' || story.title.match(/^(Ask|Tell) HN:/)){
 					title_class += ' ask';
-					title = util.getAskStoryTitle(story);
+					title = story.askTitle;
 				}
 			}
 			else{
-				title = util.getStoryTitleHTML(story)
+				title = story.titleHtml;
 			}
 			document.title = document.title + " | " + story.title;
 			document.getElementById('content_main').insertAdjacentHTML('afterbegin', "<section class='" + title_class + "'>" + title + text + "</section>");

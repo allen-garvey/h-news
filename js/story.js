@@ -48,6 +48,23 @@ export class HNStory{
 		return this.storyInfo['title'] || '';
 	}
 
+	get titleHtml(){
+		let title = `<a href="${this.url}"><h3>${this.title}`;
+		if(this.urlRoot !== ''){
+			title += `<span class='small url_source'>${this.urlRoot}</span>`;
+		}
+		title += '</h3></a>';
+		return title;
+	}
+
+	/**
+	* Used for ask pages to display without the link
+	* It should have the same style as titleHtml()
+	*/
+	get askTitle(){
+		return `<h3>${this.title}</h3>`;
+	}
+
 	get text(){
 		return this.storyInfo['text'] || '';
 	}
