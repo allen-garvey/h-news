@@ -161,38 +161,22 @@ util.getJSON = function(url, success, failure){
 };
 
 /*
- * Used to iterate over array or array-like collection (e.g. NodeList)
- * 
- * @param collection - collection to be iterated over
- * @param action - anynomous function to be called for each item in collection - arguments are item, and (int) index of item
- * @return null
- */
-
- util.each = function(collection, action){
- 	var length = collection.length;
- 	for (var i = 0; i < length; i++) {
- 		action(collection[i], i);
- 	};
- };
-
-/*
 * Used for comments to change ycombinator links to hnews links
 */
 util.redirectLinks = function(){
-	var ycombinatorLink = 'https://news.ycombinator.com/item?id=';
-	var links = document.querySelectorAll("#top_list a[href^='" + ycombinatorLink + "']");
-	util.each(links, function(link){
-		var hrefSplit = link.href.split(ycombinatorLink);
+	const ycombinatorLink = 'https://news.ycombinator.com/item?id=';
+	document.querySelectorAll(`#top_list a[href^="${ycombinatorLink}"]`).forEach((link)=>{
+		const hrefSplit = link.href.split(ycombinatorLink);
 		//make sure it's a comment url
 		if(hrefSplit.length !== 2){
 			return;
 		}
-		var commentId = hrefSplit[1];
+		const commentId = hrefSplit[1];
 		//make sure comment id is number
 		if(!commentId.match(/^[0-9]*$/)){
 			return;
 		}
-		var hnewsUrl = APP_CONSTANTS.urls.comments + commentId;
+		const hnewsUrl = APP_CONSTANTS.urls.comments + commentId;
 		link.setAttribute('href', hnewsUrl);
 		link.text = hnewsUrl;
 	});
