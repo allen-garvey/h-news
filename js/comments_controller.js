@@ -2,7 +2,7 @@
 * used to display comment and ask pages
 */
 
-import util from './hn_util.js';
+import util from './util.js';
 import { HNStory } from './story.js';
 import { HNComment } from './comment.js';
 
