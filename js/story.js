@@ -11,15 +11,15 @@ export class HNStory{
 		this.storyInfo = storyInfo;
 	}
 
-	url(){
+	get url(){
 		//for ask or show HN stories
-		if(this.isLocalHNUrl()){
+		if(this.isLocalHNUrl){
 			return APP_CONSTANTS.urls.ask + this.storyInfo['id'];
 		}
 		return this.storyInfo['url'];
 	}
 
-	isLocalHNUrl(){
+	get isLocalHNUrl(){
 		if(!this.storyInfo['url']){
 			return true;
 		}
@@ -30,13 +30,13 @@ export class HNStory{
 	* gets the url root domain for display with story
 	* http://www.nytimes.com/story becomes (nytimes.com)
 	*/
-	urlRoot() {
+	get urlRoot() {
 		//for ask or show HN stories
-		if(this.isLocalHNUrl()){
+		if(this.isLocalHNUrl){
 			return ''; 
 		}
 		//removes first part of url (http://www.)
-		var base_url = this.url();
+		var base_url = this.url;
 		base_url =  base_url.replace(/^http(s)?:\/\/(www.)?/, '');
 		//removes subfolders from url (/index.html)
 		base_url = base_url.replace(/\/.*$/, '');
@@ -44,24 +44,24 @@ export class HNStory{
 		return '(' + base_url.replace(/\?.*$/,'') + ')';
 	}
 
-	title(){
+	get title(){
 		return this.storyInfo['title'] || '';
 	}
 
-	text(){
+	get text(){
 		return this.storyInfo['text'] || '';
 	}
 
-	author(){
+	get author(){
 		return this.storyInfo['by'] || '';
 	}
 
-	storyType(){
-		if(this.type() !== 'story'){
+	get storyType(){
+		if(this.type !== 'story'){
 			return false;
 		}
-		if(this.isLocalHNUrl()){
-			if(this.title().substring(0,3).toLowerCase() === 'ask'){
+		if(this.isLocalHNUrl){
+			if(this.title.substring(0,3).toLowerCase() === 'ask'){
 				return 'ask';
 			}
 			return 'show';
@@ -69,18 +69,18 @@ export class HNStory{
 		return 'story';
 	}
 
-	type(){
+	get type(){
 		return this.storyInfo['type'];
 	}
 
-	numComments(){
+	get numComments(){
 		if(!this.storyInfo['descendants']){
 			return 0;
 		}
 		return this.storyInfo['descendants'];
 	}
 
-	getTopLevelCommentsIds(){
+	get topLevelCommentsIds(){
 		if(!this.storyInfo['kids']){
 			return [];
 		}

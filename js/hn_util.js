@@ -30,9 +30,9 @@ util.getItemInfoUrlFromId = function(id){
 * Takes HN.Story object as a parameter and returns the html to display the title and link
 */
 util.getStoryTitleHTML = function(story){
-	var title = "<a href='" + story.url() +"'><h3>" + story.title();
-	if(story.urlRoot() !== ''){
-		title += "<span class='small url_source'> " + story.urlRoot() + "</span>";
+	var title = "<a href='" + story.url +"'><h3>" + story.title;
+	if(story.urlRoot !== ''){
+		title += "<span class='small url_source'> " + story.urlRoot + "</span>";
 	}
 	title += "</h3></a>";
 	return title;
@@ -43,7 +43,7 @@ util.getStoryTitleHTML = function(story){
 * Even though code only used on ask pages, is kept here because it should have the same style as getStoryTitleHTML()
 */
 util.getAskStoryTitle = function(story){
-	return "<h3>" + story.title() + "</h3>";
+	return "<h3>" + story.title + "</h3>";
 };
 
 /**

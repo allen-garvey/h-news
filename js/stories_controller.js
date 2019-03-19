@@ -33,7 +33,7 @@ export function displayStories(pageSettings){
 
 	function getStoryHTML(story, pageSettings){
 		let html = "<li><div class='container'>" + util.getStoryTitleHTML(story);
-		const num_comments = story.numComments();
+		const num_comments = story.numComments;
 		if(num_comments > 0){
 			let comments_text = ' comment';
 			if(num_comments > 1){

@@ -4,7 +4,7 @@ const DEFAULT_PAGE_TITLE = 'H News';
 export const routes = {
     'home' : {
         storiesUrl: `${HACKER_NEWS_API_URL}/topstories.json`,
-        shouldDisplayStory: (story)=>{if(story.type()==="job"){return false;} return true;},
+        shouldDisplayStory: (story)=>{if(story.type==="job"){return false;} return true;},
         commentsUrl: '/comments/',
         pageTitle: `${DEFAULT_PAGE_TITLE}`,
         bodyTags: ['page_home']

@@ -24,11 +24,11 @@ export function displayComments(commentsType){
 			}
 			var story = new HNStory(storyInfo);
 			var title_class = 'container'
-			var text = story.text();
+			var text = story.text;
 			var title = '';
 			if(text){
-				text = "<h6>" + story.author() + "</h6><article>" + util.smartenQuotesHTML(story.text())  + "</article>";
-				if(commentsType === 'ask' || story.title().match(/^(Ask|Tell) HN:/)){
+				text = "<h6>" + story.author + "</h6><article>" + util.smartenQuotesHTML(story.text)  + "</article>";
+				if(commentsType === 'ask' || story.title.match(/^(Ask|Tell) HN:/)){
 					title_class += ' ask';
 					title = util.getAskStoryTitle(story);
 				}
@@ -36,9 +36,9 @@ export function displayComments(commentsType){
 			else{
 				title = util.getStoryTitleHTML(story)
 			}
-			document.title = document.title + " | " + story.title();
+			document.title = document.title + " | " + story.title;
 			document.getElementById('content_main').insertAdjacentHTML('afterbegin', "<section class='" + title_class + "'>" + title + text + "</section>");
-			displayAllCommentChildren(story.getTopLevelCommentsIds());	
+			displayAllCommentChildren(story.topLevelCommentsIds);	
 		},
 
 		function(){console.log("Error retrieving comments");}
