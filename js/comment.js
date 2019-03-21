@@ -6,6 +6,11 @@
 export class HNComment{
 	constructor(commentInfo){
 		this.commentInfo = commentInfo;
+
+		if(this.isDeleted){
+			this.commentInfo.by = '';
+			this.commentInfo.text = '[deleted]'
+		}
 	}
 
 	get isDeleted(){

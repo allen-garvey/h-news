@@ -82,9 +82,6 @@ export function displayComments(commentsType){
 		if(comment.isDead){
 			return;
 		}
-		if(comment.isDeleted){
-			comment = getDeletedComment(commentInfo);
-		}
 		var commentHTML = "<li class='comment'>";
 		if(isTopLevelComment){
 			commentHTML += "<div class='container'>";
@@ -112,15 +109,6 @@ export function displayComments(commentsType){
 	*/
 	function commentIdToCSSId(commentId){
 		return `comment${commentId}`;
-	}
-
-	/**
-	* Returns the text used in place of deleted comments
-	*/
-	function getDeletedComment(commentInfo){
-		commentInfo.by = '';
-		commentInfo.text = '[deleted]'
-		return new HNComment(commentInfo);
 	}
 };
 
