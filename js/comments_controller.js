@@ -112,7 +112,7 @@ export function displayComments(commentsType){
 	* Returns the correct jquery id cssId for the parent ol to append comment to
 	*/
 	function commentIdToCSSId(commentId){
-		return 'comment' + commentId;
+		return `comment${commentId}`;
 	}
 
 	/**
