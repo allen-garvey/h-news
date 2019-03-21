@@ -7,41 +7,40 @@ import { HNStory } from './story.js';
 import { HNComment } from './comment.js';
 
 export function displayComments(commentsType){
-	var storyId = window.location.href.match(/\d+\/?$/);
-	if(storyId){
-		//remove possible trailing slash
-		storyId = storyId[0].replace(/\/$/, '');
-		var storyUrl = 'https://hacker-news.firebaseio.com/v0/item/' + storyId + '.json';
-	}
-	else{
-		console.log("No story id found");
+	const storyIdMatch = window.location.pathname.match(/\d+\/?$/);
+	if(!storyIdMatch){
+		console.log('No story id found');
 		return;
 	}
+	//remove possible trailing slash
+	const storyId = storyIdMatch[0].replace(/\/$/, '');
+	const storyUrl = `https://hacker-news.firebaseio.com/v0/item/${storyId}.json`;
+
 	util.getJSON(storyUrl, function(storyInfo){
 			if(!storyInfo){
 				console.log('No info about the story returned');
 				return;
 			}
-			var story = new HNStory(storyInfo);
-			var title_class = 'container'
-			var text = story.text;
-			var title = '';
+			const story = new HNStory(storyInfo);
+			let titleClass = 'container'
+			let text = story.text;
+			let title = '';
 			if(text){
-				text = "<h6>" + story.author + "</h6><article>" + util.smartenQuotesHTML(story.text)  + "</article>";
+				text = `<h6>${story.author}</h6><article>${util.smartenQuotesHTML(story.text)}</article>`;
 				if(commentsType === 'ask' || story.title.match(/^(Ask|Tell) HN:/)){
-					title_class += ' ask';
+					titleClass += ' ask';
 					title = story.askTitle;
 				}
 			}
 			else{
 				title = story.titleHtml;
 			}
-			document.title = document.title + " | " + story.title;
-			document.getElementById('content_main').insertAdjacentHTML('afterbegin', "<section class='" + title_class + "'>" + title + text + "</section>");
+			document.title =`${document.title} | ${story.title}`;
+			document.getElementById('content_main').insertAdjacentHTML('afterbegin', `<section class="${titleClass}">${title}${text}</section>`);
 			displayAllCommentChildren(story.topLevelCommentsIds);	
 		},
 
-		function(){console.log("Error retrieving comments");}
+		function(){console.log('Error retrieving comments');}
 	);
 
 	/**
