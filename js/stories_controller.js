@@ -5,43 +5,51 @@
 import util from './util.js';
 import APP_CONSTANTS from './app-constants.js';
 import { HNStory } from './story.js';
+import { getJson } from './ajax.js';
 
 export function displayStories(pageSettings){
-	util.getJSON(pageSettings.storiesUrl, function(storyIds){getStoryInfo(storyIds);}, function(){console.log("Error retrieving story ids");});
-
-	function getStoryInfo(storyIds){
-		var top_list = document.getElementById('top_list');
-		for(let i=0;i<APP_CONSTANTS.storiesPerPage;i++){
-			const storyId = storyIds[i];
-			const storyInfoUrl = util.getItemInfoUrlFromId(storyId);
-			if(storyInfoUrl){
-				util.getJSON(storyInfoUrl, function(storyInfo){
-								if(!storyInfo){
-									console.log('Story info is: ' + storyInfo + ' for story id: ' + storyId);
-									return;
-								}
-								const story = new HNStory(storyInfo);
-								if(pageSettings.shouldDisplayStory(story)){
-									top_list.insertAdjacentHTML('beforeend', getStoryHTML(story, pageSettings));
-								}	
-					}, 
-					function(){console.log("failed to get info about story: " + storyId);}
-				);
-			}
-		}
-	}
-
-	function getStoryHTML(story, pageSettings){
-		let html = "<li><div class='container'>" + story.titleHtml;
-		const num_comments = story.numComments;
-		if(num_comments > 0){
-			let comments_text = ' comment';
-			if(num_comments > 1){
-				comments_text = ' comments';
-			}
-			html = html + "<a href='" + story.commentsUrl(pageSettings.commentsUrl) +"'><p>" + num_comments  + comments_text + "</p></a>";
-		}
-		html = html + "</div></li>";
-		return html;
-	}
+	getJson(pageSettings.storiesUrl).then((storyIds)=>{
+		getStoryInfo(pageSettings, storyIds);
+	});
 };
+
+function getStoryInfo(pageSettings, storyIds){
+	const storyPromises = [];
+	
+	for(let i=0;i<APP_CONSTANTS.storiesPerPage;i++){
+		const storyId = storyIds[i];
+		const storyInfoUrl = util.getItemInfoUrlFromId(storyId);
+		storyPromises.push(getStoryPromise(storyInfoUrl));
+	}
+
+	Promise.all(storyPromises).then((stories)=>{
+		let storiesHtml = '';
+		stories.forEach((story)=>{
+			if(pageSettings.shouldDisplayStory(story)){
+				storiesHtml += getStoryHTML(story, pageSettings);
+			}
+		});
+		document.getElementById('top_list').insertAdjacentHTML('beforeend', storiesHtml);
+	});
+}
+
+
+function getStoryPromise(storyInfoUrl){
+	return getJson(storyInfoUrl).then((storyInfo)=>{
+		return new HNStory(storyInfo);
+	});
+}
+
+function getStoryHTML(story, pageSettings){
+	let html = `<li><div class="container">${story.titleHtml}`;
+	const numComments = story.numComments;
+	if(numComments > 0){
+		let commentsText = `${numComments} comment`;
+		if(numComments > 1){
+			commentsText += 's';
+		}
+		html += `<a href="${story.commentsUrl(pageSettings.commentsUrl)}"><p>${commentsText}</p></a>`;
+	}
+	html = html + "</div></li>";
+	return html;
+}
