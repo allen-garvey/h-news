@@ -5,6 +5,7 @@
 import util from './util.js';
 import { HNStory } from './story.js';
 import { HNComment } from './comment.js';
+import { getJson } from './ajax.js';
 
 export function displayComments(commentsType){
 	const storyIdMatch = window.location.pathname.match(/\d+\/?$/);
@@ -16,32 +17,29 @@ export function displayComments(commentsType){
 	const storyId = storyIdMatch[0].replace(/\/$/, '');
 	const storyUrl = `https://hacker-news.firebaseio.com/v0/item/${storyId}.json`;
 
-	util.getJSON(storyUrl, function(storyInfo){
-			if(!storyInfo){
-				console.log('No info about the story returned');
-				return;
+	getJson(storyUrl).then((storyInfo)=>{
+		if(!storyInfo){
+			console.log('No info about the story returned');
+			return;
+		}
+		const story = new HNStory(storyInfo);
+		let titleClass = 'container'
+		let text = story.text;
+		let title = '';
+		if(text){
+			text = `<h6>${story.author}</h6><article>${util.smartenQuotesHTML(story.text)}</article>`;
+			if(commentsType === 'ask' || story.title.match(/^(Ask|Tell) HN:/)){
+				titleClass += ' ask';
+				title = story.askTitle;
 			}
-			const story = new HNStory(storyInfo);
-			let titleClass = 'container'
-			let text = story.text;
-			let title = '';
-			if(text){
-				text = `<h6>${story.author}</h6><article>${util.smartenQuotesHTML(story.text)}</article>`;
-				if(commentsType === 'ask' || story.title.match(/^(Ask|Tell) HN:/)){
-					titleClass += ' ask';
-					title = story.askTitle;
-				}
-			}
-			else{
-				title = story.titleHtml;
-			}
-			document.title =`${document.title} | ${story.title}`;
-			document.getElementById('content_main').insertAdjacentHTML('afterbegin', `<section class="${titleClass}">${title}${text}</section>`);
-			displayAllCommentChildren(story.topLevelCommentsIds);	
-		},
-
-		function(){console.log('Error retrieving comments');}
-	);
+		}
+		else{
+			title = story.titleHtml;
+		}
+		document.title =`${document.title} | ${story.title}`;
+		document.getElementById('content_main').insertAdjacentHTML('afterbegin', `<section class="${titleClass}">${title}${text}</section>`);
+		displayAllCommentChildren(story.topLevelCommentsIds);	
+	});
 
 	/**
 	* displays comment children of an array of comment ids
@@ -53,15 +51,13 @@ export function displayComments(commentsType){
 		}
 		var isTopLevelComment = !cssId;
 		var parentList = cssId ? document.getElementById(cssId) : document.getElementById('top_list');
-		var numCommentIds = commentIdArray.length;
 		
 		commentIdArray.forEach(function(commentId){
-			util.getJSON(util.getItemInfoUrlFromId(commentId), function(commentInfo){
-					displayComment(commentInfo, parentList, isTopLevelComment);
-				},
-				function(){console.log("Error retrieving info about comment: " + commentId);}
-			);
+			const commentUrl = util.getItemInfoUrlFromId(commentId);
 			
+			getJson(commentUrl).then((commentInfo)=>{
+				displayComment(commentInfo, parentList, isTopLevelComment);
+			});
 		});
 		
 		//change hacker news links to hnews links
