@@ -62,6 +62,7 @@ function displayAllCommentChildren(commentIdArray, cssId){
 	});
 	
 	//change hacker news links to hnews links
+	//TODO fix this so it happens after all the promises complete
 	util.redirectLinks();
 
 }
