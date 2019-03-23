@@ -71,36 +71,36 @@ export function displayComments(commentsType){
 
 	/**
 	* displays comment
-	* parent_list is a dom object that the comment should be appended to
+	* parentList is a dom object that the comment should be appended to
 	* isTopLevelComment is used for styling purposes, since top level comments are styled different than child comments
 	*/
-	function displayComment(commentInfo, parent_list, isTopLevelComment){
+	function displayComment(commentInfo, parentList, isTopLevelComment){
 		if(!commentInfo){
 			return;
 		}
-		var comment = new HNComment(commentInfo);
+		const comment = new HNComment(commentInfo);
 		if(comment.isDead){
 			return;
 		}
-		var commentHTML = "<li class='comment'>";
+		let commentHTML = "<li class='comment'>";
 		if(isTopLevelComment){
 			commentHTML += "<div class='container'>";
 		}
-		commentHTML += "<h6>" + comment.author + "</h6><article";
+		commentHTML += `<h6>${comment.author}</h6><article`;
 		if(comment.isDeleted){
-			commentHTML += " class='deleted'";	
+			commentHTML += ' class="deleted"';	
 		}
-		commentHTML += ">" + util.smartenQuotesHTML(comment.text) + "</article>";
+		commentHTML += `>${util.smartenQuotesHTML(comment.text)}</article>`;
 		
 		if(comment.numChildren > 0){
-			commentHTML += "<ol id='" + commentIdToCSSId(comment.commentId) + "'></ol>";
+			commentHTML += `<ol id="${commentIdToCSSId(comment.commentId)}"></ol>`;
 		}
 		if(isTopLevelComment){
-			commentHTML += "</div>";
+			commentHTML += '</div>';
 		}
-		commentHTML +=  "</li>";
+		commentHTML +=  '</li>';
 
-		parent_list.insertAdjacentHTML('beforeend', commentHTML);
+		parentList.insertAdjacentHTML('beforeend', commentHTML);
 		displayAllCommentChildren(comment.children, commentIdToCSSId(comment.commentId));
 	}
 	
