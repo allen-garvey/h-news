@@ -40,8 +40,9 @@ export function displayComments(commentsType){
 		document.getElementById('content_main').insertAdjacentHTML('afterbegin', `<section class="${titleClass}">${title}${text}</section>`);
 		displayAllCommentChildren(story.topLevelCommentsIds);	
 	});
+};
 
-	/**
+/**
 	* displays comment children of an array of comment ids
 	* if no cssId is given, assumes it is top level comment and creates appropriate jquery cssId object
 	*/
@@ -106,5 +107,4 @@ export function displayComments(commentsType){
 	function commentIdToCSSId(commentId){
 		return `comment${commentId}`;
 	}
-};
 
