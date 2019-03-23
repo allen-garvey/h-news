@@ -50,10 +50,10 @@ function displayAllCommentChildren(commentIdArray, cssId){
 	if(!commentIdArray){
 		return;
 	}
-	var isTopLevelComment = !cssId;
-	var parentList = cssId ? document.getElementById(cssId) : document.getElementById('top_list');
+	const isTopLevelComment = !cssId;
+	const parentList = cssId ? document.getElementById(cssId) : document.getElementById('top_list');
 	
-	commentIdArray.forEach(function(commentId){
+	commentIdArray.forEach((commentId)=>{
 		const commentUrl = util.getItemInfoUrlFromId(commentId);
 		
 		getJson(commentUrl).then((commentInfo)=>{
