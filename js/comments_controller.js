@@ -5,7 +5,7 @@
 import util from './util.js';
 import { HNStory } from './story.js';
 import { HNComment } from './comment.js';
-import { getJson } from './ajax.js';
+import { getJson, getItemUrl } from './ajax.js';
 
 export function displayComments(commentsType){
 	const storyIdMatch = window.location.pathname.match(/\d+\/?$/);
@@ -15,7 +15,7 @@ export function displayComments(commentsType){
 	}
 	//remove possible trailing slash
 	const storyId = storyIdMatch[0].replace(/\/$/, '');
-	const storyUrl = util.getItemInfoUrlFromId(storyId);
+	const storyUrl = getItemUrl(storyId);
 
 	getJson(storyUrl).then((storyInfo)=>{
 		if(!storyInfo){
@@ -54,7 +54,7 @@ function displayAllCommentChildren(commentIdArray, cssId){
 	const parentList = cssId ? document.getElementById(cssId) : document.getElementById('top_list');
 	
 	commentIdArray.forEach((commentId)=>{
-		const commentUrl = util.getItemInfoUrlFromId(commentId);
+		const commentUrl = getItemUrl(commentId);
 		
 		getJson(commentUrl).then((commentInfo)=>{
 			displayComment(commentInfo, parentList, isTopLevelComment);

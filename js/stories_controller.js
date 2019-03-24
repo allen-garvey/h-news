@@ -5,7 +5,7 @@
 import util from './util.js';
 import APP_CONSTANTS from './app-constants.js';
 import { HNStory } from './story.js';
-import { getJson } from './ajax.js';
+import { getJson, getItemUrl } from './ajax.js';
 
 export function displayStories(pageSettings){
 	getJson(pageSettings.storiesUrl).then((storyIds)=>{
@@ -18,7 +18,7 @@ function getStoryInfo(pageSettings, storyIds){
 	
 	for(let i=0;i<APP_CONSTANTS.storiesPerPage;i++){
 		const storyId = storyIds[i];
-		const storyInfoUrl = util.getItemInfoUrlFromId(storyId);
+		const storyInfoUrl = getItemUrl(storyId);
 		storyPromises.push(getStoryPromise(storyInfoUrl));
 	}
 
