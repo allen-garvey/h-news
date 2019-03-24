@@ -13,33 +13,29 @@ export function displayStories(pageSettings){
 };
 
 function getStoryInfo(pageSettings, storyIds){
-	const storyPromises = [];
+	const storiesCount = APP_CONSTANTS.storiesPerPage;
+
+	const storiesArray = new Array(storiesCount);
+	const storiesListEl = document.getElementById('top_list');
 	
 	for(let i=0;i<APP_CONSTANTS.storiesPerPage;i++){
 		const storyId = storyIds[i];
 		const storyInfoUrl = getItemUrl(storyId);
-		storyPromises.push(getStoryPromise(storyInfoUrl));
-	}
-
-	Promise.all(storyPromises).then((stories)=>{
-		let storiesHtml = '';
-		stories.forEach((story)=>{
-			if(pageSettings.shouldDisplayStory(story)){
-				storiesHtml += getStoryHTML(story, pageSettings);
-			}
+		getStoryPromise(storyInfoUrl, pageSettings).then((storyHtml)=>{
+			storiesArray[i] = storyHtml;
+			insertStoriesHtml(storiesArray, storiesListEl);
 		});
-		document.getElementById('top_list').insertAdjacentHTML('beforeend', storiesHtml);
-	});
+	}
 }
 
 
-function getStoryPromise(storyInfoUrl){
+function getStoryPromise(storyInfoUrl, pageSettings){
 	return getJson(storyInfoUrl).then((storyInfo)=>{
-		return new HNStory(storyInfo);
+		return storyHtml(new HNStory(storyInfo), pageSettings);
 	});
 }
 
-function getStoryHTML(story, pageSettings){
+function storyHtml(story, pageSettings){
 	let html = `<li><div class="container">${story.titleHtml}`;
 	const numComments = story.numComments;
 	if(numComments > 0){
@@ -51,4 +47,8 @@ function getStoryHTML(story, pageSettings){
 	}
 	html = html + "</div></li>";
 	return html;
+}
+
+function insertStoriesHtml(storiesArray, targetEl){
+	targetEl.innerHTML = storiesArray.filter(html => html).join();
 }
