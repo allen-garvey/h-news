@@ -1,20 +1,6 @@
 /**
 * main content styles
 */
-.main{
-	//so it doesn't overlap fixed header
-	@include media_q(med){
-		margin-top: $header_height;
-	}
-}
-.page_settings, .page_comments{
-	//so it doesn't overlap fixed header
-	.main{
-		@include media_q(med){
-		margin-top: $header_height + 40px;
-		}
-	}	
-}
 main{
 	ol{
 		padding:0;
