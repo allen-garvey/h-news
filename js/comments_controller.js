@@ -15,7 +15,7 @@ export function displayComments(commentsType){
 	}
 	//remove possible trailing slash
 	const storyId = storyIdMatch[0].replace(/\/$/, '');
-	const storyUrl = `https://hacker-news.firebaseio.com/v0/item/${storyId}.json`;
+	const storyUrl = util.getItemInfoUrlFromId(storyId);
 
 	getJson(storyUrl).then((storyInfo)=>{
 		if(!storyInfo){
