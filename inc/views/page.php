@@ -49,10 +49,6 @@
         HN.settings.userThemeFormName='<?= HNewsSettingsPageController::$userThemeFormName; ?>';
         HN.settings.themeIdPrefix='<?= HNewsSettingsPageController::$themeIdPrefix; ?>';
          </script>
-         <?php if(ENVIRONMENT_CURRENT === ENVIRONMENT_DEVELOPMENT): ?>
-            <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
-        <?php else: ?>
-            <script src="<?= SCRIPTS_URL.'app.min.js'; ?>" type="text/javascript"></script>
-        <?php endif; ?>
+         <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
     </body>
 </html>
