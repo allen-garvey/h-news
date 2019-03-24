@@ -38,7 +38,7 @@
                      ?>
                  </div>
                 <p class='small'>Not affiliated with Hacker News or Y Combinator.</p>
-                <p class='small'>Released under the MIT License. <a href='https://github.com/allen-garvey/h-news'>Source on GitHub</a></p>
+                <p class='small'><a href='https://github.com/allen-garvey/h-news'>Source on GitHub</a></p>
             </div>
         </footer>
         <script type="text/javascript">
