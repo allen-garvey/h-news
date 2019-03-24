@@ -2,7 +2,6 @@
 * used to display homepage, show and ask pages list of story links
 */
 
-import util from './util.js';
 import APP_CONSTANTS from './app-constants.js';
 import { HNStory } from './story.js';
 import { getJson, getItemUrl } from './ajax.js';
