@@ -33,8 +33,8 @@ util.getItemInfoUrlFromId = function(id){
 * preserves dumbquotes in html attributes
 */
 util.smartenQuotesHTML = function(dumbString){
-	return util.replaceSmartQuoteEntities(util.transformTextNodes(dumbString, function(text){
-		return util.replaceDumbQuotes(text);
+	return replaceSmartQuoteEntities(transformTextNodes(dumbString, (text)=>{
+		return replaceDumbQuotes(text);
 	}));
 };
 
@@ -47,7 +47,7 @@ util.smartenQuotesHTML = function(dumbString){
 * it should be of the format: function(text){return text.toUpperCase();} or however the text is to be transformed
 * @returns either the transformed string if was originally a string or transformed element if was originally an element
 */
-util.transformTextNodes = function (element, textTransformFunc) {
+function transformTextNodes(element, textTransformFunc) {
     var elementType = typeof element;
     
     if(elementType === 'string'){
@@ -83,7 +83,7 @@ util.transformTextNodes = function (element, textTransformFunc) {
 * Used to replace dumb quotes in a text string
 * uses a second replace in the function passed to replace to preserve the non word characters before the quote, such as spaces or parens
 */
-util.replaceDumbQuotes = function(dumbString){
+function replaceDumbQuotes(dumbString){
 	var rightSingleSmartQuote = "&#8217;";
 	var leftSingleSmartQuote = "&#8216;";
 	var rightDoubleSmartQuote = "&#8221;";
@@ -102,7 +102,7 @@ util.replaceDumbQuotes = function(dumbString){
 /**
 * Required because the treeWalker automatically escapes ampersands
 */
-util.replaceSmartQuoteEntities = function(string){
+function replaceSmartQuoteEntities(string){
 	if(typeof string != 'string'){
 		return string;
 	}
