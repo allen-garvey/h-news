@@ -38,7 +38,6 @@
                      ?>
                  </div>
                 <p class='small'>Not affiliated with Hacker News or Y Combinator.</p>
-                <p class='small'>Designed and created by <a href='http://www.allengarvey.com'>Allen Garvey</a> using the Hacker News API.</p>
                 <p class='small'>Released under the MIT License. <a href='https://github.com/allen-garvey/h-news'>Source on GitHub</a></p>
             </div>
         </footer>
