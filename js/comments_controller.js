@@ -2,7 +2,7 @@
 * used to display comment and ask pages
 */
 
-import util from './util.js';
+import dom from './dom.js';
 import { HNStory } from './story.js';
 import { HNComment } from './comment.js';
 import { getJson, getItemUrl } from './ajax.js';
@@ -27,7 +27,7 @@ export function displayComments(commentsType){
 		let text = story.text;
 		let title = '';
 		if(text){
-			text = `<h6>${story.author}</h6><article>${util.smartenQuotesHTML(story.text)}</article>`;
+			text = `<h6>${story.author}</h6><article>${dom.smartenQuotesHTML(story.text)}</article>`;
 			if(commentsType === 'ask' || story.title.match(/^(Ask|Tell) HN:/)){
 				titleClass += ' ask';
 				title = story.askTitle;
@@ -63,7 +63,7 @@ function displayAllCommentChildren(commentIdArray, cssId){
 	
 	//change hacker news links to hnews links
 	//TODO fix this so it happens after all the promises complete
-	util.redirectLinks();
+	dom.redirectLinks();
 
 }
 
@@ -88,7 +88,7 @@ function displayComment(commentInfo, parentList, isTopLevelComment){
 	if(comment.isDeleted){
 		commentHTML += ' class="deleted"';	
 	}
-	commentHTML += `>${util.smartenQuotesHTML(comment.text)}</article>`;
+	commentHTML += `>${dom.smartenQuotesHTML(comment.text)}</article>`;
 	
 	if(comment.numChildren > 0){
 		commentHTML += `<ol id="${commentIdToCSSId(comment.commentId)}"></ol>`;
