@@ -17,13 +17,20 @@ function getStoryInfo(pageSettings, storyIds){
 
 	const storiesArray = new Array(storiesCount);
 	const storiesListEl = document.getElementById('top_list');
+	//to limit number of dom updates
+	let domUpdateTimeout = null;
 	
-	for(let i=0;i<APP_CONSTANTS.storiesPerPage;i++){
+	for(let i=0;i<storiesCount;i++){
 		const storyId = storyIds[i];
 		const storyInfoUrl = getItemUrl(storyId);
+
 		getStoryPromise(storyInfoUrl, pageSettings).then((storyHtml)=>{
 			storiesArray[i] = storyHtml;
-			insertStoriesHtml(storiesArray, storiesListEl);
+			//no error if null
+			clearTimeout(domUpdateTimeout);
+			domUpdateTimeout = setTimeout(()=>{
+				insertStoriesHtml(storiesArray, storiesListEl);
+			}, 5);
 		});
 	}
 }
