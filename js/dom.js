@@ -4,15 +4,12 @@
 
 import APP_CONSTANTS from './app-constants.js';
 
-
-const util = {};
-
 /**
 * Used for comment HTML text to smarten quotes
 * takes html string and returns html string with dumb quotes replaced with smart quotes
 * preserves dumbquotes in html attributes
 */
-util.smartenQuotesHTML = function(dumbString){
+export function smartenQuotes(dumbString){
 	return replaceSmartQuoteEntities(transformTextNodes(dumbString, (text)=>{
 		return replaceDumbQuotes(text);
 	}));
@@ -94,7 +91,7 @@ function replaceSmartQuoteEntities(string){
 /*
 * Used for comments to change ycombinator links to hnews links
 */
-util.redirectLinks = function(){
+export function rewriteHackerNewsLinks(){
 	const ycombinatorLink = 'https://news.ycombinator.com/item?id=';
 	document.querySelectorAll(`#top_list a[href^="${ycombinatorLink}"]`).forEach((link)=>{
 		const hrefSplit = link.href.split(ycombinatorLink);
@@ -112,5 +109,3 @@ util.redirectLinks = function(){
 		link.text = hnewsUrl;
 	});
 };
-
-export default util;
