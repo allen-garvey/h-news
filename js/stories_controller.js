@@ -57,5 +57,5 @@ function storyHtml(story, pageSettings){
 }
 
 function insertStoriesHtml(storiesArray, targetEl){
-	targetEl.innerHTML = storiesArray.filter(html => html).join();
+	targetEl.innerHTML = storiesArray.filter(html => html).join('');
 }
