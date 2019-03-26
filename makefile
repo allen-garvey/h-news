@@ -9,10 +9,6 @@ PHP_SOURCE != find ./inc -type f -name '*.php'
 
 all: $(HTML_INDEX)
 
-setup:
-	npm install
-	cp inc/environment_example.php inc/environment.php
-
 reset:
 	rm $(HTML_INDEX)
 

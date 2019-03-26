@@ -51,7 +51,7 @@ export class HNStory{
 	get titleHtml(){
 		let title = `<a href="${this.url}"><h3>${this.title}`;
 		if(this.urlRoot !== ''){
-			title += `<span class='small url_source'>${this.urlRoot}</span>`;
+			title += ` <span class='small url_source'>${this.urlRoot}</span>`;
 		}
 		title += '</h3></a>';
 		return title;

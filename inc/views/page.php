@@ -12,13 +12,13 @@
             <header class='jumbotron'>
                 <div class='container'>
                     <nav>
-                        <a href='<?= HOME_URL; ?>'><span class='brand nav-link-home'><?= PAGE_TITLE_DEFAULT; ?></span></a>
+                        <a href='<?= HOME_URL; ?>' class='brand nav-link-home'><?= PAGE_TITLE_DEFAULT; ?></a>
                         <ul class="page_links">
-                            <li class="nav-link-show">
-                                <a href='<?= SHOW_URL; ?>'>Show</a>
+                            <li>
+                                <a href='<?= SHOW_URL; ?>' class="nav-link-show">Show</a>
                             </li>
-                            <li class="nav-link-ask">
-                                <a href='<?= ASK_URL; ?>'>Ask</a>
+                            <li>
+                                <a href='<?= ASK_URL; ?>' class="nav-link-ask">Ask</a>
                             </li>
                         </ul>
                     </nav>
@@ -38,8 +38,7 @@
                      ?>
                  </div>
                 <p class='small'>Not affiliated with Hacker News or Y Combinator.</p>
-                <p class='small'>Designed and created by <a href='http://www.allengarvey.com'>Allen Garvey</a> using the Hacker News API.</p>
-                <p class='small'>Released under the MIT License. <a href='https://github.com/allen-garvey/h-news'>Source on github</a></p>
+                <p class='small'><a href='https://github.com/allen-garvey/h-news'>Source on GitHub</a></p>
             </div>
         </footer>
         <script type="text/javascript">
@@ -49,10 +48,6 @@
         HN.settings.userThemeFormName='<?= HNewsSettingsPageController::$userThemeFormName; ?>';
         HN.settings.themeIdPrefix='<?= HNewsSettingsPageController::$themeIdPrefix; ?>';
          </script>
-         <?php if(ENVIRONMENT_CURRENT === ENVIRONMENT_DEVELOPMENT): ?>
-            <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
-        <?php else: ?>
-            <script src="<?= SCRIPTS_URL.'app.min.js'; ?>" type="text/javascript"></script>
-        <?php endif; ?>
+         <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
     </body>
 </html>

@@ -4,37 +4,14 @@
 
 import APP_CONSTANTS from './app-constants.js';
 
-
-const util = {};
-/**
-* returns object of info about a story based on integer id
-* id		The item's unique id.
-* deleted	true if the item is deleted.
-* type		The type of item. One of "job", "story", "comment", "poll", or "pollopt".
-* by		The username of the item's author.
-* time		Creation date of the item, in Unix Time.
-* text		The comment, story or poll text. HTML.
-* dead		true if the item is dead.
-* parent	The item's parent. For comments, either another comment or the relevant story. For pollopts, the relevant poll.
-* kids		The ids of the item's comments, in ranked display order.
-* url		The URL of the story.
-* score		The story's score, or the votes for a pollopt.
-* title		The title of the story, poll or job.
-* parts		A list of related pollopts, in display order.
-* descendants	In the case of stories or polls, the total comment count.
-*/
-util.getItemInfoUrlFromId = function(id){
-	return `https://hacker-news.firebaseio.com/v0/item/${id}.json`;
-};
-
 /**
 * Used for comment HTML text to smarten quotes
 * takes html string and returns html string with dumb quotes replaced with smart quotes
 * preserves dumbquotes in html attributes
 */
-util.smartenQuotesHTML = function(dumbString){
-	return util.replaceSmartQuoteEntities(util.transformTextNodes(dumbString, function(text){
-		return util.replaceDumbQuotes(text);
+export function smartenQuotes(dumbString){
+	return replaceSmartQuoteEntities(transformTextNodes(dumbString, (text)=>{
+		return replaceDumbQuotes(text);
 	}));
 };
 
@@ -47,7 +24,7 @@ util.smartenQuotesHTML = function(dumbString){
 * it should be of the format: function(text){return text.toUpperCase();} or however the text is to be transformed
 * @returns either the transformed string if was originally a string or transformed element if was originally an element
 */
-util.transformTextNodes = function (element, textTransformFunc) {
+function transformTextNodes(element, textTransformFunc) {
     var elementType = typeof element;
     
     if(elementType === 'string'){
@@ -83,7 +60,7 @@ util.transformTextNodes = function (element, textTransformFunc) {
 * Used to replace dumb quotes in a text string
 * uses a second replace in the function passed to replace to preserve the non word characters before the quote, such as spaces or parens
 */
-util.replaceDumbQuotes = function(dumbString){
+function replaceDumbQuotes(dumbString){
 	var rightSingleSmartQuote = "&#8217;";
 	var leftSingleSmartQuote = "&#8216;";
 	var rightDoubleSmartQuote = "&#8221;";
@@ -102,7 +79,7 @@ util.replaceDumbQuotes = function(dumbString){
 /**
 * Required because the treeWalker automatically escapes ampersands
 */
-util.replaceSmartQuoteEntities = function(string){
+function replaceSmartQuoteEntities(string){
 	if(typeof string != 'string'){
 		return string;
 	}
@@ -112,39 +89,9 @@ util.replaceSmartQuoteEntities = function(string){
 };
 
 /*
- * Wrapper for ajax
- * 
- * @param url - string for url to get request
- * @param success - function to be run on success - takes one argument of the data returned
- * @param failure - function to be run on error - take one argument of error
- * @return null
- */
-util.getJSON = function(url, success, failure){
-	var request = new XMLHttpRequest();
-	request.open('GET', url, true);
-
-	request.onload = function() {
-	  if (this.status >= 200 && this.status < 400) {
-	    var data = JSON.parse(this.response);
-	    success(data);
-	  } else {
-	    // We reached our target server, but it returned an error
-	    failure(this.response);
-	  }
-	};
-
-	request.onerror = function() {
-	  // There was a connection error of some sort
-	  failure(this.response);
-	};
-
-	request.send();
-};
-
-/*
 * Used for comments to change ycombinator links to hnews links
 */
-util.redirectLinks = function(){
+export function rewriteHackerNewsLinks(){
 	const ycombinatorLink = 'https://news.ycombinator.com/item?id=';
 	document.querySelectorAll(`#top_list a[href^="${ycombinatorLink}"]`).forEach((link)=>{
 		const hrefSplit = link.href.split(ycombinatorLink);
@@ -162,5 +109,3 @@ util.redirectLinks = function(){
 		link.text = hnewsUrl;
 	});
 };
-
-export default util;

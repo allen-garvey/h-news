@@ -7,53 +7,35 @@
 	background-color: lighten($primary_color, 33%);
 	top: 0;
 	width: 100%;
-	height: $header_height;
-	overflow: hidden;
 	@include media_q(med){
-		position: fixed;
+		position: -webkit-sticky;
+		position: sticky;
 	}
 }
-.brand{
-	position: relative;//because of floated li breaks vertical alignment
-	top: 1rem;
-	padding: 1rem 1rem 1.5rem $universal_left_right_padding;
-	@include media_q(med){
-		padding-right: 2rem;
-	}
+
+nav, nav ul, nav li{
+	display: flex;
+	justify-content: space-between;
 }
-nav, nav ul, nav ul li{
-	display:inline-block;
-}
+
 nav{
 	@include font_size(1);
-	width: 100%;
-	.page_links{
-		padding:0;
-		float : right;
-		margin:0;
-	}
-	li{
-		margin:0;
-		&:first-of-type a{
-			@include media_q(sm){
-				padding-right : 3rem;
-			}
-		}
-		a{
-			display: inline-block;
-			padding: 1rem 1.3rem 1.5rem;
-			@include media_q(sm){
-				padding-left: 2rem;
-				padding-right:2rem;
-			}
+	.page_links a{
+		@include media_q(med){
+			padding: $universal_left_right_padding (2.5*$universal_left_right_padding);
 		}
 	}
 	a{
+		padding: $universal_left_right_padding;
 		color: darken($secondary_color, 10%);
 		&:visited{
 			color: $secondary_color;
 		}
 	}
+}
+
+nav ul{
+	margin: 0;
 }
 
 header .container{
@@ -63,19 +45,8 @@ header .container{
 /*
 * Current page nav link highlight
 */
-@mixin current_nav_link(){
-	background-color: lighten($primary_color, 20%);
-}
-.page_home .nav-link-home, .nav_home .nav-link-home{
-	@include current_nav_link;
-	@include media_q(med){
-		//so the brand doesn't look off-center when it's selected
-		padding-right: $universal_left_right_padding;
-	}
-}
-.page_show .nav-link-show, .nav_show .nav-link-show{
-	@include current_nav_link;
-}
+.page_home .nav-link-home, .nav_home .nav-link-home, 
+.page_show .nav-link-show, .nav_show .nav-link-show, 
 .page_ask .nav-link-ask, .nav_ask .nav-link-ask{
-	@include current_nav_link;
+	background-color: lighten($primary_color, 20%);
 }
