@@ -16,7 +16,7 @@ A redesign of [Hacker News](http://news.ycombinator.com) with a focus on usabili
 * Run `npm install` to install dependencies
 * Run `make` to generate `index.html` file
 * Run `npm start` to compile JavaScript and Sass files, start a local webserver and open a browser for local development
-* Run `npm run webpack:prod` to build JavaScript and Sass files for production
+* Run `make release` to build JavaScript and Sass files for production
 
 ##License
 

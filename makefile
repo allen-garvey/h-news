@@ -12,5 +12,8 @@ all: $(HTML_INDEX)
 reset:
 	rm $(HTML_INDEX)
 
+release: $(HTML_INDEX)
+	npm run deploy
+
 $(HTML_INDEX): $(PHP_SOURCE)
 	php inc/pages/index.php > $(HTML_INDEX)
