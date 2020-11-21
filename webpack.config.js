@@ -16,6 +16,7 @@ module.exports = {
         publicPath: 'http://localhost:3000/assets/',
         port: 3000,
         historyApiFallback: true, //servers index.html if no route found
+        open: true,
     },
     module: {
         rules: [
