@@ -1,6 +1,7 @@
+@use 'sass:color';
 @use 'mixins';
 
-$primary_color : lighten(#663399, 10%); //rebecca purple
+$primary_color : color.adjust(#663399, $lightness: 10%); //rebecca purple
 .purple{
 	@include mixins.theme_default_override($primary_color, black);
 }

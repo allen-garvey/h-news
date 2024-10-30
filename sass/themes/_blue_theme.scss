@@ -1,7 +1,8 @@
+@use 'sass:color';
 @use 'mixins';
 
-$primary_color : darken(#2883FF, 5%);
-$secondary_color : lighten(black, 28%);
+$primary_color : color.adjust(#2883FF, $lightness: -5%);
+$secondary_color : color.adjust(black, $lightness: 28%);
 .blue{
 	@include mixins.theme_default_override($primary_color, $secondary_color);
 }

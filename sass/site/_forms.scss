@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../base/constants';
 
 .btn{
@@ -6,10 +7,10 @@
 	min-height: 2em;
 }
 .btn-primary{
-	background-color: lighten(constants.$secondary_color, 45%);
-	border: 1px solid lighten(constants.$secondary_color, 15%);
+	background-color: color.adjust(constants.$secondary_color, $lightness: 45%);
+	border: 1px solid color.adjust(constants.$secondary_color, $lightness: 15%);
 }
 .btn-primary:active{
-	background-color: lighten(constants.$secondary_color, 30%);
+	background-color: color.adjust(constants.$secondary_color, $lightness: 30%);
 	color: constants.$main_background_color;
 }

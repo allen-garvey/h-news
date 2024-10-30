@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'mixins';
 @use '../base/constants';
 
@@ -11,17 +12,17 @@ $secondary_color : snow;
 	}
 	
 	#top_list > li:nth-child(even){
-		background-color: lighten($primary_color, 15%);
+		background-color: color.adjust($primary_color, $lightness: 15%);
 	}
 	button, input{
 		color: $primary_color;
 	}
 	.btn-primary{
-		background-color: darken($secondary_color, 10%);
-		border: 1px solid darken($secondary_color, 20%);
+		background-color: color.adjust($secondary_color, $lightness: -10%);
+		border: 1px solid color.adjust($secondary_color, $lightness: -20%);
 	}
 	.btn-primary:active{
-		background-color: darken($secondary_color, 20%);
+		background-color: color.adjust($secondary_color, $lightness: -20%);
 		color: constants.$main_background_color;
 	}
 }

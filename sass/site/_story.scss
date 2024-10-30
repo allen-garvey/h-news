@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../base/constants';
 @use '../base/mixins';
 
@@ -12,5 +13,5 @@
 
 //just selects top level li so nested comments are not alternating colors
 #top_list > li:nth-child(even){
-	background-color: lighten(constants.$primary_color, 45%);
+	background-color: color.adjust(constants.$primary_color, $lightness: 45%);
 }

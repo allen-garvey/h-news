@@ -1,41 +1,42 @@
+@use 'sass:color';
 @use '../base/constants';
 
 @mixin theme_default_override($primary_color, $secondary_color){
 	a{
-		color: lighten($secondary_color, 10%);
+		color: color.adjust($secondary_color, $lightness: 10%);
 		&:visited{
-			color: darken($secondary_color, 10%);
+			color: color.adjust($secondary_color, $lightness: -10%);
 		}	
 	}
 	
 	nav a{
-		color: darken($secondary_color, 10%);
+		color: color.adjust($secondary_color, $lightness: -10%);
 		&:visited{
 			color: $secondary_color;
 		}	
 	}
 
 	.jumbotron{
-		background-color: lighten($primary_color, 33%);
+		background-color: color.adjust($primary_color, $lightness: 33%);
 	}
 	.current, 
 	.page_home .nav-link-home, .nav_home .nav-link-home, 
 	.page_show .nav-link-show, .nav_show .nav-link-show,
 	.page_ask .nav-link-ask, .nav_ask .nav-link-ask
 	{
-		background-color: lighten($primary_color, 20%);
+		background-color: color.adjust($primary_color, $lightness: 20%);
 	}
 
 	//just selects top level li so nested comments are not alternating colors
 	#top_list > li:nth-child(even){
-		background-color: lighten($primary_color, 45%);
+		background-color: color.adjust($primary_color, $lightness: 45%);
 	}
 	.btn-primary{
-		background-color: lighten($primary_color, 25%);
-		border: 1px solid lighten($primary_color, 15%);
+		background-color: color.adjust($primary_color, $lightness: 25%);
+		border: 1px solid color.adjust($primary_color, $lightness: 15%);
 	}
 	.btn-primary:active{
-		background-color: lighten($primary_color, 10%);
+		background-color: color.adjust($primary_color, $lightness: 10%);
 		color: constants.$main_background_color;
 	}
 	@content;

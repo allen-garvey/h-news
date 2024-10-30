@@ -1,9 +1,10 @@
+@use 'sass:color';
 @use '../base/constants';
 @use '../base/mixins';
 
 .jumbotron{
 	@include mixins.brand_font_family;
-	background-color: lighten(constants.$primary_color, 33%);
+	background-color: color.adjust(constants.$primary_color, $lightness: 33%);
 	top: 0;
 	width: 100%;
 	@include mixins.media_q(med){
@@ -26,7 +27,7 @@ nav{
 	}
 	a{
 		padding: constants.$universal_left_right_padding;
-		color: darken(constants.$secondary_color, 10%);
+		color: color.adjust(constants.$secondary_color, $lightness: -10%);
 		&:visited{
 			color: constants.$secondary_color;
 		}
@@ -47,5 +48,5 @@ header .container{
 .page_home .nav-link-home, .nav_home .nav-link-home, 
 .page_show .nav-link-show, .nav_show .nav-link-show, 
 .page_ask .nav-link-ask, .nav_ask .nav-link-ask{
-	background-color: lighten(constants.$primary_color, 20%);
+	background-color: color.adjust(constants.$primary_color, $lightness: 20%);
 }
