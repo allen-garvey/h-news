@@ -1,9 +1,8 @@
-/**
-* Comments page styles
-*/
+@use '../base/mixins';
+
 .comment{
 	article{
-		@include heading_font_family;
+		@include mixins.heading_font_family;
 		line-height: 1.5em;
 		max-width: 43rem;
 		margin-top: -1rem;
@@ -13,7 +12,7 @@
 			line-height: 1rem;
 		}
 		a{
-			@include font_size(-1);
+			@include mixins.font_size(-1);
 		}
 	}
 	
@@ -22,7 +21,7 @@
 	}
 	ol{
 		padding-left: 1rem;
-		@include media_q(med){
+		@include mixins.media_q(med){
 			padding-left: 2rem;
 		}
 	}

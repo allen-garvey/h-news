@@ -1,13 +1,12 @@
-/**
-* Header and nav styles
-*/
+@use '../base/constants';
+@use '../base/mixins';
 
 .jumbotron{
-	@include brand_font_family;
-	background-color: lighten($primary_color, 33%);
+	@include mixins.brand_font_family;
+	background-color: lighten(constants.$primary_color, 33%);
 	top: 0;
 	width: 100%;
-	@include media_q(med){
+	@include mixins.media_q(med){
 		position: -webkit-sticky;
 		position: sticky;
 	}
@@ -19,17 +18,17 @@ nav, nav ul, nav li{
 }
 
 nav{
-	@include font_size(1);
+	@include mixins.font_size(1);
 	.page_links a{
-		@include media_q(med){
-			padding: $universal_left_right_padding (2.5*$universal_left_right_padding);
+		@include mixins.media_q(med){
+			padding: constants.$universal_left_right_padding (2.5*constants.$universal_left_right_padding);
 		}
 	}
 	a{
-		padding: $universal_left_right_padding;
-		color: darken($secondary_color, 10%);
+		padding: constants.$universal_left_right_padding;
+		color: darken(constants.$secondary_color, 10%);
 		&:visited{
-			color: $secondary_color;
+			color: constants.$secondary_color;
 		}
 	}
 }
@@ -48,5 +47,5 @@ header .container{
 .page_home .nav-link-home, .nav_home .nav-link-home, 
 .page_show .nav-link-show, .nav_show .nav-link-show, 
 .page_ask .nav-link-ask, .nav_ask .nav-link-ask{
-	background-color: lighten($primary_color, 20%);
+	background-color: lighten(constants.$primary_color, 20%);
 }

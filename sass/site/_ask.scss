@@ -1,6 +1,5 @@
-/**
-* ask page styles
-*/
+@use '../base/mixins';
+
 section.ask{
 	margin-bottom: 3rem;
 }
@@ -8,7 +7,7 @@ section.ask{
 
 .ask{
 	article, article p{
-		@include font_size(1);
+		@include mixins.font_size(1);
 		line-height: 1.5em;
 	}
 	h3{

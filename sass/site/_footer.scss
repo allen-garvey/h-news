@@ -1,16 +1,15 @@
-/**
-* Footer styles
-*/
+@use '../base/mixins';
+
 footer{
 	margin-bottom: 4rem;
 	form{
-		@include media_q(lg){
+		@include mixins.media_q(lg){
 			text-align: center;
 		}
 	}
 	p{
 		line-height: 1.5em;
-		@include media_q(lg){
+		@include mixins.media_q(lg){
 			margin-top: 0;
 			margin-bottom: 0;		
 			&:first-of-type{
@@ -21,7 +20,7 @@ footer{
 }
 
 .hide_for_med{ //used for search button
-	@include media_q_inverse(lg){
+	@include mixins.media_q_inverse(lg){
 		display:none;	
 	}
 }
@@ -34,7 +33,7 @@ footer{
 .settings_link{
 	margin-bottom: 2em;
 	display: block;
-	@include media_q(lg){
+	@include mixins.media_q(lg){
 		margin-bottom: 0;
 		display: inline;
 	}

@@ -1,4 +1,4 @@
-@import 'base/index.scss';
-@import 'site/index.scss';
-@import 'themes/index.scss';
+@use 'base/index.scss' as base_index;
+@use 'site/index.scss' as site_index;
+@use 'themes/index.scss' as theme_index;
 

@@ -1,6 +1,8 @@
+@use '../base/mixins';
+
 legend{
-	@include heading_font_family;
-	@include font_size(2);
+	@include mixins.heading_font_family;
+	@include mixins.font_size(2);
 }
 fieldset{
 	border: 1px solid silver;
@@ -8,12 +10,12 @@ fieldset{
 }
 .form-group{
 	margin-bottom: 1.5em;
-	@include media_q(lg){
+	@include mixins.media_q(lg){
 		margin-bottom: 0.5em;
 	}
 }
 label{
-	@include font_size(-1);
+	@include mixins.font_size(-1);
 }
 
 .settings-main{

@@ -1,16 +1,16 @@
-/**
-* story content styles
-*/
+@use '../base/constants';
+@use '../base/mixins';
+
 .small{
-	@include font_size(-1);
+	@include mixins.font_size(-1);
 }
 .url_source{ //used to display url root next to or below story title
-	@include media_q_inverse(med){
+	@include mixins.media_q_inverse(med){
 		display: block;
 	}
 }
 
 //just selects top level li so nested comments are not alternating colors
 #top_list > li:nth-child(even){
-	background-color: lighten($primary_color, 45%);
+	background-color: lighten(constants.$primary_color, 45%);
 }

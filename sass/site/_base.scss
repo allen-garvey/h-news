@@ -1,6 +1,6 @@
-/**
-* Base styles
-*/
+@use '../base/constants';
+@use '../base/mixins';
+
 html{
 	font-size: 20px;
 	box-sizing: border-box;
@@ -9,44 +9,44 @@ html{
 	box-sizing: inherit;
 }
 body{
-	background-color: $main_background_color;
-	@include body_copy_font_family;
+	background-color: constants.$main_background_color;
+	@include mixins.body_copy_font_family;
 }
 ul, ol{
 	list-style-type: none;
 }
 
 h1,h2,h3,h4,h5,h6{
-	@include heading_font_family;
+	@include mixins.heading_font_family;
 	font-weight : normal;
 }
 h1{
-	@include font_size(4);
+	@include mixins.font_size(4);
 }
 h2{
-	@include font_size(3);
+	@include mixins.font_size(3);
 }
 h3{
-	@include font_size(2);
+	@include mixins.font_size(2);
 }
 h4{
-	@include font_size(1);
+	@include mixins.font_size(1);
 }
 h5{
-	@include font_size(0);
+	@include mixins.font_size(0);
 }
 h6{
-	@include font_size(-1);
+	@include mixins.font_size(-1);
 }
 a,p,article{
 	word-wrap:break-word; //so a tag's text wraps on small (iPhone screens)
 }
 a{
 	text-decoration:none;
-	color: lighten($secondary_color, 10%);
+	color: lighten(constants.$secondary_color, 10%);
 
 	&:visited{
-		color: darken($secondary_color, 10%);
+		color: darken(constants.$secondary_color, 10%);
 	}
 	&:hover{
 		text-decoration:underline;
@@ -54,8 +54,8 @@ a{
 }
 
 code{
-	@include code_font_family;
-	@include font_size(-1);
+	@include mixins.code_font_family;
+	@include mixins.font_size(-1);
 }
 
 /* Browser specific (not valid) styles to make preformatted text wrap */		
@@ -73,7 +73,7 @@ pre {
 .container{
 	max-width: 950px;
 	margin: 0 auto;
-	padding: 0 $universal_left_right_padding;
+	padding: 0 constants.$universal_left_right_padding;
 }
 .center{
 	text-align: center;

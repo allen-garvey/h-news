@@ -1,7 +1,8 @@
 @use 'sass:math';
 
-@mixin font_size($pow, $scale : $type_scale){
-	font-size : #{math.pow($scale, $pow)}rem;
+@mixin font_size($pow){
+	// major third font scale
+	font-size : #{math.pow(1.25, $pow)}rem;
 }
 
 @mixin brand_font_family{
@@ -20,6 +21,10 @@
 	font-family: Menlo, Monaco, Consolas, Inconsolata, 'Courier New', monospace;
 	@content;
 }
+
+$breakpoint_sm : 460px;
+$breakpoint_med : 562px;
+$breakpoint_lg : 1200px;
 
 @mixin media_q($breakpoint: sm){
 	@if $breakpoint == sm{
