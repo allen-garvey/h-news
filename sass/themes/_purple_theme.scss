@@ -1,8 +1,6 @@
-/*
-* purple theme
-*/
+@use 'mixins';
+
 $primary_color : lighten(#663399, 10%); //rebecca purple
-$secondary_color : black;
 .purple{
-	@include theme_default_override;
+	@include mixins.theme_default_override($primary_color, black);
 }

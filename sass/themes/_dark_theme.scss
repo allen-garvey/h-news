@@ -1,10 +1,10 @@
-/*
-* dark theme
-*/
+@use 'mixins';
+@use '../base/constants';
+
 $primary_color : #181818;
 $secondary_color : snow;
 .dark{
-	@include theme_default_override;
+	@include mixins.theme_default_override($primary_color, $secondary_color);
 	body{
 		background-color: $primary_color;
 		color: $secondary_color;	
@@ -22,6 +22,6 @@ $secondary_color : snow;
 	}
 	.btn-primary:active{
 		background-color: darken($secondary_color, 20%);
-		color: $main_background_color;
+		color: constants.$main_background_color;
 	}
 }

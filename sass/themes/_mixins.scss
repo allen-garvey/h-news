@@ -1,4 +1,6 @@
-@mixin theme_default_override{
+@use '../base/constants';
+
+@mixin theme_default_override($primary_color, $secondary_color){
 	a{
 		color: lighten($secondary_color, 10%);
 		&:visited{
@@ -34,7 +36,7 @@
 	}
 	.btn-primary:active{
 		background-color: lighten($primary_color, 10%);
-		color: $main_background_color;
+		color: constants.$main_background_color;
 	}
 	@content;
 }

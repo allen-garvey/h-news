@@ -1,8 +1,7 @@
-/*
-* green theme
-*/
+@use 'mixins';
+
 $primary_color: lighten(#465C42, 10%);
 $secondary_color : lighten(black, 17%);
 .green{
-	@include theme_default_override;
+	@include mixins.theme_default_override($primary_color, $secondary_color);
 }

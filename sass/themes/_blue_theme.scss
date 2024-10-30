@@ -1,8 +1,7 @@
-/*
-* blue theme
-*/
+@use 'mixins';
+
 $primary_color : darken(#2883FF, 5%);
 $secondary_color : lighten(black, 28%);
 .blue{
-	@include theme_default_override;
+	@include mixins.theme_default_override($primary_color, $secondary_color);
 }

@@ -1,8 +1,4 @@
-/*
-* Theme imports
-*/
-@import 'mixins.scss';
-@import 'blue_theme.scss';
-@import 'green_theme.scss';
-@import 'purple_theme.scss';
-@import 'dark_theme.scss';
+@use 'blue_theme.scss';
+@use 'green_theme.scss';
+@use 'purple_theme.scss';
+@use 'dark_theme.scss';
