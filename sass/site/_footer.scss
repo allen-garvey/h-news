@@ -19,11 +19,6 @@ footer{
 	}
 }
 
-.hide_for_med{ //used for search button
-	@include mixins.media_q_inverse(lg){
-		display:none;	
-	}
-}
 .total{
 	//used to place footer at the bottom of the page
 	min-height: 70vh;
