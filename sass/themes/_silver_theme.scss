@@ -1,8 +1,0 @@
-/*
-* silver theme
-*/
-$primary_color : darken(silver, 10%);
-$secondary_color : black;
-.silver{
-	@include theme_default_override;
-}

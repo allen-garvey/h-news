@@ -1,8 +1,0 @@
-/*
-* Red theme
-*/
-$primary_color : #FF4432;
-$secondary_color : darkred;
-.red{
-	@include theme_default_override;
-}

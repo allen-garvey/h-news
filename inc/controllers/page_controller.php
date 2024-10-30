@@ -8,7 +8,7 @@ class HNewsSettingsPageController{
 	public static $autoDarkModeFormName = "autoDark";
 	public static $themeIdPrefix = "theme_";
 	public static function getThemeList(){
-		return ['default', 'dark', 'blue', 'green', 'purple', 'silver', 'red'];
+		return ['default', 'dark', 'blue', 'green', 'purple'];
 	}
 
 }
