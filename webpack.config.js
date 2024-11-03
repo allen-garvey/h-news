@@ -3,12 +3,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: [
-            `${__dirname}/js/index.js`, 
-            `${__dirname}/sass/style.scss`,
-        ],
+    entry: {
+        app: `${__dirname}/js/app.js`,
+        head: `${__dirname}/js/head.js`,
+    },
     output: {
-        filename: 'app.js',
         path: path.resolve(__dirname, 'public_html/assets'),
     },
     devServer: {
@@ -17,7 +16,7 @@ module.exports = {
             watch: true,
         },
         devMiddleware: {
-            publicPath: '/assets/'
+            publicPath: '/assets/',
         },
         port: 3000,
         historyApiFallback: true, //servers index.html if no route found
@@ -40,9 +39,9 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                     },
-                ]
+                ],
             },
-        ]
+        ],
     },
     plugins: [
         new MiniCssExtractPlugin({

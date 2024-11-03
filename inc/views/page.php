@@ -6,6 +6,14 @@
         <meta name="description" content="H News, a trimmed-down, mobile-friendly, read-only version of your favorite programming and start-up news site"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" type="text/css" href="<?= STYLES_URL.'style.css'; ?>"/>
+        <script type="text/javascript">
+            var HN={};HN.settings = {};
+            HN.settings.themeNames=<?= json_encode(HNewsSettingsPageController::getThemeList()); ?>;
+            <?php //used for settings page ?>
+            HN.settings.userThemeFormName='<?= HNewsSettingsPageController::$userThemeFormName; ?>';
+            HN.settings.themeIdPrefix='<?= HNewsSettingsPageController::$themeIdPrefix; ?>';
+         </script>
+        <script src="<?= SCRIPTS_URL.'head.js'; ?>" type="text/javascript"></script>
     </head>
     <body>
         <div class='total'>
@@ -41,13 +49,6 @@
                 <p class='small'><a href='https://github.com/allen-garvey/h-news'>Source on GitHub</a></p>
             </div>
         </footer>
-        <script type="text/javascript">
-        var HN={};HN.settings = {};
-        HN.settings.themeNames=<?= json_encode(HNewsSettingsPageController::getThemeList()); ?>;
-        <?php //used for settings page ?>
-        HN.settings.userThemeFormName='<?= HNewsSettingsPageController::$userThemeFormName; ?>';
-        HN.settings.themeIdPrefix='<?= HNewsSettingsPageController::$themeIdPrefix; ?>';
-         </script>
          <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
     </body>
 </html>
