@@ -13,7 +13,10 @@ export function displayStories(pageSettings) {
 }
 
 function getStoryInfo(pageSettings, storyIds) {
-    const storiesCount = APP_CONSTANTS.storiesPerPage;
+    const storiesCount = Math.min(
+        APP_CONSTANTS.storiesPerPage,
+        storyIds.length
+    );
 
     const storiesArray = new Array(storiesCount);
     const storiesListEl = document.getElementById('top_list');
