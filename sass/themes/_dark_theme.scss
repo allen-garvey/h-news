@@ -4,7 +4,8 @@
 
 $primary_color : #181818;
 $secondary_color : snow;
-.dark{
+
+@media (prefers-color-scheme: dark) {
 	@include mixins.theme_default_override($primary_color, $secondary_color);
 	body{
 		background-color: $primary_color;

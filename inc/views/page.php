@@ -6,14 +6,6 @@
         <meta name="description" content="H News, a trimmed-down, mobile-friendly, read-only version of your favorite programming and start-up news site"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" type="text/css" href="<?= STYLES_URL.'style.css'; ?>"/>
-        <script type="text/javascript">
-            var HN={};HN.settings = {};
-            HN.settings.themeNames=<?= json_encode(HNewsSettingsPageController::getThemeList()); ?>;
-            <?php //used for settings page ?>
-            HN.settings.userThemeFormName='<?= HNewsSettingsPageController::$userThemeFormName; ?>';
-            HN.settings.themeIdPrefix='<?= HNewsSettingsPageController::$themeIdPrefix; ?>';
-         </script>
-        <script src="<?= SCRIPTS_URL.'head.js'; ?>" type="text/javascript"></script>
     </head>
     <body>
         <div class='total'>
@@ -34,7 +26,6 @@
             </header>
             <noscript class='container center'><h3>H-News requires JavaScript in order to download stories and comments</h3></noscript>
             <?php
-                include(VIEWS_PATH.'settings_main_content.php');
                 include(VIEWS_PATH.'page_main_content.php');   
              ?>
         </div>

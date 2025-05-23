@@ -5,7 +5,6 @@ module.exports = {
     mode: 'development',
     entry: {
         app: `${__dirname}/js/app.js`,
-        head: `${__dirname}/js/head.js`,
     },
     output: {
         path: path.resolve(__dirname, 'public_html/assets'),

@@ -1,8 +1,0 @@
-@use 'sass:color';
-@use 'mixins';
-
-$primary_color: color.adjust(#465C42, $lightness: 10%);
-$secondary_color : color.adjust(black, $lightness: 17%);
-.green{
-	@include mixins.theme_default_override($primary_color, $secondary_color);
-}
