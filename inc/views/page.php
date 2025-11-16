@@ -2,44 +2,46 @@
 <html lang="en">
     <head>
         <meta charset="utf-8"/>
-        <title><?= PAGE_TITLE_DEFAULT; ?></title>
+        <title>H News</title>
         <meta name="description" content="H News, a trimmed-down, mobile-friendly, read-only version of your favorite programming and start-up news site"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" type="text/css" href="<?= STYLES_URL.'style.css'; ?>"/>
+        <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
     </head>
     <body>
         <div class='total'>
             <header class='jumbotron'>
                 <div class='container'>
                     <nav>
-                        <a href='<?= HOME_URL; ?>' class='brand nav-link-home'><?= PAGE_TITLE_DEFAULT; ?></a>
+                        <a href='/' class='brand nav-link-home'>H News</a>
                         <ul class="page_links">
                             <li>
-                                <a href='<?= SHOW_URL; ?>' class="nav-link-show">Show</a>
+                                <a href='/show/' class="nav-link-show">Show</a>
                             </li>
                             <li>
-                                <a href='<?= ASK_URL; ?>' class="nav-link-ask">Ask</a>
+                                <a href='/ask/' class="nav-link-ask">Ask</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
             </header>
             <noscript class='container center'><h3>H-News requires JavaScript in order to download stories and comments</h3></noscript>
-            <?php
-                include(VIEWS_PATH.'page_main_content.php');   
-             ?>
+            <main id="content_main" class="main content-main">
+                <ol id='top_list'>
+                </ol>
+            </main>
         </div>
         <footer>
             <div class='container'>
                 <div class='footer-controls'>
-                    <?php 
-                        include(VIEWS_PATH.'footer_controls.php');
-                     ?>
+                <form method='GET' action='https://hn.algolia.com'>
+                    <input type='search' name='query' placeholder='Search archives' />
+                    <input type='submit' value='Search'/>
+                </form>
                  </div>
                 <p class='small'>Not affiliated with Hacker News or Y Combinator.</p>
                 <p class='small'><a href='https://github.com/allen-garvey/h-news'>Source on GitHub</a></p>
             </div>
         </footer>
-         <script src="<?= SCRIPTS_URL.'app.js'; ?>" type="text/javascript"></script>
+         <script src="/assets/app.js" type="text/javascript"></script>
     </body>
 </html>
