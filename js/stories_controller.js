@@ -4,6 +4,8 @@
 import { HNStory } from './story.js';
 import { getJson, getItemUrl } from './ajax.js';
 
+const storyTemplate = document.getElementById('story-item');
+
 export function displayStories(pageSettings) {
     getJson(pageSettings.storiesUrl).then(storyIds => {
         getStoryInfo(pageSettings, storyIds);
@@ -13,49 +15,49 @@ export function displayStories(pageSettings) {
 function getStoryInfo(pageSettings, storyIds) {
     const STORIES_PER_PAGE = 30;
     const storiesCount = Math.min(STORIES_PER_PAGE, storyIds.length);
-
-    const storiesArray = new Array(storiesCount);
     const storiesListEl = document.getElementById('top_list');
     //to limit number of dom updates
     let domUpdateTimeout = null;
+    let fragment = document.createDocumentFragment();
 
     for (let i = 0; i < storiesCount; i++) {
         const storyId = storyIds[i];
         const storyInfoUrl = getItemUrl(storyId);
 
-        getStoryPromise(storyInfoUrl, pageSettings).then(storyHtml => {
-            storiesArray[i] = storyHtml;
-            //no error if null
+        getJson(storyInfoUrl).then(storyInfo => {
+            const storyTemplateEl = getStoryTemplate(
+                new HNStory(storyInfo),
+                pageSettings
+            );
             clearTimeout(domUpdateTimeout);
+            fragment.appendChild(storyTemplateEl);
             domUpdateTimeout = setTimeout(() => {
-                insertStoriesHtml(storiesArray, storiesListEl);
+                storiesListEl.appendChild(fragment);
+                fragment = document.createDocumentFragment();
             }, 5);
         });
     }
 }
 
-function getStoryPromise(storyInfoUrl, pageSettings) {
-    return getJson(storyInfoUrl).then(storyInfo => {
-        return storyHtml(new HNStory(storyInfo), pageSettings);
-    });
-}
-
-function storyHtml(story, pageSettings) {
-    let html = `<li><div class="container">${story.titleHtml}`;
+function getStoryTemplate(story, pageSettings) {
     const numComments = story.numComments;
+    let commentsText = `${numComments}`;
     if (numComments > 0) {
-        let commentsText = `${numComments} comment`;
+        commentsText = `${numComments} comment`;
         if (numComments > 1) {
             commentsText += 's';
         }
-        html += `<a href="${story.commentsUrl(
-            pageSettings.commentsUrl
-        )}"><p>${commentsText}</p></a>`;
     }
-    html = html + '</div></li>';
-    return html;
-}
 
-function insertStoriesHtml(storiesArray, targetEl) {
-    targetEl.innerHTML = storiesArray.filter(html => html).join('');
+    const template = storyTemplate.content.cloneNode(true);
+    template.querySelector('[data-role="title-link"]').href = story.url;
+    template.querySelector('[data-role="title"]').textContent = story.title;
+    template.querySelector('[data-role="title-source"]').textContent =
+        story.urlRoot;
+    template.querySelector('[data-role="comments-link"]').href =
+        story.commentsUrl(pageSettings.commentsUrl);
+    template.querySelector('[data-role="comments-text"]').textContent =
+        commentsText;
+
+    return template;
 }
