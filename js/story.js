@@ -32,13 +32,8 @@ export class HNStory {
         if (this.isLocalHNUrl) {
             return '';
         }
-        //removes first part of url (http://www.)
-        var base_url = this.url;
-        base_url = base_url.replace(/^http(s)?:\/\/(www.)?/, '');
-        //removes subfolders from url (/index.html)
-        base_url = base_url.replace(/\/.*$/, '');
-        //removes get requests from url (?q=something)
-        return '(' + base_url.replace(/\?.*$/, '') + ')';
+        const url = new URL(this.url);
+        return `(${url.hostname.replace(/^www\./, '')})`;
     }
 
     get title() {
