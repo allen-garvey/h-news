@@ -41,7 +41,7 @@ function getStoryInfo(pageSettings, storyIds) {
 
 function getStoryTemplate(story, pageSettings) {
     const numComments = story.numComments;
-    let commentsText = `${numComments}`;
+    let commentsText = '';
     if (numComments > 0) {
         commentsText = `${numComments} comment`;
         if (numComments > 1) {
