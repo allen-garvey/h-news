@@ -1,8 +1,6 @@
 /**
  * used to display homepage, show and ask pages list of story links
  */
-
-import APP_CONSTANTS from './app-constants.js';
 import { HNStory } from './story.js';
 import { getJson, getItemUrl } from './ajax.js';
 
@@ -13,10 +11,8 @@ export function displayStories(pageSettings) {
 }
 
 function getStoryInfo(pageSettings, storyIds) {
-    const storiesCount = Math.min(
-        APP_CONSTANTS.storiesPerPage,
-        storyIds.length
-    );
+    const STORIES_PER_PAGE = 30;
+    const storiesCount = Math.min(STORIES_PER_PAGE, storyIds.length);
 
     const storiesArray = new Array(storiesCount);
     const storiesListEl = document.getElementById('top_list');
