@@ -4,8 +4,7 @@
 
 import { rewriteHackerNewsLinks } from './dom.js';
 import { HNStory } from './story.js';
-import { HNComment } from './comment.js';
-import { getJson, getItemUrl } from './ajax.js';
+import { getJson, getItemUrl, fetchCommentChain } from './ajax.js';
 
 const commentsHeaderContentTemplate = document.getElementById(
     'comments-header-content'
@@ -27,103 +26,76 @@ export function displayComments(commentsType) {
             return;
         }
         const story = new HNStory(storyInfo);
-        let titleClass = 'container';
-        let text = document.createTextNode(story.text);
-        let title = story.titleFragment;
-        if (text) {
-            const template =
-                commentsHeaderContentTemplate.content.cloneNode(true);
-            template.querySelector('[data-role="author"]').textContent =
-                story.author;
-            //TODO replace with setHTML() when supported
-            template.querySelector('[data-role="content"]').innerHTML = text;
-            text = template;
-            if (
-                commentsType === 'ask' ||
-                story.title.match(/^(Ask|Tell) HN:/)
-            ) {
-                titleClass += ' ask';
-                title = story.askTitle;
-            }
+
+        renderCommentHeader(story, commentsType);
+
+        story.topLevelCommentsIds.map(id => fetchAndRenderCommentChain(id));
+    });
+}
+
+function renderCommentHeader(story, commentsType) {
+    let titleClass = 'container';
+    let text = document.createTextNode(story.text);
+    let title = story.titleFragment;
+    if (text) {
+        const template = commentsHeaderContentTemplate.content.cloneNode(true);
+        template.querySelector('[data-role="author"]').textContent =
+            story.author;
+        //TODO replace with setHTML() when supported
+        template.querySelector('[data-role="content"]').innerHTML = text;
+        text = template;
+        if (commentsType === 'ask' || story.title.match(/^(Ask|Tell) HN:/)) {
+            titleClass += ' ask';
+            title = story.askTitle;
         }
-        document.title = `${document.title} | ${story.title}`;
-        const commentsEl = document.createElement('section');
-        commentsEl.className = titleClass;
-        commentsEl.appendChild(title);
-        commentsEl.appendChild(text);
-        const contentMain = document.getElementById('content_main');
-        contentMain.insertBefore(commentsEl, contentMain.firstChild);
-        displayAllCommentChildren(story.topLevelCommentsIds);
+    }
+    document.title = `${document.title} | ${story.title}`;
+    const commentsEl = document.createElement('section');
+    commentsEl.className = titleClass;
+    commentsEl.appendChild(title);
+    commentsEl.appendChild(text);
+    const contentMain = document.getElementById('content_main');
+    contentMain.insertBefore(commentsEl, contentMain.firstChild);
+}
+
+function fetchAndRenderCommentChain(id) {
+    fetchCommentChain(id).then(comment => {
+        document
+            .getElementById('top_list')
+            .appendChild(renderCommentChain(comment, true));
+        rewriteHackerNewsLinks();
     });
 }
 
-/**
- * displays comment children of an array of comment ids
- * if no cssId is given, assumes it is top level comment and creates appropriate jquery cssId object
- */
-function displayAllCommentChildren(commentIdArray, cssId) {
-    if (!commentIdArray) {
-        return;
+function renderCommentChain(comment, isRoot) {
+    const root = document.createElement('li');
+    root.className = 'comment';
+    let top = root;
+    if (isRoot) {
+        top = document.createElement('div');
+        top.className = 'container';
+        root.appendChild(top);
     }
-    const isTopLevelComment = !cssId;
-    const parentList = cssId
-        ? document.getElementById(cssId)
-        : document.getElementById('top_list');
 
-    commentIdArray.forEach(commentId => {
-        const commentUrl = getItemUrl(commentId);
+    const authorEl = document.createElement('h6');
+    authorEl.textContent = comment.author;
+    top.appendChild(authorEl);
 
-        getJson(commentUrl).then(commentInfo => {
-            displayComment(commentInfo, parentList, isTopLevelComment);
-        });
-    });
-
-    //change hacker news links to hnews links
-    //TODO fix this so it happens after all the promises complete
-    rewriteHackerNewsLinks();
-}
-
-/**
- * displays comment
- * parentList is a dom object that the comment should be appended to
- * isTopLevelComment is used for styling purposes, since top level comments are styled different than child comments
- */
-function displayComment(commentInfo, parentList, isTopLevelComment) {
-    if (!commentInfo) {
-        return;
-    }
-    const comment = new HNComment(commentInfo);
-    if (comment.isDead) {
-        return;
-    }
-    let commentHTML = "<li class='comment'>";
-    if (isTopLevelComment) {
-        commentHTML += "<div class='container'>";
-    }
-    commentHTML += `<h6>${comment.author}</h6><article`;
+    const textEl = document.createElement('article');
     if (comment.isDeleted) {
-        commentHTML += ' class="deleted"';
+        textEl.className = 'deleted';
     }
-    commentHTML += `>${comment.text}</article>`;
+    // TODO replace to setHTML() when supported
+    textEl.innerHTML = comment.text;
+    top.appendChild(textEl);
 
-    if (comment.numChildren > 0) {
-        commentHTML += `<ol id="${commentIdToCSSId(comment.commentId)}"></ol>`;
+    if (comment.childNodes.length) {
+        const list = document.createElement('ol');
+        for (let child of comment.childNodes) {
+            list.appendChild(renderCommentChain(child, false));
+        }
+        top.appendChild(list);
     }
-    if (isTopLevelComment) {
-        commentHTML += '</div>';
-    }
-    commentHTML += '</li>';
 
-    parentList.insertAdjacentHTML('beforeend', commentHTML);
-    displayAllCommentChildren(
-        comment.children,
-        commentIdToCSSId(comment.commentId)
-    );
-}
-
-/**
- * Returns the correct jquery id cssId for the parent ol to append comment to
- */
-function commentIdToCSSId(commentId) {
-    return `comment${commentId}`;
+    return root;
 }

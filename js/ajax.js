@@ -1,3 +1,5 @@
+import { HNComment } from './comment.js';
+
 export const getJson = url => fetch(url).then(res => res.json());
 
 /**
@@ -20,3 +22,27 @@ export const getJson = url => fetch(url).then(res => res.json());
 export function getItemUrl(id) {
     return `https://hacker-news.firebaseio.com/v0/item/${id}.json`;
 }
+
+export const fetchCommentChain = id => {
+    return getJson(getItemUrl(id)).then(async data => {
+        const story = new HNComment(data);
+        let storiesStack = [story];
+
+        while (storiesStack.length > 0) {
+            const currentStory = storiesStack.pop();
+            if (!currentStory.children.length) {
+                continue;
+            }
+            const children = await Promise.all(
+                currentStory.children.map(id =>
+                    getJson(getItemUrl(id)).then(data => new HNComment(data))
+                )
+            );
+
+            currentStory.childNodes = children;
+            storiesStack = storiesStack.concat(children);
+        }
+
+        return story;
+    });
+};

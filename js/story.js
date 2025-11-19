@@ -101,10 +101,6 @@ export class HNStory {
         return this.storyInfo.kids;
     }
 
-    set children(children) {
-        this.children = children;
-    }
-
     commentsUrl(commentsUrl) {
         return commentsUrl + this.storyInfo.id;
     }
