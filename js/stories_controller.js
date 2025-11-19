@@ -50,10 +50,9 @@ function getStoryTemplate(story, pageSettings) {
     }
 
     const template = storyTemplate.content.cloneNode(true);
-    template.querySelector('[data-role="title-link"]').href = story.url;
-    template.querySelector('[data-role="title"]').textContent = story.title;
-    template.querySelector('[data-role="title-source"]').textContent =
-        story.urlRoot;
+    const container = template.querySelector('.container');
+    container.insertBefore(story.titleFragment, container.firstChild);
+
     template.querySelector('[data-role="comments-link"]').href =
         story.commentsUrl(pageSettings.commentsUrl);
     template.querySelector('[data-role="comments-text"]').textContent =

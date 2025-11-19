@@ -3,6 +3,8 @@
  * Used to get process info about a story such as url, title, and type
  */
 
+const storyTitleLinkTemplate = document.getElementById('story-title-link');
+
 export class HNStory {
     constructor(storyInfo) {
         this.storyInfo = storyInfo;
@@ -40,13 +42,14 @@ export class HNStory {
         return this.storyInfo.title || '';
     }
 
-    get titleHtml() {
-        let title = `<a href="${this.url}"><h3>${this.title}`;
-        if (this.urlRoot !== '') {
-            title += ` <span class='small url_source'>${this.urlRoot}</span>`;
-        }
-        title += '</h3></a>';
-        return title;
+    get titleFragment() {
+        const template = storyTitleLinkTemplate.content.cloneNode(true);
+        template.querySelector('[data-role="title-link"]').href = this.url;
+        template.querySelector('[data-role="title"]').textContent = this.title;
+        template.querySelector('[data-role="title-source"]').textContent =
+            this.urlRoot;
+
+        return template;
     }
 
     /**
@@ -54,7 +57,9 @@ export class HNStory {
      * It should have the same style as titleHtml()
      */
     get askTitle() {
-        return `<h3>${this.title}</h3>`;
+        const el = document.createElement('h3');
+        el.textContent = this.title;
+        return el;
     }
 
     get text() {
@@ -94,6 +99,10 @@ export class HNStory {
             return [];
         }
         return this.storyInfo.kids;
+    }
+
+    set children(children) {
+        this.children = children;
     }
 
     commentsUrl(commentsUrl) {

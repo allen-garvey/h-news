@@ -7,6 +7,10 @@ import { HNStory } from './story.js';
 import { HNComment } from './comment.js';
 import { getJson, getItemUrl } from './ajax.js';
 
+const commentsHeaderContentTemplate = document.getElementById(
+    'comments-header-content'
+);
+
 export function displayComments(commentsType) {
     const storyIdMatch = window.location.pathname.match(/\d+\/?$/);
     if (!storyIdMatch) {
@@ -25,9 +29,15 @@ export function displayComments(commentsType) {
         const story = new HNStory(storyInfo);
         let titleClass = 'container';
         let text = story.text;
-        let title = '';
+        let title = story.titleFragment;
         if (text) {
-            text = `<h6>${story.author}</h6><article>${text}</article>`;
+            const template =
+                commentsHeaderContentTemplate.content.cloneNode(true);
+            template.querySelector('[data-role="author"]').textContent =
+                story.author;
+            //TODO replace with setHTML() when supported
+            template.querySelector('[data-role="content"]').innerHTML = text;
+            text = template;
             if (
                 commentsType === 'ask' ||
                 story.title.match(/^(Ask|Tell) HN:/)
@@ -35,16 +45,14 @@ export function displayComments(commentsType) {
                 titleClass += ' ask';
                 title = story.askTitle;
             }
-        } else {
-            title = story.titleHtml;
         }
         document.title = `${document.title} | ${story.title}`;
-        document
-            .getElementById('content_main')
-            .insertAdjacentHTML(
-                'afterbegin',
-                `<section class="${titleClass}">${title}${text}</section>`
-            );
+        const commentsEl = document.createElement('section');
+        commentsEl.className = titleClass;
+        commentsEl.appendChild(title);
+        commentsEl.appendChild(text);
+        const contentMain = document.getElementById('content_main');
+        contentMain.insertBefore(commentsEl, contentMain.firstChild);
         displayAllCommentChildren(story.topLevelCommentsIds);
     });
 }
