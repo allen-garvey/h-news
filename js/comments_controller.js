@@ -37,12 +37,12 @@ function renderCommentHeader(story, commentsType) {
     let titleClass = 'container';
     let text = document.createTextNode(story.text);
     let title = story.titleFragment;
-    if (text) {
+    if (story.text) {
         const template = commentsHeaderContentTemplate.content.cloneNode(true);
         template.querySelector('[data-role="author"]').textContent =
             story.author;
         //TODO replace with setHTML() when supported
-        template.querySelector('[data-role="content"]').innerHTML = text;
+        template.querySelector('[data-role="content"]').innerHTML = story.text;
         text = template;
         if (commentsType === 'ask' || story.title.match(/^(Ask|Tell) HN:/)) {
             titleClass += ' ask';
