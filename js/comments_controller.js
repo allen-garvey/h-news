@@ -28,7 +28,7 @@ export function displayComments(commentsType) {
         }
         const story = new HNStory(storyInfo);
         let titleClass = 'container';
-        let text = story.text;
+        let text = document.createTextNode(story.text);
         let title = story.titleFragment;
         if (text) {
             const template =
