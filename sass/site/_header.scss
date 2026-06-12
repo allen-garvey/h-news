@@ -3,7 +3,7 @@
 @use '../base/mixins';
 
 .jumbotron{
-	@include mixins.brand_font_family;
+	font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Ubuntu, Calibri, Arial, sans-serif;
 	background-color: color.adjust(constants.$primary_color, $lightness: 33%);
 	top: 0;
 	width: 100%;

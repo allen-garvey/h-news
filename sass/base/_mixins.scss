@@ -5,20 +5,8 @@
 	font-size : #{math.pow(1.25, $pow)}rem;
 }
 
-@mixin brand_font_family{
-	font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Ubuntu, Calibri, Arial, sans-serif;
-	@content;
-}
 @mixin heading_font_family{
 	font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Ubuntu, Calibri, Arial, sans-serif;
-	@content;
-}
-@mixin body_copy_font_family{
-	font-family: Georgia, 'Times', serif;
-	@content;
-}
-@mixin code_font_family{
-	font-family: Menlo, Monaco, Consolas, Inconsolata, 'Courier New', monospace;
 	@content;
 }
 
