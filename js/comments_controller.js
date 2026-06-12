@@ -78,6 +78,12 @@ function renderCommentHeader(story, commentsType) {
 
 function fetchAndRenderCommentChain(id) {
     fetchCommentChain(id).then(comment => {
+        if (
+            (comment.isDead || comment.isDeleted) &&
+            comment.children.length === 0
+        ) {
+            return;
+        }
         document
             .getElementById('top_list')
             .appendChild(renderCommentChain(comment, true));
@@ -100,7 +106,7 @@ function renderCommentChain(comment, isRoot) {
     top.appendChild(authorEl);
 
     const textEl = document.createElement('article');
-    if (comment.isDeleted) {
+    if (comment.isDeleted || comment.isDead) {
         textEl.className = 'deleted';
     }
     textEl.setHTML(comment.text, sanitizer);
