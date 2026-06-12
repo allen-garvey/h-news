@@ -6,6 +6,23 @@ import { rewriteHackerNewsLinks } from './dom.js';
 import { HNStory } from './story.js';
 import { getJson, getItemUrl, fetchCommentChain } from './ajax.js';
 
+const sanitizer = new Sanitizer({
+    elements: [
+        'a',
+        'b',
+        'blockquote',
+        'code',
+        'div',
+        'em',
+        'i',
+        'pre',
+        'span',
+        'strong',
+    ],
+    removeAttributes: ['id'],
+    comments: false,
+});
+
 const commentsHeaderContentTemplate = document.getElementById(
     'comments-header-content'
 );
@@ -41,8 +58,9 @@ function renderCommentHeader(story, commentsType) {
         const template = commentsHeaderContentTemplate.content.cloneNode(true);
         template.querySelector('[data-role="author"]').textContent =
             story.author;
-        //TODO replace with setHTML() when supported
-        template.querySelector('[data-role="content"]').innerHTML = story.text;
+        template
+            .querySelector('[data-role="content"]')
+            .setHTML(story.text, sanitizer);
         text = template;
         if (commentsType === 'ask' || story.title.match(/^(Ask|Tell) HN:/)) {
             titleClass += ' ask';
@@ -85,8 +103,7 @@ function renderCommentChain(comment, isRoot) {
     if (comment.isDeleted) {
         textEl.className = 'deleted';
     }
-    // TODO replace to setHTML() when supported
-    textEl.innerHTML = comment.text;
+    textEl.setHTML(comment.text, sanitizer);
     top.appendChild(textEl);
 
     if (comment.childNodes.length) {
