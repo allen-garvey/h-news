@@ -5,8 +5,8 @@
 .sass-cache
 .sass-cache/*
 node_modules/*
-public_html/assets/*
 *.png
 inc/environment.php
 .directory
 .DS_Store
+dist/*

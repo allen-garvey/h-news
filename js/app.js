@@ -5,7 +5,7 @@ import { routes } from './routes.js';
 import { displayStories } from './stories_controller.js';
 import { displayComments } from './comments_controller.js';
 
-import css from '../sass/style.scss';
+import '../sass/style.scss';
 
 //setup page based on routing
 function initPage(pageSettings) {
